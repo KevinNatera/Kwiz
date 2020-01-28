@@ -98,7 +98,10 @@ class MultipleChoiceVC: UIViewController {
             questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             questionTextField.heightAnchor.constraint(equalToConstant: 100),
-            questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 75)
+            questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 75),
+
+            questionTextField.bottomAnchor.constraint(equalTo: answerChoiceATextField.topAnchor, constant: 50),
+
         ])
         
     }
@@ -112,11 +115,10 @@ class MultipleChoiceVC: UIViewController {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-          stackView.heightAnchor.constraint(equalToConstant: 130),
-            stackView.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -150)])
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            stackView.heightAnchor.constraint(equalToConstant: 130)])
     }
     
 
