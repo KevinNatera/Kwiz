@@ -17,6 +17,7 @@
 		0B45FF7C23DF4E2200F3084D /* KwizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF7B23DF4E2200F3084D /* KwizUITests.swift */; };
 		0B45FF8E23DF51B500F3084D /* LaunchScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */; };
 		0B45FF9023DF51DA00F3084D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF8F23DF51DA00F3084D /* LoginVC.swift */; };
+		85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85412AE523E093F900F9488C /* MultiplechoiceModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		0B45FF7D23DF4E2200F3084D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenVC.swift; sourceTree = "<group>"; };
 		0B45FF8F23DF51DA00F3084D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		85412AE523E093F900F9488C /* MultiplechoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplechoiceModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +107,7 @@
 			children = (
 				0B45FF8C23DF517800F3084D /* Views */,
 				0B45FF8923DF4EB900F3084D /* ViewControllers */,
-				0B45FF8B23DF4ED100F3084D /* Models */,
+				85412AE423E093E200F9488C /* Models */,
 				0B45FF8A23DF4EC600F3084D /* SupportingFiles */,
 			);
 			path = Kwiz;
@@ -152,18 +154,19 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		0B45FF8B23DF4ED100F3084D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		0B45FF8C23DF517800F3084D /* Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		85412AE423E093E200F9488C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				85412AE523E093F900F9488C /* MultiplechoiceModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */,
 				0B45FF5E23DF4E2000F3084D /* MultipleChoiceVC.swift in Sources */,
 				0B45FF5A23DF4E2000F3084D /* AppDelegate.swift in Sources */,
 				0B45FF5C23DF4E2000F3084D /* SceneDelegate.swift in Sources */,
