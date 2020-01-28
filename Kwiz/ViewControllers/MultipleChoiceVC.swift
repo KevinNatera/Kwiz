@@ -97,7 +97,11 @@ class MultipleChoiceVC: UIViewController {
         NSLayoutConstraint.activate([
             questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            questionTextField.heightAnchor.constraint(equalToConstant: 100),
+            questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 75),
+
             questionTextField.bottomAnchor.constraint(equalTo: answerChoiceATextField.topAnchor, constant: 50),
+
         ])
         
     }
@@ -105,7 +109,7 @@ class MultipleChoiceVC: UIViewController {
     private func setUpAnswersStackView(){
         let stackView = UIStackView(arrangedSubviews: [answerChoiceATextField, answerChoiceBTextField, answerChoiceCTextField, answerChoiceDTextField])
         stackView.axis = .vertical
-        stackView.spacing = 15
+        stackView.spacing = 20
         stackView.distribution = .fillEqually
         self.view.addSubview(stackView)
         
