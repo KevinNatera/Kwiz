@@ -14,6 +14,11 @@ class MainVC: UIViewController {
     var startButton = UIButton()
     var rankingButton = UIButton()
     var settingButton = UIButton()
+    var kwizImage: UIImageView = {
+        var view = UIImageView()
+        view.image = UIImage(named: "Kwiz")
+        return view
+    }()
     
     //MARK: - Setup
     private func setupStackViewWithButtons() {
@@ -26,12 +31,22 @@ class MainVC: UIViewController {
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.size.height / 3)])
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.size.height / 3 + 30)])
     }
     private func setupButtons() {
         updateTitleOnButton(button: startButton, title: "START")
         updateTitleOnButton(button: rankingButton, title: "RANKING")
         updateTitleOnButton(button: settingButton, title: "SETTINGS")
+    }
+    private func setupImageConstraints() {
+        view.addSubview(kwizImage)
+        kwizImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            kwizImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            kwizImage.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant:  -100),
+            kwizImage.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: 100),
+            kwizImage.heightAnchor.constraint(equalToConstant: 200)])
+        
     }
     
     //MARK: - Functions
@@ -56,6 +71,7 @@ class MainVC: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4241105914, green: 0.3439905345, blue: 0.7182968259, alpha: 1)
         setupButtons()
         setupStackViewWithButtons()
+        setupImageConstraints()
 
     }
 
