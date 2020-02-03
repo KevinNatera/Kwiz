@@ -28,6 +28,21 @@ class ScaleVC: UIViewController {
         image.backgroundColor = .gray
         return image
     }()
+    var mysteryBox: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        label.text = "?"
+        label.font = UIFont(name: "System", size: 20)
+        label.textAlignment = .center
+        label.textColor = .white
+        image.addSubview(label)
+        label.center = image.center
+        
+        image.backgroundColor = .brown
+        return image
+        
+    }()
     
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
@@ -35,9 +50,10 @@ class ScaleVC: UIViewController {
     //MARK: - Constraints
     private func setConstraints() {
         constrainLine()
-        rotateLine()
         constrainPrompt()
         constrainSteel()
+        constrainMysteryBox()
+        rotateObjects()
     }
     private func constrainLine() {
         view.addSubview(line)
@@ -47,11 +63,6 @@ class ScaleVC: UIViewController {
             line.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             line.widthAnchor.constraint(equalToConstant: line.frame.width),
             line.heightAnchor.constraint(equalToConstant: line.frame.height)])
-    }
-    private func rotateLine() {
-        UIView.animate(withDuration: 0, delay: 0, options: [], animations: {
-            self.line.transform = CGAffineTransform(rotationAngle: CGFloat.pi/9)
-        }, completion: nil)
     }
     private func constrainPrompt() {
         view.addSubview(promptLabel)
@@ -65,10 +76,32 @@ class ScaleVC: UIViewController {
         steel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             steel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            steel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            steel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             steel.widthAnchor.constraint(equalToConstant: steel.frame.width),
             steel.heightAnchor.constraint(equalToConstant: steel.frame.height)])
     }
+    private func constrainMysteryBox() {
+        view.addSubview(mysteryBox)
+        mysteryBox.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            mysteryBox.widthAnchor.constraint(equalToConstant: mysteryBox.frame.width),
+            mysteryBox.heightAnchor.constraint(equalToConstant: mysteryBox.frame.height),
+            mysteryBox.bottomAnchor.constraint(equalTo: line.topAnchor, constant: 45),
+            mysteryBox.leadingAnchor.constraint(equalTo: line.centerXAnchor, constant: 75)])
+    }
+    
+    //MARK: Rotate
+    private func rotateLine() {
+        line.transform = CGAffineTransform(rotationAngle: CGFloat.pi/9)
+    }
+    private func rotateMysteryBox() {
+        mysteryBox.transform = CGAffineTransform(rotationAngle: CGFloat.pi/9)
+    }
+    private func rotateObjects() {
+        rotateLine()
+        rotateMysteryBox()
+    }
+    
     //MARK: Setup
     private func addGestures() {
         steel.isUserInteractionEnabled = true
