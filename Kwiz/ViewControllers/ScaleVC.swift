@@ -28,6 +28,11 @@ class ScaleVC: UIViewController {
         image.backgroundColor = .gray
         return image
     }()
+    var feather: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
+        image.backgroundColor = #colorLiteral(red: 1, green: 0.8688890338, blue: 0.8717179298, alpha: 1)
+        return image
+    }()
     var mysteryBox: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
         
@@ -55,6 +60,8 @@ class ScaleVC: UIViewController {
     
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
+    var featherPanGesture = UIPanGestureRecognizer()
+    
     
     //MARK: - Constraints
     private func setConstraints() {
@@ -64,6 +71,7 @@ class ScaleVC: UIViewController {
         constrainMysteryBox()
         constrainInputBox()
         constrainTriangle()
+        constrainFeather()
         makeTriangle()
         
         rotateObjects()
@@ -120,6 +128,15 @@ class ScaleVC: UIViewController {
             triangle.centerXAnchor.constraint(equalTo: line.centerXAnchor),
             triangle.topAnchor.constraint(equalTo: line.bottomAnchor)])
     }
+    private func constrainFeather() {
+        view.addSubview(feather)
+        feather.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            feather.widthAnchor.constraint(equalToConstant: feather.frame.width),
+            feather.heightAnchor.constraint(equalToConstant: feather.frame.height),
+            feather.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            feather.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
+    }
     
     //MARK: Rotate
     private func rotateLine() {
@@ -140,6 +157,10 @@ class ScaleVC: UIViewController {
         steel.isUserInteractionEnabled = true
         steelPanGesture = UIPanGestureRecognizer(target: self, action: #selector(draggedSteel(_:)))
         steel.addGestureRecognizer(steelPanGesture)
+        
+        feather.isUserInteractionEnabled = true
+        featherPanGesture = UIPanGestureRecognizer(target: self, action: #selector(draggedFeather(_:)))
+        feather.addGestureRecognizer(featherPanGesture)
     }
     
     //MARK: - Functions
@@ -151,11 +172,7 @@ class ScaleVC: UIViewController {
         
         path.move(to: CGPoint(x: triangle.frame.minX, y: triangle.frame.maxY))
         path.addLine(to: CGPoint(x: triangle.frame.minX, y: triangle.frame.maxY))
-        
-        //path.move(to: CGPoint(x: triangle.frame.midX, y: triangle.frame.minY))
         path.addLine(to: CGPoint(x: triangle.frame.midX, y: triangle.frame.minY))
-        
-        //path.move(to: CGPoint(x: triangle.frame.maxX, y: triangle.frame.maxY))
         path.addLine(to: CGPoint(x: triangle.frame.maxX, y: triangle.frame.maxY))
         
         shapeLayer.path = path.cgPath
@@ -172,6 +189,12 @@ class ScaleVC: UIViewController {
         view.bringSubviewToFront(steel)
         let translation = sender.translation(in: view)
         steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
+        sender.setTranslation(CGPoint.zero, in: view)
+    }
+    @objc func draggedFeather(_ sender: UIPanGestureRecognizer) {
+        view.bringSubviewToFront(feather)
+        let translation = sender.translation(in: view)
+        feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
         sender.setTranslation(CGPoint.zero, in: view)
     }
 
