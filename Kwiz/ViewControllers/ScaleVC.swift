@@ -71,13 +71,21 @@ class ScaleVC: UIViewController {
         didSet {
             if inputBox.frame.contains(steelCenter) {
                 steel.center = inputBox.center
+                rotate(view: steel)
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
             }
         }
     }
-    var featherCenter = CGPoint()
+    var featherCenter = CGPoint() {
+        didSet {
+            if inputBox.frame.contains(featherCenter) {
+                feather.center = inputBox.center
+                rotate(view: feather)
+            }
+        }
+    }
     
     
     //MARK: - Constraints
@@ -172,6 +180,9 @@ class ScaleVC: UIViewController {
     private func rotateMysteryBox() {
         mysteryBox.transform = CGAffineTransform(rotationAngle: CGFloat.pi/9)
     }
+    private func rotate(view: UIImageView) {
+        view.transform = CGAffineTransform(rotationAngle: CGFloat.pi/9)
+    }
     private func rotateObjects() {
         rotateLine()
         rotateMysteryBox()
@@ -233,6 +244,7 @@ class ScaleVC: UIViewController {
         let translation = sender.translation(in: view)
         feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
         sender.setTranslation(CGPoint.zero, in: view)
+        featherCenter = feather.center
     }
 
     //MARK: - LifeCycle
