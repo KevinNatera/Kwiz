@@ -57,20 +57,38 @@ class ScaleVC: UIViewController {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
         return view
     }()
+    var answer: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
+        image.backgroundColor = .clear
+        return image
+    }()
     
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
     var featherPanGesture = UIPanGestureRecognizer()
     
+    var steelCenter = CGPoint() {
+        didSet {
+            if inputBox.frame.contains(steelCenter) {
+                steel.center = inputBox.center
+            } else if answer.frame.contains(steelCenter) {
+                steel.center = answer.center
+                showSolution()
+            }
+        }
+    }
+    var featherCenter = CGPoint()
+    
     
     //MARK: - Constraints
     private func setConstraints() {
         constrainLine()
+        constrainAnswer()
         constrainPrompt()
-        constrainSteel()
         constrainMysteryBox()
         constrainInputBox()
         constrainTriangle()
+        constrainSteel()
         constrainFeather()
         makeTriangle()
         
@@ -137,6 +155,15 @@ class ScaleVC: UIViewController {
             feather.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             feather.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
+    private func constrainAnswer() {
+        view.addSubview(answer)
+        answer.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            answer.trailingAnchor.constraint(equalTo: line.trailingAnchor),
+            answer.topAnchor.constraint(equalTo: line.bottomAnchor),
+            answer.widthAnchor.constraint(equalToConstant: answer.frame.width),
+            answer.heightAnchor.constraint(equalToConstant: answer.frame.height)])
+    }
     
     //MARK: Rotate
     private func rotateLine() {
@@ -181,7 +208,16 @@ class ScaleVC: UIViewController {
         shapeLayer.fillColor = UIColor.black.cgColor
         triangle.layer.addSublayer(shapeLayer)
     }
-    
+    private func showSolution() {
+        line.transform = CGAffineTransform(rotationAngle: 0)
+        inputBox.transform = CGAffineTransform(rotationAngle: 0)
+        mysteryBox.transform = CGAffineTransform(rotationAngle: 0)
+        
+        inputBox.center = CGPoint(x: line.frame.minX + (steel.frame.width / 2), y: line.frame.minY - (steel.frame.height / 2))
+        mysteryBox.center = CGPoint(x: line.frame.maxX - (steel.frame.width / 2), y: line.frame.minY - (steel.frame.height / 2))
+        
+        feather.isUserInteractionEnabled = false
+    }
     
     
     //MARK: Objc Func
@@ -190,6 +226,7 @@ class ScaleVC: UIViewController {
         let translation = sender.translation(in: view)
         steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
         sender.setTranslation(CGPoint.zero, in: view)
+        steelCenter = steel.center
     }
     @objc func draggedFeather(_ sender: UIPanGestureRecognizer) {
         view.bringSubviewToFront(feather)
