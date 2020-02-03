@@ -41,7 +41,16 @@ class ScaleVC: UIViewController {
         
         image.backgroundColor = .brown
         return image
-        
+    }()
+    var inputBox: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
+        image.layer.borderWidth = 5
+        image.layer.borderColor = UIColor.black.cgColor
+        return image
+    }()
+    var triangle: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
+        return view
     }()
     
     //MARK: - Properties
@@ -53,6 +62,10 @@ class ScaleVC: UIViewController {
         constrainPrompt()
         constrainSteel()
         constrainMysteryBox()
+        constrainInputBox()
+        constrainTriangle()
+        makeTriangle()
+        
         rotateObjects()
     }
     private func constrainLine() {
@@ -89,6 +102,24 @@ class ScaleVC: UIViewController {
             mysteryBox.bottomAnchor.constraint(equalTo: line.topAnchor, constant: 45),
             mysteryBox.leadingAnchor.constraint(equalTo: line.centerXAnchor, constant: 75)])
     }
+    private func constrainInputBox() {
+        view.addSubview(inputBox)
+        inputBox.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            inputBox.widthAnchor.constraint(equalToConstant: inputBox.frame.width),
+            inputBox.heightAnchor.constraint(equalToConstant: inputBox.frame.height),
+            inputBox.leadingAnchor.constraint(equalTo: line.leadingAnchor, constant: 35),
+            inputBox.bottomAnchor.constraint(equalTo: line.topAnchor, constant: -35)])
+    }
+    private func constrainTriangle() {
+        view.addSubview(triangle)
+        triangle.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            triangle.widthAnchor.constraint(equalToConstant: triangle.frame.width),
+            triangle.heightAnchor.constraint(equalToConstant: triangle.frame.height),
+            triangle.centerXAnchor.constraint(equalTo: line.centerXAnchor),
+            triangle.topAnchor.constraint(equalTo: line.bottomAnchor)])
+    }
     
     //MARK: Rotate
     private func rotateLine() {
@@ -100,6 +131,8 @@ class ScaleVC: UIViewController {
     private func rotateObjects() {
         rotateLine()
         rotateMysteryBox()
+        inputBox.transform = CGAffineTransform(rotationAngle: CGFloat.pi/9)
+
     }
     
     //MARK: Setup
@@ -110,6 +143,27 @@ class ScaleVC: UIViewController {
     }
     
     //MARK: - Functions
+    private func makeTriangle() {
+        let path = UIBezierPath()
+        let strokeColor: UIColor = .black
+        let lineWidth: CGFloat = 2.0
+        let shapeLayer = CAShapeLayer()
+        
+        path.move(to: CGPoint(x: triangle.frame.minX, y: triangle.frame.maxY))
+        path.addLine(to: CGPoint(x: triangle.frame.minX, y: triangle.frame.maxY))
+        
+        //path.move(to: CGPoint(x: triangle.frame.midX, y: triangle.frame.minY))
+        path.addLine(to: CGPoint(x: triangle.frame.midX, y: triangle.frame.minY))
+        
+        //path.move(to: CGPoint(x: triangle.frame.maxX, y: triangle.frame.maxY))
+        path.addLine(to: CGPoint(x: triangle.frame.maxX, y: triangle.frame.maxY))
+        
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = strokeColor.cgColor
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.fillColor = UIColor.black.cgColor
+        triangle.layer.addSublayer(shapeLayer)
+    }
     
     
     
