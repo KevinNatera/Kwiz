@@ -15,10 +15,20 @@ class ScaleVC: UIViewController {
         lineView.backgroundColor = .black
         return lineView
     }()
+    var promptLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Balance the scale"
+        label.textAlignment = .center
+        label.textColor = .black
+        label.font = UIFont(name: "Times New Roman", size: 40)
+        return label
+    }()
     
     //MARK: - Constraints
     private func setConstraints() {
         constrainLine()
+        rotateLine()
+        constrainPrompt()
     }
     private func constrainLine() {
         view.addSubview(line)
@@ -28,6 +38,18 @@ class ScaleVC: UIViewController {
             line.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             line.widthAnchor.constraint(equalToConstant: line.frame.width),
             line.heightAnchor.constraint(equalToConstant: line.frame.height)])
+    }
+    private func rotateLine() {
+        UIView.animate(withDuration: 0, delay: 0, options: [], animations: {
+            self.line.transform = CGAffineTransform(rotationAngle: CGFloat.pi/9)
+        }, completion: nil)
+    }
+    private func constrainPrompt() {
+        view.addSubview(promptLabel)
+        promptLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            promptLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            promptLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
 
     //MARK: - LifeCycle
