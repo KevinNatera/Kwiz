@@ -23,12 +23,21 @@ class ScaleVC: UIViewController {
         label.font = UIFont(name: "Times New Roman", size: 40)
         return label
     }()
+    var steel: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
+        image.backgroundColor = .gray
+        return image
+    }()
+    
+    //MARK: - Properties
+    var steelPanGesture = UIPanGestureRecognizer()
     
     //MARK: - Constraints
     private func setConstraints() {
         constrainLine()
         rotateLine()
         constrainPrompt()
+        constrainSteel()
     }
     private func constrainLine() {
         view.addSubview(line)
@@ -51,12 +60,40 @@ class ScaleVC: UIViewController {
             promptLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             promptLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
+    private func constrainSteel() {
+        view.addSubview(steel)
+        steel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            steel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            steel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            steel.widthAnchor.constraint(equalToConstant: steel.frame.width),
+            steel.heightAnchor.constraint(equalToConstant: steel.frame.height)])
+    }
+    //MARK: Setup
+    private func addGestures() {
+        steel.isUserInteractionEnabled = true
+        steelPanGesture = UIPanGestureRecognizer(target: self, action: #selector(draggedSteel(_:)))
+        steel.addGestureRecognizer(steelPanGesture)
+    }
+    
+    //MARK: - Functions
+    
+    
+    
+    //MARK: Objc Func
+    @objc func draggedSteel(_ sender: UIPanGestureRecognizer) {
+        view.bringSubviewToFront(steel)
+        let translation = sender.translation(in: view)
+        steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
+        sender.setTranslation(CGPoint.zero, in: view)
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setConstraints()
+        addGestures()
         
     }
     
