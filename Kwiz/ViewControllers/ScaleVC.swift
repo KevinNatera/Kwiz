@@ -62,6 +62,13 @@ class ScaleVC: UIViewController {
         image.backgroundColor = .clear
         return image
     }()
+    var reset: UIButton = {
+        let button = UIButton()
+        button.setTitle("Reset", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.isHidden = true
+        return button
+    }()
     
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
@@ -72,6 +79,7 @@ class ScaleVC: UIViewController {
             if inputBox.frame.contains(steelCenter) {
                 steel.center = inputBox.center
                 rotate(view: steel)
+                reset.isHidden = false
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
@@ -83,9 +91,12 @@ class ScaleVC: UIViewController {
             if inputBox.frame.contains(featherCenter) {
                 feather.center = inputBox.center
                 rotate(view: feather)
+                reset.isHidden = false
             }
         }
     }
+    var steelOriginalCenter = CGPoint()
+    var featherOriginalCenter = CGPoint()
     
     
     //MARK: - Constraints
@@ -98,9 +109,13 @@ class ScaleVC: UIViewController {
         constrainTriangle()
         constrainSteel()
         constrainFeather()
+        constrainReset()
+        
         makeTriangle()
         
         rotateObjects()
+        
+        getOriginalCenters()
     }
     private func constrainLine() {
         view.addSubview(line)
@@ -162,6 +177,14 @@ class ScaleVC: UIViewController {
             feather.heightAnchor.constraint(equalToConstant: feather.frame.height),
             feather.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             feather.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
+    }
+    private func constrainReset() {
+        view.addSubview(reset)
+        reset.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            reset.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            reset.centerYAnchor.constraint(equalTo: steel.centerYAnchor)])
+        reset.addTarget(self, action: #selector(resetPressed), for: .touchUpInside)
     }
     private func constrainAnswer() {
         view.addSubview(answer)
@@ -229,22 +252,40 @@ class ScaleVC: UIViewController {
         
         feather.isUserInteractionEnabled = false
     }
+    private func getOriginalCenters() {
+        view.layoutIfNeeded()
+        steelOriginalCenter = CGPoint(x: steel.center.x, y: steel.center.y - 34)
+        featherOriginalCenter = CGPoint(x: feather.center.x, y: feather.center.y - 34)
+    }
     
     
     //MARK: Objc Func
-    @objc func draggedSteel(_ sender: UIPanGestureRecognizer) {
+    @objc private func draggedSteel(_ sender: UIPanGestureRecognizer) {
+        steel.transform = CGAffineTransform.identity
+        feather.transform = CGAffineTransform.identity
         view.bringSubviewToFront(steel)
         let translation = sender.translation(in: view)
         steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
         sender.setTranslation(CGPoint.zero, in: view)
         steelCenter = steel.center
     }
-    @objc func draggedFeather(_ sender: UIPanGestureRecognizer) {
+    @objc private func draggedFeather(_ sender: UIPanGestureRecognizer) {
+        steel.transform = CGAffineTransform.identity
+        feather.transform = CGAffineTransform.identity
         view.bringSubviewToFront(feather)
         let translation = sender.translation(in: view)
         feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
         sender.setTranslation(CGPoint.zero, in: view)
         featherCenter = feather.center
+    }
+    @objc private func resetPressed() {
+        steel.center = steelOriginalCenter
+        feather.center = featherOriginalCenter
+        
+        steel.transform = CGAffineTransform.identity
+        feather.transform = CGAffineTransform.identity
+        
+        reset.isHidden = true
     }
 
     //MARK: - LifeCycle
@@ -253,7 +294,6 @@ class ScaleVC: UIViewController {
         view.backgroundColor = .white
         setConstraints()
         addGestures()
-        
     }
     
 
