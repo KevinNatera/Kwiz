@@ -12,6 +12,9 @@ import UIKit
 class TickleQuestionVC: UIViewController {
     //MARK: - Properties
     
+    var lives = 3
+    var tickles = 1.01
+    
     lazy var question: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: view.center.x - 100, y: 100, width: 200, height: 50)
@@ -27,6 +30,7 @@ class TickleQuestionVC: UIViewController {
         button.frame = CGRect(x: view.center.x - 100, y: 250, width: 200, height: 50)
         button.backgroundColor = .red
         button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
     
@@ -36,6 +40,7 @@ class TickleQuestionVC: UIViewController {
         button.frame = CGRect(x: view.center.x - 100, y: 350, width: 200, height: 50)
         button.backgroundColor = .red
         button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
     
@@ -45,19 +50,23 @@ class TickleQuestionVC: UIViewController {
         button.frame = CGRect(x: view.center.x - 100, y: 450, width: 200, height: 50)
         button.backgroundColor = .red
         button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
     
     lazy var correctAnswer: UIButton = {
         let button = UIButton()
-        button.setTitle("CORRECT ANSWER", for: .normal)
+        button.setTitle("WRONG ANSWER >:(", for: .normal)
         button.frame = CGRect(x: view.center.x - 100, y: 550, width: 200, height: 50)
         button.backgroundColor = .green
         button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
     
- 
+    
+    
+    
     //MARK: - ViewDidload
     
     override func viewDidLoad() {
@@ -66,16 +75,54 @@ class TickleQuestionVC: UIViewController {
         randomizeAnswers()
     }
     
+    //MARK: - Objc Funcs
+    
+    @objc func wrongAnswerPressed(sender: UIButton) {
+        
+        lives -= 1
+        
+        print("lives \(lives)")
+        if lives <= 0 {
+            //Trigger Game Over Sequence
+            print("gg scrub")
+        }
+    }
+    
+    
+    
+    @objc func swipeHandler(gestureRecognizer : UIPanGestureRecognizer) {
+        
+        
+        if correctAnswer.frame.contains(gestureRecognizer.location(in: self.view)) {
+            tickles += 0.02
+            
+            if tickles < 10.1 {
+                
+                correctAnswer.setTitle(String(Int(tickles)), for: .normal)
+                
+                //animation logic
+                
+                print(tickles)
+            } else {
+                
+                correctAnswer.setTitle("Correct!!!", for: .normal)
+                //Trigger segue into next question
+                print("grats")
+            }
+            
+        }
+    }
+    
     //MARK: - Private Funcs
     
     private func addSubViews() {
+        self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(swipeHandler(gestureRecognizer:))))
         view.backgroundColor = .purple
         view.addSubview(question)
         view.addSubview(wrongAnswer1)
         view.addSubview(wrongAnswer2)
         view.addSubview(wrongAnswer3)
         view.addSubview(correctAnswer)
-        correctAnswer.isUserInteractionEnabled = false
     }
     
     private func randomizeAnswers() {
@@ -92,7 +139,7 @@ class TickleQuestionVC: UIViewController {
             wrongAnswer3.frame = correctAnswer.frame
             correctAnswer.frame = tempFrame3
             
-            //3421
+        //3421
         case 3...4:
             let tempFrame1 = wrongAnswer1.frame
             let tempFrame2 = wrongAnswer2.frame
@@ -117,32 +164,6 @@ class TickleQuestionVC: UIViewController {
             print("default")
         }
     }
-    
-    
-    //MARK: - Touch Funcs
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-      for touch in touches {
-      
-        let location: CGPoint = touch.location(in: self.view)
-        
-        if correctAnswer.frame.contains(location) {
-            print("correct!!!")
-        }
-    }
-        print(1)
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        print(2)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(3)
-    }
-    
     
 }
 
