@@ -59,6 +59,14 @@ class LockVC: UIViewController {
         boxView.backgroundColor = #colorLiteral(red: 0.8467330933, green: 0.8713539243, blue: 0.8751690984, alpha: 1)
         return boxView
     }()
+    let handle: UIView = {
+        let knob = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
+        knob.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
+        knob.layer.borderColor = UIColor.black.cgColor
+        knob.layer.borderWidth = 10
+        knob.layer.cornerRadius = knob.frame.height / 2
+        return knob
+    }()
     
     //MARK: - Constraints
     private func setupConstraints() {
@@ -70,6 +78,7 @@ class LockVC: UIViewController {
         constrainLockImage()
         constrainTextBox()
         constrainTextBox2()
+        constrainHandle()
     }
     private func constrainLoginLabel() {
         view.addSubview(loginLabel)
@@ -134,6 +143,15 @@ class LockVC: UIViewController {
             textBox2.topAnchor.constraint(equalTo: passwordLabel.topAnchor, constant: -5),
             textBox2.bottomAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 5),
             textBox2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25)])
+    }
+    private func constrainHandle() {
+        view.addSubview(handle)
+        handle.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            handle.widthAnchor.constraint(equalToConstant: handle.frame.width),
+            handle.heightAnchor.constraint(equalToConstant: handle.frame.height),
+            handle.leadingAnchor.constraint(equalTo: lockView.centerXAnchor, constant: -20),
+            handle.topAnchor.constraint(equalTo: lockView.topAnchor, constant: 60)])
     }
     
     
