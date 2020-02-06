@@ -29,12 +29,20 @@ class LockVC: UIViewController {
         label.font = UIFont(name: "ArialMT", size: 25)
         return label
     }()
+    let signUpLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sign up for an account!"
+        label.textAlignment = .center
+        label.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 20)
+        return label
+    }()
     
     //MARK: - Constraints
     private func setupConstraints() {
         constrainLoginLabel()
         constrainUsernameLabel()
         contrainPasswordLabel()
+        constrainSignUpLabel()
     }
     private func constrainLoginLabel() {
         view.addSubview(loginLabel)
@@ -47,7 +55,7 @@ class LockVC: UIViewController {
         view.addSubview(usernameLabel)
         usernameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            usernameLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 50),
+            usernameLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 70),
             usernameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50)])
     }
     private func contrainPasswordLabel() {
@@ -56,6 +64,13 @@ class LockVC: UIViewController {
         NSLayoutConstraint.activate([
             passwordLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 25),
             passwordLabel.leadingAnchor.constraint(equalTo: usernameLabel.leadingAnchor)])
+    }
+    private func constrainSignUpLabel() {
+        view.addSubview(signUpLabel)
+        signUpLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            signUpLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
+            signUpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
     
     //MARK: - LifeCycle
