@@ -10,21 +10,31 @@ import UIKit
 
 class LockVC: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    //MARK: - Objects
+    let loginLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Login"
+        label.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 40)
+        return label
+    }()
+    
+    //MARK: - Constraints
+    private func setupConstraints() {
+        constrainLoginLabel()
+    }
+    private func constrainLoginLabel() {
+        view.addSubview(loginLabel)
+        loginLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            loginLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 70),
+            loginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
+        setupConstraints()
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }
