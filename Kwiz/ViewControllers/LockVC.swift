@@ -43,6 +43,12 @@ class LockVC: UIViewController {
         lockView.layer.cornerRadius = lockView.frame.width / 2
         return lockView
     }()
+    let lockImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "lock")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
     
     //MARK: - Constraints
     private func setupConstraints() {
@@ -51,6 +57,7 @@ class LockVC: UIViewController {
         contrainPasswordLabel()
         constrainSignUpLabel()
         constrainLockView()
+        constrainLockImage()
     }
     private func constrainLoginLabel() {
         view.addSubview(loginLabel)
@@ -88,6 +95,15 @@ class LockVC: UIViewController {
             lockView.bottomAnchor.constraint(equalTo: loginLabel.topAnchor, constant: -50),
             lockView.widthAnchor.constraint(equalToConstant: lockView.frame.width),
             lockView.heightAnchor.constraint(equalToConstant: lockView.frame.height)])
+    }
+    private func constrainLockImage() {
+        lockView.addSubview(lockImage)
+        lockImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            lockImage.leadingAnchor.constraint(equalTo: lockView.leadingAnchor, constant: 30),
+            lockImage.trailingAnchor.constraint(equalTo: lockView.trailingAnchor, constant: -30),
+            lockImage.bottomAnchor.constraint(equalTo: lockView.bottomAnchor, constant: -50),
+            lockImage.topAnchor.constraint(equalTo: lockView.centerYAnchor, constant: 50)])
     }
     
     //MARK: - LifeCycle
