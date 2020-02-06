@@ -36,6 +36,13 @@ class LockVC: UIViewController {
         label.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 20)
         return label
     }()
+    let lockView: UIView = {
+        let lockView = UIView(frame: CGRect(x: 0, y: 0, width: 124, height: 300))
+        lockView.layer.borderColor = UIColor.black.cgColor
+        lockView.layer.borderWidth = 15
+        lockView.layer.cornerRadius = lockView.frame.width / 2
+        return lockView
+    }()
     
     //MARK: - Constraints
     private func setupConstraints() {
@@ -43,6 +50,7 @@ class LockVC: UIViewController {
         constrainUsernameLabel()
         contrainPasswordLabel()
         constrainSignUpLabel()
+        constrainLockView()
     }
     private func constrainLoginLabel() {
         view.addSubview(loginLabel)
@@ -71,6 +79,15 @@ class LockVC: UIViewController {
         NSLayoutConstraint.activate([
             signUpLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
             signUpLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+    }
+    private func constrainLockView() {
+        view.addSubview(lockView)
+        lockView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            lockView.leadingAnchor.constraint(equalTo: loginLabel.leadingAnchor, constant: -70),
+            lockView.bottomAnchor.constraint(equalTo: loginLabel.topAnchor, constant: -50),
+            lockView.widthAnchor.constraint(equalToConstant: lockView.frame.width),
+            lockView.heightAnchor.constraint(equalToConstant: lockView.frame.height)])
     }
     
     //MARK: - LifeCycle
