@@ -49,6 +49,16 @@ class LockVC: UIViewController {
         image.contentMode = .scaleAspectFit
         return image
     }()
+    let textBox: UIView = {
+        let boxView = UIView()
+        boxView.backgroundColor = #colorLiteral(red: 0.8467330933, green: 0.8713539243, blue: 0.8751690984, alpha: 1)
+        return boxView
+    }()
+    let textBox2: UIView = {
+        let boxView = UIView()
+        boxView.backgroundColor = #colorLiteral(red: 0.8467330933, green: 0.8713539243, blue: 0.8751690984, alpha: 1)
+        return boxView
+    }()
     
     //MARK: - Constraints
     private func setupConstraints() {
@@ -58,6 +68,8 @@ class LockVC: UIViewController {
         constrainSignUpLabel()
         constrainLockView()
         constrainLockImage()
+        constrainTextBox()
+        constrainTextBox2()
     }
     private func constrainLoginLabel() {
         view.addSubview(loginLabel)
@@ -105,6 +117,25 @@ class LockVC: UIViewController {
             lockImage.bottomAnchor.constraint(equalTo: lockView.bottomAnchor, constant: -50),
             lockImage.topAnchor.constraint(equalTo: lockView.centerYAnchor, constant: 50)])
     }
+    private func constrainTextBox() {
+        view.addSubview(textBox)
+        textBox.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textBox.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant: 20),
+            textBox.topAnchor.constraint(equalTo: usernameLabel.topAnchor, constant: -5),
+            textBox.bottomAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 5),
+            textBox.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25)])
+    }
+    private func constrainTextBox2() {
+        view.addSubview(textBox2)
+        textBox2.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textBox2.leadingAnchor.constraint(equalTo: textBox.leadingAnchor),
+            textBox2.topAnchor.constraint(equalTo: passwordLabel.topAnchor, constant: -5),
+            textBox2.bottomAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 5),
+            textBox2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25)])
+    }
+    
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
