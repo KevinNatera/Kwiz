@@ -17,10 +17,17 @@ class LockVC: UIViewController {
         label.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 40)
         return label
     }()
+    let usernameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Username:"
+        label.font = UIFont(name: "ArialMT", size: 25)
+        return label
+    }()
     
     //MARK: - Constraints
     private func setupConstraints() {
         constrainLoginLabel()
+        constrainUsername()
     }
     private func constrainLoginLabel() {
         view.addSubview(loginLabel)
@@ -28,6 +35,13 @@ class LockVC: UIViewController {
         NSLayoutConstraint.activate([
             loginLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 70),
             loginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+    }
+    private func constrainUsername() {
+        view.addSubview(usernameLabel)
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            usernameLabel.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 50),
+            usernameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50)])
     }
     
     override func viewDidLoad() {
