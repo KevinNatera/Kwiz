@@ -60,13 +60,15 @@ class LockVC: UIViewController {
         return boxView
     }()
     let handle: UIView = {
-        let knob = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 60))
+        let knob = UIView(frame: .zero)
         knob.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
         knob.layer.borderColor = UIColor.black.cgColor
         knob.layer.borderWidth = 10
-        knob.layer.cornerRadius = knob.frame.height / 2
+        knob.layer.cornerRadius = 30
         return knob
     }()
+    
+    let panGesture = UIPanGestureRecognizer()
     
     //MARK: - Constraints
     private func setupConstraints() {
@@ -147,19 +149,36 @@ class LockVC: UIViewController {
     private func constrainHandle() {
         view.addSubview(handle)
         handle.translatesAutoresizingMaskIntoConstraints = false
+        handle.layer.anchorPoint = CGPoint(x: 0.1, y: 0.5)
         NSLayoutConstraint.activate([
-            handle.widthAnchor.constraint(equalToConstant: handle.frame.width),
-            handle.heightAnchor.constraint(equalToConstant: handle.frame.height),
-            handle.leadingAnchor.constraint(equalTo: lockView.centerXAnchor, constant: -20),
+            handle.widthAnchor.constraint(equalToConstant: 200),
+            handle.heightAnchor.constraint(equalToConstant: 60),
+            handle.leadingAnchor.constraint(equalTo: lockView.centerXAnchor, constant: -20 - 85),
             handle.topAnchor.constraint(equalTo: lockView.topAnchor, constant: 60)])
     }
     
+    //MARK: Methods
+    @objc func draggedView(sender: UIPanGestureRecognizer) {
+        guard let view = sender.view else { return }
+        let touch = sender.location(in: view.superview)
+        let origin = view.layer.position
+        let point = CGPoint(x: touch.x - origin.x, y: touch.y - origin.y)
+        guard point.y > 0, point.x > 0 else { return }
+        
+        let angle = point.x == 0 ? .pi/2 : atan(Double(point.y / point.x))
+        print(touch)
+        print(angle)
+        handle.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
+    }
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
         setupConstraints()
+        panGesture.addTarget(self, action: #selector(draggedView))
+        handle.addGestureRecognizer(panGesture)
+        
 
     }
 
