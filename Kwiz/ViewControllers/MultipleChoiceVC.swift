@@ -13,14 +13,15 @@ class MultipleChoiceVC: UIViewController {
     lazy var questionTextField: UITextField = {
         let tf = UITextField()
         tf.font = UIFont(name: "Times New Roman", size: 14)
-        tf.backgroundColor = #colorLiteral(red: 0.9226855636, green: 0.9171560407, blue: 0.9346966743, alpha: 1)
+        tf.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        tf.layer.cornerRadius = 10
         return tf
         
     }()
     
     lazy var answerChoiceAButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9226855636, green: 0.9171560407, blue: 0.9346966743, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
         return button
         
@@ -28,7 +29,7 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceBButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9226855636, green: 0.9171560407, blue: 0.9346966743, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
         return button
         
@@ -36,7 +37,7 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceCButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9226855636, green: 0.9171560407, blue: 0.9346966743, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
         return button
         
@@ -44,7 +45,7 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceDButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9226855636, green: 0.9171560407, blue: 0.9346966743, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
         return button
         
@@ -53,15 +54,15 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var skipButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.1684301496, green: 0.1522013843, blue: 0.8870446086, alpha: 1)
-        button.setImage(UIImage(named: "skip"), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.setImage(UIImage(named: "forwardArrow"), for: .normal)
         return button
     }()
     
     lazy var backButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.1684301496, green: 0.1522013843, blue: 0.8870446086, alpha: 1)
-        button.setImage(UIImage(named: "back"), for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.setImage(UIImage(named: "backArrow"), for: .normal)
         return button
     }()
     
@@ -89,7 +90,7 @@ class MultipleChoiceVC: UIViewController {
         super.viewDidLoad()
         addViews()
         addConstraints()
-        view.backgroundColor = #colorLiteral(red: 0.1684301496, green: 0.1522013843, blue: 0.8870446086, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     }
     
     private func addViews(){
@@ -118,8 +119,8 @@ class MultipleChoiceVC: UIViewController {
     private func setUpQuestionTF(){
         questionTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 65),
+            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -65),
             questionTextField.heightAnchor.constraint(equalToConstant: 100),
             questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             
@@ -133,7 +134,7 @@ class MultipleChoiceVC: UIViewController {
     private func setUpAnswersStackView(){
         let stackView = UIStackView(arrangedSubviews: [answerChoiceAButton, answerChoiceBButton, answerChoiceCButton, answerChoiceDButton])
         stackView.axis = .vertical
-        stackView.spacing = 40
+        stackView.spacing = 30
         stackView.distribution = .fillEqually
         self.view.addSubview(stackView)
         
@@ -142,7 +143,7 @@ class MultipleChoiceVC: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
             stackView.leadingAnchor.constraint(equalTo: questionTextField.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: questionTextField.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 50)
+            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 60)
         ])
     }
     
@@ -150,10 +151,10 @@ class MultipleChoiceVC: UIViewController {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             
-            backButton.heightAnchor.constraint(equalToConstant: 90),
-            backButton.bottomAnchor.constraint(equalTo: questionTextField.topAnchor),
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            backButton.widthAnchor.constraint(equalToConstant: 80)
+            backButton.heightAnchor.constraint(equalToConstant: 70),
+            backButton.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            backButton.widthAnchor.constraint(equalToConstant: 55)
             
         ])
     }
@@ -172,16 +173,16 @@ class MultipleChoiceVC: UIViewController {
     private func setUpLivesStackView(){
         let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
         stackView.axis = .horizontal
-        stackView.spacing = 5
+        stackView.spacing = 1
         stackView.distribution = .fillEqually
         self.view.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            stackView.leadingAnchor.constraint(equalTo: backButton.trailingAnchor, constant: 80),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: questionTextField.topAnchor)
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            stackView.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
+            stackView.heightAnchor.constraint(equalToConstant: 60),
+            stackView.widthAnchor.constraint(equalToConstant: 150)
 
         ])
         
