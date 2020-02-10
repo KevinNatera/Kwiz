@@ -36,13 +36,7 @@ class ScaleVC: UIViewController {
     var mysteryBox: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        label.text = "?"
-        label.font = UIFont(name: "System", size: 20)
-        label.textAlignment = .center
-        label.textColor = .white
-        image.addSubview(label)
-        label.center = image.center
+        
         
         image.backgroundColor = .brown
         return image
@@ -70,6 +64,26 @@ class ScaleVC: UIViewController {
         return button
     }()
     
+    lazy var userLivesImageOne: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+       
+        return imageView
+    }()
+    lazy var userLivesImageTwo: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+       
+        return imageView
+    }()
+    
+    lazy var userLivesImageThree: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+       
+        return imageView
+    }()
+    
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
     var featherPanGesture = UIPanGestureRecognizer()
@@ -79,10 +93,12 @@ class ScaleVC: UIViewController {
             if inputBox.frame.contains(steelCenter) {
                 steel.center = inputBox.center
                 rotate(view: steel)
+                loselife()
                 reset.isHidden = false
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
+                pickedCorrectAnswer()
             }
         }
     }
@@ -91,6 +107,7 @@ class ScaleVC: UIViewController {
             if inputBox.frame.contains(featherCenter) {
                 feather.center = inputBox.center
                 rotate(view: feather)
+                loselife()
                 reset.isHidden = false
             }
         }
@@ -110,12 +127,17 @@ class ScaleVC: UIViewController {
         constrainSteel()
         constrainFeather()
         constrainReset()
+        setUpLivesStackView()
+        setupLabelsInBoxes(text: "?", superview: mysteryBox, color: .white)
+        setupLabelsInBoxes(text: "Feathers", superview: feather, color: .black)
+        setupLabelsInBoxes(text: "Steel", superview: steel, color: .white)
         
         makeTriangle()
         
         rotateObjects()
         
         getOriginalCenters()
+        
     }
     private func constrainLine() {
         view.addSubview(line)
@@ -130,7 +152,7 @@ class ScaleVC: UIViewController {
         view.addSubview(promptLabel)
         promptLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            promptLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            promptLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             promptLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
     private func constrainSteel() {
@@ -195,6 +217,29 @@ class ScaleVC: UIViewController {
             answer.widthAnchor.constraint(equalToConstant: answer.frame.width),
             answer.heightAnchor.constraint(equalToConstant: answer.frame.height)])
     }
+    private func setUpLivesStackView(){
+        view.addSubview(userLivesImageOne)
+        view.addSubview(userLivesImageTwo)
+        view.addSubview(userLivesImageThree)
+        
+        userLivesImageOne.translatesAutoresizingMaskIntoConstraints = false
+        userLivesImageTwo.translatesAutoresizingMaskIntoConstraints = false
+        userLivesImageThree.translatesAutoresizingMaskIntoConstraints = false
+        
+        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
+        stackView.axis = .horizontal
+        stackView.spacing = 5
+        stackView.distribution = .fillEqually
+        self.view.addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 0),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 100)
+        ])
+    }
     
     //MARK: Rotate
     private func rotateLine() {
@@ -222,6 +267,21 @@ class ScaleVC: UIViewController {
         feather.isUserInteractionEnabled = true
         featherPanGesture = UIPanGestureRecognizer(target: self, action: #selector(draggedFeather(_:)))
         feather.addGestureRecognizer(featherPanGesture)
+    }
+    private func setupLabelsInBoxes(text: String, superview: UIView, color: UIColor) {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        label.text = text
+        label.font = UIFont(name: "System", size: 20)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = .white
+        superview.addSubview(label)
+        
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        label.widthAnchor.constraint(equalToConstant: superview.frame.width).isActive = true
+        label.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
     }
     
     //MARK: - Functions
@@ -256,6 +316,19 @@ class ScaleVC: UIViewController {
         view.layoutIfNeeded()
         steelOriginalCenter = CGPoint(x: steel.center.x, y: steel.center.y - 34)
         featherOriginalCenter = CGPoint(x: feather.center.x, y: feather.center.y - 34)
+    }
+    private func loselife() {
+        UIView.animate(withDuration: 2) {
+            self.userLivesImageOne.alpha = 0.0
+        }
+    }
+    private func pickedCorrectAnswer() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            let lock = LockVC()
+            lock.modalPresentationStyle = .fullScreen
+            self.present(lock, animated: true, completion: nil)
+        }
+        
     }
     
     
