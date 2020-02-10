@@ -31,9 +31,11 @@ class AdvertisementVC: UIViewController {
         let button = UIButton()
         button.setTitle("Download Today!", for: .normal)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Arial-BoldMT", size: 20)
         button.layer.borderColor = UIColor.orange.cgColor
-        button.layer.borderWidth = 5
+        button.layer.borderWidth = 10
         button.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+//        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         return button
     }()
     
@@ -41,12 +43,13 @@ class AdvertisementVC: UIViewController {
     private func setupConstraints() {
         constrainAdLabel()
         constrainGroupOneLabel()
+        constrainDownloadButton()
     }
     private func constrainAdLabel() {
         view.addSubview(adLabel)
         adLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            adLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            adLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             adLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
             adLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
             adLabel.heightAnchor.constraint(equalToConstant: 200)])
@@ -60,7 +63,15 @@ class AdvertisementVC: UIViewController {
             groupOneLabel.trailingAnchor.constraint(equalTo: adLabel.trailingAnchor),
             groupOneLabel.heightAnchor.constraint(equalToConstant: 300)])
     }
-    
+    private func constrainDownloadButton() {
+        view.addSubview(downloadButton)
+        downloadButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            downloadButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
+            downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            downloadButton.widthAnchor.constraint(equalToConstant: 220),
+            downloadButton.heightAnchor.constraint(equalToConstant: 100)])
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
