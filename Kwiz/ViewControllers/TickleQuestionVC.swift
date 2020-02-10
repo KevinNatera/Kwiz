@@ -17,17 +17,20 @@ class TickleQuestionVC: UIViewController {
     
     lazy var question: UILabel = {
         let label = UILabel()
-        label.frame = CGRect(x: view.center.x - 100, y: 100, width: 200, height: 50)
+        label.frame = CGRect(x: view.center.x - 200, y: 100, width: 400, height: 50)
         label.backgroundColor = .red
-        label.text = "THIS IS A QUESTION BOII"
+        label.text = "How many tickles does it take to make a squid laugh?"
         label.textColor = .black
+        label.font = label.font.withSize(20)
+        label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
     
     lazy var wrongAnswer1: UIButton = {
         let button = UIButton()
-        button.setTitle("WRONG ANSWER 1", for: .normal)
-        button.frame = CGRect(x: view.center.x - 100, y: 250, width: 200, height: 50)
+        button.setTitle("Like three", for: .normal)
+        button.frame = CGRect(x: view.center.x - 150, y: 250, width: 300, height: 50)
         button.backgroundColor = .red
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
@@ -36,8 +39,8 @@ class TickleQuestionVC: UIViewController {
     
     lazy var wrongAnswer2: UIButton = {
         let button = UIButton()
-        button.setTitle("WRONG ANSWER 2", for: .normal)
-        button.frame = CGRect(x: view.center.x - 100, y: 350, width: 200, height: 50)
+        button.setTitle("The Right Answer", for: .normal)
+        button.frame = CGRect(x: view.center.x - 150, y: 350, width: 300, height: 50)
         button.backgroundColor = .red
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
@@ -46,8 +49,8 @@ class TickleQuestionVC: UIViewController {
     
     lazy var wrongAnswer3: UIButton = {
         let button = UIButton()
-        button.setTitle("WRONG ANSWER 3", for: .normal)
-        button.frame = CGRect(x: view.center.x - 100, y: 450, width: 200, height: 50)
+        button.setTitle("Witty Spongebob Reference", for: .normal)
+        button.frame = CGRect(x: view.center.x - 150, y: 450, width: 300, height: 50)
         button.backgroundColor = .red
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
@@ -56,14 +59,13 @@ class TickleQuestionVC: UIViewController {
     
     lazy var correctAnswer: UIButton = {
         let button = UIButton()
-        button.setTitle("WRONG ANSWER >:(", for: .normal)
-        button.frame = CGRect(x: view.center.x - 100, y: 550, width: 200, height: 50)
-        button.backgroundColor = .green
+        button.setTitle(">:(", for: .normal)
+        button.frame = CGRect(x: view.center.x - 150, y: 550, width: 300, height: 50)
+        button.backgroundColor = .red
         button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
-    
     
     
     
@@ -96,7 +98,33 @@ class TickleQuestionVC: UIViewController {
         if correctAnswer.frame.contains(gestureRecognizer.location(in: self.view)) {
             tickles += 0.02
             
-            if tickles < 10.1 {
+            let direction = Int.random(in: 1...4)
+            
+            switch direction {
+            case 1...2:
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.correctAnswer.frame = CGRect(x: self.correctAnswer.frame.minX + 1 , y: self.correctAnswer.frame.minY, width: self.correctAnswer.frame.width, height: self.correctAnswer.frame.height)
+                    
+                }) { (bool) in
+                    
+                    self.correctAnswer.frame = CGRect(x: self.correctAnswer.frame.minX - 1 , y: self.correctAnswer.frame.minY, width: self.correctAnswer.frame.width, height: self.correctAnswer.frame.height)
+                }
+            case 3...4:
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.correctAnswer.frame = CGRect(x: self.correctAnswer.frame.minX - 1 , y: self.correctAnswer.frame.minY, width: self.correctAnswer.frame.width, height: self.correctAnswer.frame.height)
+                    
+                    
+                }) { (bool) in
+                    
+                    self.correctAnswer.frame = CGRect(x: self.correctAnswer.frame.minX + 1 , y: self.correctAnswer.frame.minY, width: self.correctAnswer.frame.width, height: self.correctAnswer.frame.height)
+                }
+                
+            default:
+                print("oops")
+            }
+            
+            
+            if tickles < 10.0 {
                 
                 correctAnswer.setTitle(String(Int(tickles)), for: .normal)
                 
@@ -105,8 +133,9 @@ class TickleQuestionVC: UIViewController {
                 print(tickles)
             } else {
                 
-                correctAnswer.setTitle("Correct!!!", for: .normal)
-                //Trigger segue into next question
+                correctAnswer.setTitle("TEN-TICKLES!!! :D", for: .normal)
+                correctAnswer.backgroundColor = .green
+                //Trigger segue into next question after a delay
                 print("grats")
             }
             
@@ -164,7 +193,6 @@ class TickleQuestionVC: UIViewController {
             print("default")
         }
     }
-    
 }
 
 
