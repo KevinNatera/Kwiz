@@ -65,6 +65,10 @@ class AdvertisementVC: UIViewController {
         imageView.isHidden = true
         return imageView
     }()
+    var stackView = UIStackView()
+    
+    //MARK: - Properties
+    var center = CGPoint.zero
     
     //MARK: - Setup/ Constraints
     private func setupConstraints() {
@@ -95,6 +99,8 @@ class AdvertisementVC: UIViewController {
     private func constrainDownloadButton() {
         view.addSubview(downloadButton)
         downloadButton.translatesAutoresizingMaskIntoConstraints = false
+        downloadButton.addTarget(self, action: #selector(downloadButtonPressed), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             downloadButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -104,14 +110,17 @@ class AdvertisementVC: UIViewController {
     private func constrainCloseButton() {
         view.addSubview(closeButton)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.addTarget(self, action: #selector(loselife), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)])
+        
         view.layoutIfNeeded()
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
     }
     private func setUpLivesStackView(){
-        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
+        stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
         stackView.axis = .horizontal
         stackView.spacing = 1
         stackView.distribution = .fillEqually
@@ -138,6 +147,22 @@ class AdvertisementVC: UIViewController {
         userLivesImageOne.isHidden = false
         userLivesImageTwo.isHidden = false
         userLivesImageThree.isHidden = false
+        center = stackView.center
+//        UIView.animate(withDuration: 2) { [weak self] in
+//            self?.stackView.center = CGPoint(x: (self?.center.x ?? 0) - 10, y: self?.center.y ?? 0)
+//            self?.stackView.center = CGPoint(x: (self?.center.x ?? 0) + 20, y: self?.center.y ?? 0)
+//            self?.stackView.center = CGPoint(x: (self?.center.x ?? 0) - 10, y: self?.center.y ?? 0)
+//        }
+    }
+    //MARK: Objc Functions
+    @objc private func loselife() {
+        showLives()
+        UIView.animate(withDuration: 2) {
+            self.userLivesImageOne.alpha = 0.0
+        }
+    }
+    @objc private func downloadButtonPressed() {
+        print("segue to next question")
     }
 
     //MARK: - LifeCycle
