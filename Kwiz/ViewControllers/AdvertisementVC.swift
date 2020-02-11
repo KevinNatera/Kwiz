@@ -38,12 +38,21 @@ class AdvertisementVC: UIViewController {
 //        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         return button
     }()
+    var closeButton: UIButton = {
+        let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 30, weight: UIImage.SymbolWeight.medium)
+        button.setImage(UIImage.init(systemName: "x.circle", withConfiguration: config), for: .normal)
+        button.tintColor = .black
+        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        return button
+    }()
     
     //MARK: - Setup/ Constraints
     private func setupConstraints() {
         constrainAdLabel()
         constrainGroupOneLabel()
         constrainDownloadButton()
+        constrainCloseButton()
     }
     private func constrainAdLabel() {
         view.addSubview(adLabel)
@@ -58,19 +67,37 @@ class AdvertisementVC: UIViewController {
         view.addSubview(groupOneLabel)
         groupOneLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            groupOneLabel.topAnchor.constraint(equalTo: adLabel.bottomAnchor, constant: 25),
+            groupOneLabel.topAnchor.constraint(equalTo: adLabel.bottomAnchor, constant: 20),
             groupOneLabel.leadingAnchor.constraint(equalTo: adLabel.leadingAnchor),
             groupOneLabel.trailingAnchor.constraint(equalTo: adLabel.trailingAnchor),
-            groupOneLabel.heightAnchor.constraint(equalToConstant: 300)])
+            groupOneLabel.heightAnchor.constraint(equalToConstant: 280)])
     }
     private func constrainDownloadButton() {
         view.addSubview(downloadButton)
         downloadButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            downloadButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25),
+            downloadButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             downloadButton.widthAnchor.constraint(equalToConstant: 220),
             downloadButton.heightAnchor.constraint(equalToConstant: 100)])
+    }
+    private func constrainCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)])
+        view.layoutIfNeeded()
+        closeButton.layer.cornerRadius = closeButton.frame.height / 2
+        
+    }
+    
+    //MARK: - Functions
+    private func animateDownloadButton() {
+        UIView.animate(withDuration: 2, delay: 2, options: [.repeat], animations: { [weak self] in
+            self?.downloadButton.backgroundColor = .systemRed
+            self?.downloadButton.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+            }, completion: nil)
     }
 
     //MARK: - LifeCycle
@@ -78,6 +105,7 @@ class AdvertisementVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraints()
+        //animateDownloadButton()
 
     }
 
