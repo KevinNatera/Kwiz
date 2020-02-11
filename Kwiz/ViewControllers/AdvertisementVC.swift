@@ -46,6 +46,25 @@ class AdvertisementVC: UIViewController {
         button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         return button
     }()
+    lazy var userLivesImageOne: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+        imageView.isHidden = true
+        return imageView
+    }()
+    lazy var userLivesImageTwo: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+        imageView.isHidden = true
+        return imageView
+    }()
+    
+    lazy var userLivesImageThree: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+        imageView.isHidden = true
+        return imageView
+    }()
     
     //MARK: - Setup/ Constraints
     private func setupConstraints() {
@@ -53,6 +72,7 @@ class AdvertisementVC: UIViewController {
         constrainGroupOneLabel()
         constrainDownloadButton()
         constrainCloseButton()
+        setUpLivesStackView()
     }
     private func constrainAdLabel() {
         view.addSubview(adLabel)
@@ -89,6 +109,21 @@ class AdvertisementVC: UIViewController {
             closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)])
         view.layoutIfNeeded()
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
+    }
+    private func setUpLivesStackView(){
+        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
+        stackView.axis = .horizontal
+        stackView.spacing = 1
+        stackView.distribution = .fillEqually
+        self.view.addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: adLabel.topAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 60),
+            stackView.widthAnchor.constraint(equalToConstant: 150)
+        ])
         
     }
     
@@ -98,6 +133,11 @@ class AdvertisementVC: UIViewController {
             self?.downloadButton.backgroundColor = .systemRed
             self?.downloadButton.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
             }, completion: nil)
+    }
+    private func showLives() {
+        userLivesImageOne.isHidden = false
+        userLivesImageTwo.isHidden = false
+        userLivesImageThree.isHidden = false
     }
 
     //MARK: - LifeCycle
