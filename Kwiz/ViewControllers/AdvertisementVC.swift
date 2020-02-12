@@ -46,6 +46,14 @@ class AdvertisementVC: UIViewController {
         button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         return button
     }()
+    var infoButton: UIButton = {
+        let button = UIButton()
+        let config = UIImage.SymbolConfiguration(pointSize: 30, weight: UIImage.SymbolWeight.medium)
+        button.setImage(UIImage.init(systemName: "info.circle", withConfiguration: config), for: .normal)
+        button.tintColor = .black
+        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        return button
+    }()
     lazy var userLivesImageOne: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
@@ -77,6 +85,7 @@ class AdvertisementVC: UIViewController {
         constrainDownloadButton()
         constrainCloseButton()
         setUpLivesStackView()
+        constrainInfoButton()
     }
     private func constrainAdLabel() {
         view.addSubview(adLabel)
@@ -134,6 +143,15 @@ class AdvertisementVC: UIViewController {
             stackView.widthAnchor.constraint(equalToConstant: 150)
         ])
         
+    }
+    private func constrainInfoButton() {
+        view.addSubview(infoButton)
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            infoButton.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 5),
+            infoButton.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor)])
+        view.layoutIfNeeded()
+        infoButton.layer.cornerRadius = infoButton.frame.height / 2
     }
     
     //MARK: - Functions
