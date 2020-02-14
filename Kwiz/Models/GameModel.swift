@@ -9,28 +9,41 @@
 import Foundation
 
 class Game {
+    static let shared = Game()
     private var lives: Int
     private var score: Int
     private var user: User?
     private var question: Multiplechoice
     
     
-    init(user: User?) {
-         lives = 3
-         score = 0
-        if let user = user {
-            self.user = user
-        } else {
-            let user = User(highestScore: 0, nickname: "bob")
-            user.enterName(name: "Bob")
-            self.user = user
-        }
+    
+    /// game requires user to exist, games always start with 3 lives and a score of 0
+    /// - Parameter user: <#user description#>
+    private init() {
+        lives = 3
+        score = 0
         
-        question = Multiplechoice(question: "What key can't open locks?", allAnswers: [1:"donkeys",2:"super keys",3:"falcon keys",4:"Bit keys"], questionValue: 10)
+        //self.user = user
+        
+        question = Game.getQuestions()
+    }
+    func setUser(user: User) {
+        self.user = user
+    }
+    
+    /// internal game function to get questions
+   static private func getQuestions() -> Multiplechoice {
+        return Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "donkeys", isCorrect: .correct)
+        ,Answer(text: "super keys", isCorrect: .incorrect)
+        ,Answer(text: "falcon keys", isCorrect: .incorrect)
+        ,Answer(text: "bit keys", isCorrect: .incorrect)]
+        , questionValue: 50)
     }
     
     func shuffle(){
         print("shuffle")
+        print("segue to multipleChoice VC")
+        question.shuffleAnswers()
     }
     
     func increaseScore(){
@@ -63,25 +76,26 @@ class Game {
         //user?.nextQuestion()
     }
     
-    func read(){
+    func read() -> String {
         print("view controller loads question")
-        let questionLabel = question.question
-        let buttonOne = question.allAnswers[1]
-        let buttonTwo = question.allAnswers[2]
-        let buttonThree = question.allAnswers[3]
-        let buttonFour = question.allAnswers[4]
+        return question.readQuestion()
     }
-    func answer() -> Bool {
-        let ans = user?.pickAnswer()
+    func getAnswerTexts() -> [String] {
+        return question.getAnswerTexts()
+    }
+    func answer(_ ans: Int) -> Bool {
         print("answer picked")
-        if ans == 1 {
+        if question.guess(answer: ans) {
             increaseScore()
             return true
         } else {
             return false
         }
     }
-    func recieveScore(){
+    
+    /// global game score
+    func getCurrentScore() {
         print("recieve \(score)")
+        //Show user score, current score
     }
 }

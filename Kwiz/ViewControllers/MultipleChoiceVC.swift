@@ -9,10 +9,11 @@
 import UIKit
 
 class MultipleChoiceVC: UIViewController {
+    var game = Game.shared
     
     lazy var questionTextField: UITextField = {
         let tf = UITextField()
-        tf.font = UIFont(name: "Times New Roman", size: 14)
+        tf.font = UIFont(name: "Times New Roman", size: 25)
         tf.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         tf.layer.cornerRadius = 10
         return tf
@@ -23,6 +24,8 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
+        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.tag = 0
         return button
         
     }()
@@ -31,6 +34,8 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
+        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.tag = 1
         return button
         
     }()
@@ -39,6 +44,8 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
+        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.tag = 2
         return button
         
     }()
@@ -47,6 +54,8 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         button.layer.cornerRadius = 20
+        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.tag = 3
         return button
         
     }()
@@ -98,6 +107,26 @@ class MultipleChoiceVC: UIViewController {
         addViews()
         addConstraints()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        addTargetsToButtons()
+        let user = User(highestScore: 0, nickname: "bob")
+        user.enterName(name: "Bob")
+        //let game = Game.shared
+        game.start()
+        game.shuffle()
+        //game.read()
+        questionTextField.text = game.read()
+        let answerTexts = game.getAnswerTexts()
+        answerChoiceAButton.setTitle("\(answerTexts[0])", for: .normal)
+        answerChoiceBButton.setTitle("\(answerTexts[1])", for: .normal)
+        answerChoiceCButton.setTitle("\(answerTexts[2])", for: .normal)
+        answerChoiceDButton.setTitle("\(answerTexts[3])", for: .normal)
+//        if game.answer(0) {
+//            print("you're right!")
+//            game.getCurrentScore()
+//        } else {
+//            print("you lose :(")
+//            game.quit()
+//        }
     }
     
     private func addViews(){
@@ -196,6 +225,7 @@ class MultipleChoiceVC: UIViewController {
         
         
     }
+
     
     private func setUpHintButton(){
         hintButton.translatesAutoresizingMaskIntoConstraints = false
@@ -211,6 +241,29 @@ class MultipleChoiceVC: UIViewController {
         
     }
     
+
+    private func addTargetsToButtons() {
+        answerChoiceAButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
+        answerChoiceBButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
+        answerChoiceCButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
+        answerChoiceDButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
+    }
+    @objc private func buttonPicked(sender: UIButton) {
+        if game.answer(sender.tag) {
+            print("you're right!")
+            let scale = ScaleVC()
+            scale.modalPresentationStyle = .fullScreen
+            present(scale, animated: true, completion: nil)
+            //game.getCurrentScore()
+        } else {
+            print("you lose :(")
+            UIView.animate(withDuration: 2) {
+                self.userLivesImageOne.alpha = 0.0
+            }
+            //game.quit()
+        }
+    }
+
     
     
 }

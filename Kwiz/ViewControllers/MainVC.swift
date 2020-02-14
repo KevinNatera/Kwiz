@@ -16,7 +16,7 @@ class MainVC: UIViewController {
     var settingButton = UIButton()
     var kwizImage: UIImageView = {
         var view = UIImageView()
-        view.image = UIImage(named: "Kwiz")
+        view.image = UIImage(named: "logo")
         return view
     }()
     
@@ -37,6 +37,8 @@ class MainVC: UIViewController {
         updateTitleOnButton(button: startButton, title: "START")
         updateTitleOnButton(button: rankingButton, title: "RANKING")
         updateTitleOnButton(button: settingButton, title: "SETTINGS")
+        
+        startButton.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
     }
     private func setupImageConstraints() {
         view.addSubview(kwizImage)
@@ -63,6 +65,13 @@ class MainVC: UIViewController {
         
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
+    }
+    //MARK: Objc Function
+    @objc func segueToQuestion() {
+        let multipleChoice = MultipleChoiceVC()
+        multipleChoice.modalPresentationStyle = .fullScreen
+        present(multipleChoice, animated: true, completion: nil)
+        
     }
 
     //MARK: - LifeCycle

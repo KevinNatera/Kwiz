@@ -98,7 +98,7 @@ class ScaleVC: UIViewController {
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
-                pickedCorrectAnswer()
+                //pickedCorrectAnswer()
             }
         }
     }
@@ -234,10 +234,10 @@ class ScaleVC: UIViewController {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 0),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            stackView.widthAnchor.constraint(equalToConstant: 150),
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 100)
+            stackView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
@@ -364,7 +364,7 @@ class ScaleVC: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
         setConstraints()
         addGestures()
     }
