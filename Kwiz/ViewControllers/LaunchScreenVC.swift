@@ -37,6 +37,7 @@ class LaunchScreenVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.7802590728, green: 0.932610333, blue: 0.9999867082, alpha: 1)
         imageConstraint()
+        button.addTarget(self, action: #selector(segueToMain), for: .touchUpInside)
         
     }
     
@@ -56,6 +57,11 @@ class LaunchScreenVC: UIViewController {
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
         ])
+    }
+    @objc func segueToMain() {
+        let destination = MainVC()
+        destination.modalPresentationStyle = .fullScreen
+        self.present(destination, animated: true, completion: nil)
     }
     
 }
