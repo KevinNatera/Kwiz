@@ -21,11 +21,22 @@ class Multiplechoice {
         self.questionValue = questionValue
     }
     
-    func readQuestion() {
+    func readQuestion() -> String {
         print(question)
+        return question
+//        for a in allAnswers {
+//            print(a.getText())
+//        }
+    }
+    func getAnswerTexts() -> [String] {
+        var texts = [String]()
         for a in allAnswers {
-            print(a.getText())
+            texts.append(a.getText())
         }
+        return texts
+    }
+    func shuffleAnswers() {
+        allAnswers = allAnswers.shuffled()
     }
     
     /// find Answer for [answer]
