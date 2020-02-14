@@ -43,6 +43,7 @@ class Game {
     func shuffle(){
         print("shuffle")
         print("segue to multipleChoice VC")
+        question.shuffleAnswers()
     }
     
     func increaseScore(){
@@ -75,9 +76,12 @@ class Game {
         //user?.nextQuestion()
     }
     
-    func read(){
+    func read() -> String {
         print("view controller loads question")
-        question.readQuestion()
+        return question.readQuestion()
+    }
+    func getAnswerTexts() -> [String] {
+        return question.getAnswerTexts()
     }
     func answer(_ ans: Int) -> Bool {
         print("answer picked")
