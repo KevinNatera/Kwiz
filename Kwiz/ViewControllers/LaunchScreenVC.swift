@@ -24,10 +24,14 @@ class LaunchScreenVC: UIViewController {
         button.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         button.layer.cornerRadius = 5
-        //button.addTarget(self, action: #selector(changeStatus), for: .touchUpInside)
+        button.addTarget(self, action: #selector(authenticate), for: .touchUpInside)
         
         return button
     }()
+    
+    @objc func authenticate(){
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
