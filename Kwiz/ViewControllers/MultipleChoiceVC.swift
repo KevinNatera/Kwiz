@@ -86,6 +86,13 @@ class MultipleChoiceVC: UIViewController {
         return imageView
     }()
     
+    lazy var hintButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.setImage(UIImage(named: "hint"), for: .normal)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
@@ -104,6 +111,7 @@ class MultipleChoiceVC: UIViewController {
         view.addSubview(userLivesImageOne)
         view.addSubview(userLivesImageTwo)
         view.addSubview(userLivesImageThree)
+        view.addSubview(hintButton)
         
     }
     
@@ -113,6 +121,7 @@ class MultipleChoiceVC: UIViewController {
         setUpBackButton()
         setUpSkipButton()
         setUpLivesStackView()
+        setUpHintButton()
         
     }
     
@@ -126,7 +135,6 @@ class MultipleChoiceVC: UIViewController {
             
             questionTextField.bottomAnchor.constraint(equalTo: answerChoiceAButton.topAnchor, constant:
                 50),
-            
         ])
         
     }
@@ -134,7 +142,7 @@ class MultipleChoiceVC: UIViewController {
     private func setUpAnswersStackView(){
         let stackView = UIStackView(arrangedSubviews: [answerChoiceAButton, answerChoiceBButton, answerChoiceCButton, answerChoiceDButton])
         stackView.axis = .vertical
-        stackView.spacing = 30
+        stackView.spacing = 50
         stackView.distribution = .fillEqually
         self.view.addSubview(stackView)
         
@@ -143,7 +151,7 @@ class MultipleChoiceVC: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
             stackView.leadingAnchor.constraint(equalTo: questionTextField.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: questionTextField.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 60)
+            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 75)
         ])
     }
     
@@ -184,6 +192,20 @@ class MultipleChoiceVC: UIViewController {
             stackView.heightAnchor.constraint(equalToConstant: 60),
             stackView.widthAnchor.constraint(equalToConstant: 150)
 
+        ])
+        
+        
+    }
+    
+    private func setUpHintButton(){
+        hintButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hintButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            hintButton.topAnchor.constraint(equalTo: answerChoiceDButton.bottomAnchor, constant: 15),
+            hintButton.heightAnchor.constraint(equalToConstant: 50),
+            hintButton.widthAnchor.constraint(equalToConstant: 50)
+            
+        
         ])
         
         
