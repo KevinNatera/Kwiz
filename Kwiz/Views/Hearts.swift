@@ -61,11 +61,17 @@ class HeartsStackView: UIStackView {
         case .three:
             makeLivesVisible()
         case .two:
-            userLivesImageOne.alpha = 0
+            UIView.animate(withDuration: 2) { [weak self] in
+                self?.userLivesImageOne.alpha = 0
+            }
         case .one:
-            userLivesImageTwo.alpha = 0
+            UIView.animate(withDuration: 2) { [weak self] in
+                self?.userLivesImageTwo.alpha = 0
+            }
         case .none:
-            userLivesImageThree.alpha = 0
+            UIView.animate(withDuration: 2) { [weak self] in
+                self?.userLivesImageThree.alpha = 0
+            }
         }
     }
     
