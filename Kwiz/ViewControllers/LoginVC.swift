@@ -30,6 +30,7 @@ class LoginVC: UIViewController {
         button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         button.backgroundColor = .cyan
         button.layer.cornerRadius = 5
+        
         button.addTarget(self, action: #selector(leaderboard), for: .touchUpInside)
         
         return button
@@ -57,7 +58,7 @@ class LoginVC: UIViewController {
         score += 1
         userPoints.text = "Points: \(score)"
         saveScore(score: score)
-       // checkFinishAchievement()
+        checkFinishAchievement(userScore: score)
     }
     @objc func leaderboard() {
       let vc = GKGameCenterViewController()
@@ -82,12 +83,13 @@ class LoginVC: UIViewController {
         
     }
     
-    func checkFinishAchievement(){
-        if(score >= 20) {
+    func checkFinishAchievement(userScore: Int){
+        if(userScore >= 20) {
             let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
+            achieved.percentComplete = 100
+            achieved.showsCompletionBanner = true
             //GKAchievement.resetAchievements(completionHandler: nil)
             let achievementArr: [GKAchievement] = [achieved]
-
             GKAchievement.report(achievementArr, withCompletionHandler: nil)
         }
     }
