@@ -30,6 +30,7 @@ class HeartsStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupStackView()
+        addHeartsToSubView()
     }
     
     required init(coder: NSCoder) {
@@ -42,6 +43,11 @@ class HeartsStackView: UIStackView {
         axis = .horizontal
         spacing = 1
         distribution = .fillEqually
+    }
+    private func addHeartsToSubView() {
+        addArrangedSubview(userLivesImageOne)
+        addArrangedSubview(userLivesImageTwo)
+        addArrangedSubview(userLivesImageThree)
     }
     
 }
