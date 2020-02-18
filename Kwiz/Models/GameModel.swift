@@ -7,10 +7,16 @@
 //
 
 import Foundation
+enum LivesRemaining {
+    case three
+    case two
+    case one
+    case none
+}
 
 class Game {
     static let shared = Game()
-    private var lives: Int
+    private var lives: LivesRemaining
     private var score: Int
     private var user: User?
     private var question: Multiplechoice
@@ -20,7 +26,7 @@ class Game {
     /// game requires user to exist, games always start with 3 lives and a score of 0
     /// - Parameter user: <#user description#>
     private init() {
-        lives = 3
+        lives = LivesRemaining.three
         score = 0
         
         //self.user = user
@@ -89,7 +95,20 @@ class Game {
             increaseScore()
             return true
         } else {
+            switchOnLives()
             return false
+        }
+    }
+    func switchOnLives() {
+        switch lives {
+        case .three:
+            lives = .two
+        case .two:
+            lives = .one
+        case .one:
+            lives = .none
+        case .none:
+            quit()
         }
     }
     
