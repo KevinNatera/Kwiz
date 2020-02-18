@@ -75,6 +75,7 @@
 		0B45FF8F23DF51DA00F3084D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVC.swift; sourceTree = "<group>"; };
 		0B4FA97F23FC43EB00DAD57A /* Hearts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hearts.swift; sourceTree = "<group>"; };
+		0B4FA98323FC561F00DAD57A /* 7393-fireworks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "7393-fireworks.json"; sourceTree = "<group>"; };
 		1168795AAFA5CA84A25C7F9E /* Pods_KwizTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KwizTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A44C9DE223DF978C13B5AC5 /* Pods_Kwiz_KwizUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kwiz_KwizUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE6DC94F9C730C862438106 /* Pods-KwizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KwizTests.release.xcconfig"; path = "Target Support Files/Pods-KwizTests/Pods-KwizTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +209,7 @@
 				0B45FF6423DF4E2200F3084D /* LaunchScreen.storyboard */,
 				0B45FF6723DF4E2200F3084D /* Info.plist */,
 				85F9A9A723F70A3700DDBEFD /* 6285nafas.json */,
+				0B4FA98323FC561F00DAD57A /* 7393-fireworks.json */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
