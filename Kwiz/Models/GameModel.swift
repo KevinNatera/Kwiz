@@ -58,7 +58,7 @@ class Game {
     }
     
     func reduceLives(){
-        print("reduce lives")
+        switchOnLives()
     }
     
     func start() {
@@ -99,7 +99,7 @@ class Game {
             return false
         }
     }
-    func switchOnLives() {
+    private func switchOnLives() {
         switch lives {
         case .three:
             lives = .two
@@ -110,6 +110,9 @@ class Game {
         case .none:
             quit()
         }
+    }
+    func getLives() -> LivesRemaining {
+        return lives
     }
     
     /// global game score
