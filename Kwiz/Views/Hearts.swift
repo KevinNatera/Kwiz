@@ -10,17 +10,17 @@ import UIKit
 
 class HeartsStackView: UIStackView {
     //MARK: Objects
-    var userLivesImageOne: UIImageView = {
+    private var userLivesImageOne: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
         return imageView
     }()
-    var userLivesImageTwo: UIImageView = {
+    private var userLivesImageTwo: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
         return imageView
     }()
-    var userLivesImageThree: UIImageView = {
+    private var userLivesImageThree: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
         return imageView
@@ -48,6 +48,25 @@ class HeartsStackView: UIStackView {
         addArrangedSubview(userLivesImageOne)
         addArrangedSubview(userLivesImageTwo)
         addArrangedSubview(userLivesImageThree)
+    }
+    
+    //MARK: Methods
+    private func makeLivesVisible() {
+        userLivesImageOne.alpha = 1
+        userLivesImageTwo.alpha = 1
+        userLivesImageThree.alpha = 1
+    }
+    func loseLife(remaining: LivesRemaining) {
+        switch remaining {
+        case .three:
+            makeLivesVisible()
+        case .two:
+            userLivesImageOne.alpha = 0
+        case .one:
+            userLivesImageTwo.alpha = 0
+        case .none:
+            userLivesImageThree.alpha = 0
+        }
     }
     
 }
