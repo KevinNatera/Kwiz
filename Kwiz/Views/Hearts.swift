@@ -9,6 +9,23 @@
 import UIKit
 
 class HeartsStackView: UIStackView {
+    //MARK: Objects
+    var userLivesImageOne: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+        return imageView
+    }()
+    var userLivesImageTwo: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+        return imageView
+    }()
+    var userLivesImageThree: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "hearts")
+        return imageView
+    }()
+    
     //MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,10 +35,13 @@ class HeartsStackView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+//    convenience init(
+    
     //MARK: Setup Functions
-    func setupStackView() {
+    private func setupStackView() {
         axis = .horizontal
         spacing = 1
         distribution = .fillEqually
     }
+    
 }
