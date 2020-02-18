@@ -7,62 +7,142 @@
 //
 
 import UIKit
+import Lottie
 
 class LaunchScreenVC: UIViewController {
     
-    lazy var image: UIImageView = {
-        var image = UIImageView()
-        image.contentMode = UIView.ContentMode.scaleAspectFit
-        image.autoresizingMask = [UIView.AutoresizingMask.flexibleBottomMargin, UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleRightMargin, UIView.AutoresizingMask.flexibleLeftMargin, UIView.AutoresizingMask.flexibleTopMargin, UIView.AutoresizingMask.flexibleWidth]
-        image.image = UIImage(named: "logo")
-        return image
+    lazy var lottieView: AnimationView = {
+        let view = AnimationView(name: "6285nafas")
+        view.contentMode = .scaleToFill
+        view.respectAnimationFrameRate = false
+        view.animationSpeed = 1.5
+        
+        return view
     }()
     
-    lazy var button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Start", for: .normal)
-        button.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-        button.layer.cornerRadius = 5
-        button.addTarget(self, action: #selector(authenticate), for: .touchUpInside)
+    lazy var logo: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "logoclear")
         
-        return button
+        return view
     }()
     
-    @objc func authenticate(){
+    lazy var logoK: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "logoK")
+        view.isHidden = false
         
-    }
+        return view
+    }()
+    
+    lazy var logoW: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "logoW")
+        view.isHidden = false
+        
+        return view
+    }()
+    
+    lazy var logoI: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "logoI")
+        view.isHidden = false
+        
+        return view
+    }()
+    
+    lazy var logoZ: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "logoZ")
+        view.isHidden = false
+        
+        return view
+    }()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.7802590728, green: 0.932610333, blue: 0.9999867082, alpha: 1)
-        imageConstraint()
-        button.addTarget(self, action: #selector(segueToMain), for: .touchUpInside)
+        view.backgroundColor = .white
+        lottieViewConstraint()
+        startAnimation()
+        logoAnimation()
+    }
+    
+    private func startAnimation(){
+        lottieView.play(toFrame: 500 ) //6285nafas last 47.50 seconds
+    }
+    
+    private func logoAnimation(){
+        UIImageView.animateKeyframes(withDuration: 2, delay: 0, options: .beginFromCurrentState, animations:  {
+            self.logoW.transform = CGAffineTransform(translationX: 80, y: 0)
+            self.logoI.transform = CGAffineTransform(translationX: 170, y: 0)
+            self.logoZ.transform = CGAffineTransform(translationX: 195, y: 0)
+        }) { (Bool) in
+            
+            let vc = MainVC()
+            //let ls = LaunchScreenVC()
+            vc.modalPresentationStyle = .fullScreen
+            vc.modalTransitionStyle = .crossDissolve
+//            vc.transition(from: ls, to: vc, duration: 3, options: .curveEaseIn, animations: {
+//            }, completion: nil)
+            self.present(vc, animated: true, completion: nil)
+            
+        }
+        
         
     }
     
-    func imageConstraint(){
-        button.translatesAutoresizingMaskIntoConstraints = false
-        image.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(image)
-        view.addSubview(button)
+    func lottieViewConstraint(){
+        lottieView.translatesAutoresizingMaskIntoConstraints = false
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        logoK.translatesAutoresizingMaskIntoConstraints = false
+        logoW.translatesAutoresizingMaskIntoConstraints = false
+        logoI.translatesAutoresizingMaskIntoConstraints = false
+        logoZ.translatesAutoresizingMaskIntoConstraints = false
+        
+        //        view.addSubview(logo)
+        //        view.addSubview(lottieView)
+        view.insertSubview(logo, at: 1)
+        view.insertSubview(lottieView, at: 0)
+        view.insertSubview(logoK, at: 2)
+        view.insertSubview(logoW, at: 3)
+        view.insertSubview(logoI, at: 4)
+        view.insertSubview(logoZ, at: 5)
+        
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            image.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            image.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            image.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            button.heightAnchor.constraint(equalToConstant: 50),
-            button.widthAnchor.constraint(equalToConstant: 150),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
+            lottieView.topAnchor.constraint(equalTo: view.topAnchor),
+            lottieView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            lottieView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            lottieView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            logo.heightAnchor.constraint(equalToConstant: 200),
+            logo.widthAnchor.constraint(equalToConstant: 200),
+            
+            logoK.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10),
+            logoK.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            logoK.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
+            logoK.widthAnchor.constraint(equalToConstant: 50),
+            
+            logoW.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10),
+            logoW.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 75),
+            logoW.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
+            logoW.widthAnchor.constraint(equalToConstant: 80),
+            
+            logoI.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10),
+            logoI.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 75),
+            logoI.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
+            
+            logoZ.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10),
+            logoZ.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 75),
+            logoZ.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
+            
         ])
     }
-    @objc func segueToMain() {
-        let destination = MainVC()
-        destination.modalPresentationStyle = .fullScreen
-        self.present(destination, animated: true, completion: nil)
-    }
+    
+    
     
 }
-

@@ -19,12 +19,14 @@ final class GameCenterHelper: NSObject {
   }
 
 var viewController: UIViewController?
-
     
     override init() {
       super.init()
       
       GKLocalPlayer.local.authenticateHandler = { gcAuthVC, error in
+        
+        
+        
         if GKLocalPlayer.local.isAuthenticated {
           print("Authenticated to Game Center!")
         } else if let vc = gcAuthVC {
@@ -34,6 +36,15 @@ var viewController: UIViewController?
           print("Error authentication to GameCenter: " +
             "\(error?.localizedDescription ?? "none")")
         }
+        
+//        switch GKLocalPlayer.local.isAuthenticated {
+//        case true:
+//             print("Authenticated to Game Center!")
+//        case false:
+//           let vc = gcAuthVC
+//           viewController?.present(vc, animated: true)
+//
+//        }
       }
     }
     

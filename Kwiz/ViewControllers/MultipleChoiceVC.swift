@@ -11,6 +11,8 @@ import UIKit
 class MultipleChoiceVC: UIViewController {
     var game = Game.shared
     
+    let user = User(highestScore: 0, nickname: "Bob")
+    
     lazy var questionTextField: UITextField = {
         let tf = UITextField()
         tf.font = UIFont(name: "Times New Roman", size: 25)
@@ -72,6 +74,7 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         button.setImage(UIImage(named: "backArrow"), for: .normal)
+        button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
     }()
     
@@ -108,8 +111,8 @@ class MultipleChoiceVC: UIViewController {
         addConstraints()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         addTargetsToButtons()
-        let user = User(highestScore: 0, nickname: "bob")
-        user.enterName(name: "Bob")
+//        let user = User(highestScore: 0, nickname: "bob")
+//        user.enterName(name: "Bob")
         //let game = Game.shared
         game.start()
         game.shuffle()
@@ -252,6 +255,10 @@ class MultipleChoiceVC: UIViewController {
         if game.answer(sender.tag) {
             print("you're right!")
             let scale = ScaleVC()
+            //Add score if correct then update it to gameCenter
+            user.highestScore += 5
+            MainVC.saveScore(score: user.highestScore)
+            MainVC.checkFinishAchievement(userScore: user.highestScore)
             scale.modalPresentationStyle = .fullScreen
             present(scale, animated: true, completion: nil)
             //game.getCurrentScore()
@@ -262,6 +269,13 @@ class MultipleChoiceVC: UIViewController {
             }
             //game.quit()
         }
+    }
+    
+    @objc private func segueToQuestion() {
+        let vc = MainVC()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
     }
 
     

@@ -63,7 +63,14 @@ class ScaleVC: UIViewController {
         button.isHidden = true
         return button
     }()
-    
+    //MARK: back button maybe deleted
+    lazy var backButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 20, y: 52, width: 100, height: 50))
+        button.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
+        button.setImage(UIImage(named: "backArrow"), for: .normal)
+        button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
+        return button
+    }()
     lazy var userLivesImageOne: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
@@ -360,6 +367,14 @@ class ScaleVC: UIViewController {
         
         reset.isHidden = true
     }
+    
+    //this function so we can go back momentarily
+    @objc private func segueToQuestion() {
+        let vc = MainVC()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -367,6 +382,7 @@ class ScaleVC: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
         setConstraints()
         addGestures()
+        view.addSubview(backButton) //adding back button here momentarily
     }
     
 
