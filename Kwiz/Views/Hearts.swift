@@ -33,10 +33,16 @@ class HeartsStackView: UIStackView {
         addHeartsToSubView()
     }
     
+    convenience init(livesRemaining: LivesRemaining) {
+        self.init(frame: CGRect.zero)
+        setupStackView()
+        addHeartsToSubView()
+        setup(remainingLives: livesRemaining)
+    }
+    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    convenience init(
     
     //MARK: Setup Functions
     private func setupStackView() {
@@ -48,6 +54,18 @@ class HeartsStackView: UIStackView {
         addArrangedSubview(userLivesImageOne)
         addArrangedSubview(userLivesImageTwo)
         addArrangedSubview(userLivesImageThree)
+    }
+    private func setup(remainingLives: LivesRemaining) {
+        switch remainingLives {
+        case .three:
+            makeLivesVisible()
+        case .two:
+            userLivesImageOne.alpha = 0
+        case .one:
+            userLivesImageTwo.alpha = 0
+        case .none:
+            userLivesImageThree.alpha = 0
+        }
     }
     
     //MARK: Methods
