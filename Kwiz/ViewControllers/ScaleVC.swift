@@ -35,9 +35,6 @@ class ScaleVC: UIViewController {
     }()
     var mysteryBox: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
-        
-        
-        
         image.backgroundColor = .brown
         return image
     }()
@@ -71,6 +68,8 @@ class ScaleVC: UIViewController {
         button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
     }()
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
+    
     lazy var userLivesImageOne: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
@@ -121,6 +120,7 @@ class ScaleVC: UIViewController {
     }
     var steelOriginalCenter = CGPoint()
     var featherOriginalCenter = CGPoint()
+    var game = Game.shared
     
     
     //MARK: - Constraints
@@ -225,26 +225,16 @@ class ScaleVC: UIViewController {
             answer.heightAnchor.constraint(equalToConstant: answer.frame.height)])
     }
     private func setUpLivesStackView(){
-        view.addSubview(userLivesImageOne)
-        view.addSubview(userLivesImageTwo)
-        view.addSubview(userLivesImageThree)
-        
-        userLivesImageOne.translatesAutoresizingMaskIntoConstraints = false
-        userLivesImageTwo.translatesAutoresizingMaskIntoConstraints = false
-        userLivesImageThree.translatesAutoresizingMaskIntoConstraints = false
-        
-        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-        stackView.axis = .horizontal
-        stackView.spacing = 5
-        stackView.distribution = .fillEqually
-        self.view.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+//        game.reduceLives()
+//        heartStack = HeartsStackView(livesRemaining: game.getLives())
+        view.addSubview(heartStack)
+        heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            stackView.widthAnchor.constraint(equalToConstant: 150),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 60)
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            heartStack.widthAnchor.constraint(equalToConstant: 150),
+            heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            heartStack.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
