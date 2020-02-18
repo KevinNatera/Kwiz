@@ -31,12 +31,14 @@ class HeartsStackView: UIStackView {
         super.init(frame: frame)
         setupStackView()
         addHeartsToSubView()
+        makeLivesVisible()
     }
     
     convenience init(livesRemaining: LivesRemaining) {
         self.init(frame: CGRect.zero)
         setupStackView()
         addHeartsToSubView()
+        makeLivesVisible()
         setup(remainingLives: livesRemaining)
     }
     
