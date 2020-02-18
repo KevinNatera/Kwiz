@@ -70,26 +70,6 @@ class ScaleVC: UIViewController {
     }()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
-    lazy var userLivesImageOne: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    lazy var userLivesImageTwo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    
-    lazy var userLivesImageThree: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
     var featherPanGesture = UIPanGestureRecognizer()
@@ -315,9 +295,8 @@ class ScaleVC: UIViewController {
         featherOriginalCenter = CGPoint(x: feather.center.x, y: feather.center.y - 34)
     }
     private func loselife() {
-        UIView.animate(withDuration: 2) {
-            self.userLivesImageOne.alpha = 0.0
-        }
+        game.reduceLives()
+        heartStack.loseLife(remaining: game.getLives())
     }
     private func pickedCorrectAnswer() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
