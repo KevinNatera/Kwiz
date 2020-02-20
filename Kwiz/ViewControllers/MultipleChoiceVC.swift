@@ -81,7 +81,7 @@ class MultipleChoiceVC: UIViewController {
         button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
     }()
-    
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     lazy var userLivesImageOne: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
@@ -158,6 +158,7 @@ class MultipleChoiceVC: UIViewController {
         view.addSubview(userLivesImageOne)
         view.addSubview(userLivesImageTwo)
         view.addSubview(userLivesImageThree)
+        view.addSubview(heartStack)
         view.addSubview(hintButton)
         
     }
@@ -226,18 +227,18 @@ class MultipleChoiceVC: UIViewController {
     }
     
     private func setUpLivesStackView(){
-        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-        stackView.axis = .horizontal
-        stackView.spacing = 1
-        stackView.distribution = .fillEqually
-        self.view.addSubview(stackView)
+//        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
+//        stackView.axis = .horizontal
+//        stackView.spacing = 1
+//        stackView.distribution = .fillEqually
+//        self.view.addSubview(stackView)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            stackView.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
-            stackView.heightAnchor.constraint(equalToConstant: 60),
-            stackView.widthAnchor.constraint(equalToConstant: 150)
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            heartStack.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
+            heartStack.heightAnchor.constraint(equalToConstant: 60),
+            heartStack.widthAnchor.constraint(equalToConstant: 150)
 
         ])
         
@@ -277,7 +278,7 @@ class MultipleChoiceVC: UIViewController {
             checkIfNoMoreQuestions()
         
         } else {
-            Game.shared.reduceLives()
+            heartStack.loseLife(remaining: Game.shared.getLives())
         }
     }
     
