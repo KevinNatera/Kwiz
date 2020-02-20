@@ -14,11 +14,14 @@ class MultipleChoiceVC: UIViewController {
     
     
     //MARK: - UI Objects
-    lazy var questionTextField: UITextField = {
-        let tf = UITextField()
-        tf.font = UIFont(name: "Times New Roman", size: 25)
+    lazy var questionTextField: UILabel = {
+        let tf = UILabel()
+        tf.font = UIFont(name: "Times New Roman", size: 22)
         tf.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        tf.textAlignment = .center
+        tf.numberOfLines = 3
         tf.layer.cornerRadius = 10
+        tf.clipsToBounds = true
         return tf
         
     }()
@@ -78,7 +81,7 @@ class MultipleChoiceVC: UIViewController {
         button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
     }()
-    
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     lazy var userLivesImageOne: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "hearts")
@@ -136,7 +139,12 @@ class MultipleChoiceVC: UIViewController {
         // 1. instatiate another VC
         // 2 . push
         let newMC = MultipleChoiceVC()
-        self.navigationController?.pushViewController(newMC, animated: true)
+        navigationController?.pushViewController(newMC, animated: true)
+    }
+    private func increaseGameScore() {
+        Game.shared.increaseScore()
+        Game.shared.saveScore()
+        Game.shared.checkFinishAchievement()
     }
     //MARK: - Setup and Constraints
     private func addViews(){
@@ -150,6 +158,7 @@ class MultipleChoiceVC: UIViewController {
         view.addSubview(userLivesImageOne)
         view.addSubview(userLivesImageTwo)
         view.addSubview(userLivesImageThree)
+        view.addSubview(heartStack)
         view.addSubview(hintButton)
         
     }
@@ -218,18 +227,18 @@ class MultipleChoiceVC: UIViewController {
     }
     
     private func setUpLivesStackView(){
-        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-        stackView.axis = .horizontal
-        stackView.spacing = 1
-        stackView.distribution = .fillEqually
-        self.view.addSubview(stackView)
+//        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
+//        stackView.axis = .horizontal
+//        stackView.spacing = 1
+//        stackView.distribution = .fillEqually
+//        self.view.addSubview(stackView)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            stackView.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
-            stackView.heightAnchor.constraint(equalToConstant: 60),
-            stackView.widthAnchor.constraint(equalToConstant: 150)
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            heartStack.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
+            heartStack.heightAnchor.constraint(equalToConstant: 60),
+            heartStack.widthAnchor.constraint(equalToConstant: 150)
 
         ])
         
@@ -260,16 +269,16 @@ class MultipleChoiceVC: UIViewController {
     }
     
     //MARK: - Objc Functions
+    
+    
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
             print("you're right!")
-            Game.shared.increaseScore()
-            Game.shared.saveScore()
-            Game.shared.checkFinishAchievement()
+            increaseGameScore()
             checkIfNoMoreQuestions()
         
         } else {
-            Game.shared.reduceLives()
+            heartStack.loseLife(remaining: Game.shared.getLives())
         }
     }
     
