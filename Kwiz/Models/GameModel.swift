@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GameKit
 enum LivesRemaining: Int {
     case three = 3
     case two = 2
@@ -31,10 +32,8 @@ class Game {
         score = 0
         questions = Game.getQuestions()
     }
-    func setUser(user: User) {
-        self.user = user
-    }
     
+    //MARK: Questions
     /// internal game function to get questions
    static private func getQuestions() -> [Multiplechoice] {
         return [Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "donkeys", isCorrect: .correct)
@@ -78,7 +77,6 @@ class Game {
     func shuffle(){
         print("shuffle")
         print("segue to multipleChoice VC")
-//        questions.first?.shuffleAnswers()
         
         questions.shuffle()
         
@@ -92,11 +90,43 @@ class Game {
         return questions.isEmpty
     }
     
-    func increaseScore(){
-        print("score")
-        score += 1
+    
+    func getCurrentQuestion() -> Multiplechoice? {
+        return currentQuestion
+    }
+    func getQuestionText() -> String {
+        if let question = currentQuestion {
+            return question.readQuestion()
+        } else {
+            return ""
+        }
+       
+    }
+    func getAnswerTexts() -> [String] {
+        if let question = currentQuestion {
+            return question.getAnswerTexts()
+        } else {
+            return ["","","",""]
+        }
+    }
+    func answer(_ ans: Int) -> Bool {
+        print("answer picked")
+        if let question = currentQuestion {
+            if question.guess(answer: ans) {
+                increaseScore()
+                return true
+            } else {
+                switchOnLives()
+                return false
+            }
+        }
+        return false
     }
     
+    //MARK: User
+    func setUser(user: User) {
+        self.user = user
+    }
     func reduceLives(){
         switchOnLives()
     }
@@ -105,9 +135,16 @@ class Game {
         print("start/restart")
         user?.startGame()
         user?.play()
-        read()
+    }
+    func increaseScore(){
+        print("score")
+        if let question = currentQuestion {
+            score += question.getPoints()
+            user!.updateHighScore(newCurrentScore: score)
+        }
     }
     
+    //MARK: Game
     func quit(){
         print("quit")
         print("back to main view controller")
@@ -122,23 +159,7 @@ class Game {
         //user?.nextQuestion()
     }
     
-    func read() -> String {
-        print("view controller loads question")
-        return questions[0].readQuestion()
-    }
-    func getAnswerTexts() -> [String] {
-        return questions[0].getAnswerTexts()
-    }
-    func answer(_ ans: Int) -> Bool {
-        print("answer picked")
-        if questions[0].guess(answer: ans) {
-            increaseScore()
-            return true
-        } else {
-            switchOnLives()
-            return false
-        }
-    }
+    
     private func switchOnLives() {
         switch lives {
         case .three:
@@ -159,5 +180,25 @@ class Game {
     func getCurrentScore() {
         print("recieve \(score)")
         //Show user score, current score
+    }
+    
+    //MARK: GameCenter
+    func checkFinishAchievement(){
+        if(user!.highestScore >= 5) {
+            let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
+            achieved.percentComplete = 100
+            achieved.showsCompletionBanner = true
+            //GKAchievement.resetAchievements(completionHandler: nil)
+            let achievementArr: [GKAchievement] = [achieved]
+            GKAchievement.report(achievementArr, withCompletionHandler: nil)
+        }
+    }
+    func saveScore(){
+        if GKLocalPlayer.local.isAuthenticated {
+            let scoreResponse = GKScore(leaderboardIdentifier: "kwiz.leaderboard.highscore")
+            scoreResponse.value = Int64(score)
+            let scoreArr: [GKScore] = [scoreResponse]
+            GKScore.report(scoreArr, withCompletionHandler: nil)
+        }
     }
 }
