@@ -114,7 +114,7 @@ class MultipleChoiceVC: UIViewController {
 //        let user = User(highestScore: 0, nickname: "bob")
 //        user.enterName(name: "Bob")
         //let game = Game.shared
-        game.start()
+//        game.start()
         game.shuffle()
         //game.read()
         questionTextField.text = game.read()
@@ -130,6 +130,13 @@ class MultipleChoiceVC: UIViewController {
 //            print("you lose :(")
 //            game.quit()
 //        }
+    }
+    
+    private func goToNextQuestion() {
+        // 1. instatiate another VC
+        // 2 . push
+        let newMC = MultipleChoiceVC()
+        self.navigationController?.pushViewController(newMC, animated: true)
     }
     
     private func addViews(){
@@ -259,8 +266,9 @@ class MultipleChoiceVC: UIViewController {
             user.highestScore += 5
             MainVC.saveScore(score: user.highestScore)
             MainVC.checkFinishAchievement(userScore: user.highestScore)
-            scale.modalPresentationStyle = .fullScreen
-            present(scale, animated: true, completion: nil)
+//            scale.modalPresentationStyle = .fullScreen
+//            present(scale, animated: true, completion: nil)
+            goToNextQuestion()
             //game.getCurrentScore()
         } else {
             print("you lose :(")
