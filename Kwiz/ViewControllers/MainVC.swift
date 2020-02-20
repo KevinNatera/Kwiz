@@ -31,7 +31,7 @@ class MainVC: UIViewController {
     
     //MARK: - Setup
     private func setupStackViewWithButtons() {
-        let stackView = UIStackView(arrangedSubviews: [startButton,rankingButton,settingButton])
+        let stackView = UIStackView(arrangedSubviews: [startButton,rankingButton])
         stackView.axis = .vertical
         stackView.spacing = view.frame.size.height / 9
         stackView.distribution = .fillEqually
@@ -45,7 +45,7 @@ class MainVC: UIViewController {
     private func setupButtons() {
         updateTitleOnButton(button: startButton, title: "START")
         updateTitleOnButton(button: rankingButton, title: "RANKING")
-        updateTitleOnButton(button: settingButton, title: "SETTINGS")
+        //updateTitleOnButton(button: settingButton, title: "SETTINGS")
         
         startButton.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
     }
@@ -99,9 +99,21 @@ class MainVC: UIViewController {
     
     //MARK: Objc Function
     @objc func segueToQuestion() {
+        
+        // 1. Instantiate navigation controller
+        // 2. Instantiate firstVC
+        // 3. Set nav controller as rootVC
+        // 4. Push the first VC
+        
+        
         let multipleChoice = MultipleChoiceVC()
-        multipleChoice.modalPresentationStyle = .fullScreen
-        present(multipleChoice, animated: true, completion: nil)
+        
+        let navigationController = UINavigationController(rootViewController: multipleChoice)
+        navigationController.navigationBar.isTranslucent = false
+        
+//        multipleChoice.modalPresentationStyle = .fullScreen
+        Game.shared.start()
+        present(navigationController, animated: true, completion: nil)
         
     }
     
