@@ -124,6 +124,7 @@ class MultipleChoiceVC: UIViewController {
         answerChoiceDButton.setTitle("\(answerTexts[3])", for: .normal)
 
     }
+    //MARK: - Methods
     private func checkIfNoMoreQuestions() {
         if Game.shared.isQuestionsEmpty() {
             //MARK: TODO: present end alert
@@ -137,7 +138,7 @@ class MultipleChoiceVC: UIViewController {
         let newMC = MultipleChoiceVC()
         self.navigationController?.pushViewController(newMC, animated: true)
     }
-    
+    //MARK: - Setup and Constraints
     private func addViews(){
         view.addSubview(questionTextField)
         view.addSubview(answerChoiceAButton)
@@ -257,6 +258,8 @@ class MultipleChoiceVC: UIViewController {
         answerChoiceCButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
         answerChoiceDButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
     }
+    
+    //MARK: - Objc Functions
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
             print("you're right!")
