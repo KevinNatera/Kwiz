@@ -7,11 +7,11 @@
 //
 
 import Foundation
-enum LivesRemaining {
-    case three
-    case two
-    case one
-    case none
+enum LivesRemaining: Int {
+    case three = 3
+    case two = 2
+    case one = 1
+    case none = 0
 }
 
 class Game {
@@ -19,7 +19,7 @@ class Game {
     private var lives: LivesRemaining
     private var score: Int
     private var user: User?
-    private var question: Multiplechoice
+    private var questions: [Multiplechoice]
     
     
     
@@ -31,25 +31,39 @@ class Game {
         
         //self.user = user
         
-        question = Game.getQuestions()
+        questions = Game.getQuestions()
     }
     func setUser(user: User) {
         self.user = user
     }
     
     /// internal game function to get questions
-   static private func getQuestions() -> Multiplechoice {
-        return Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "donkeys", isCorrect: .correct)
+   static private func getQuestions() -> [Multiplechoice] {
+        return [Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "donkeys", isCorrect: .correct)
         ,Answer(text: "super keys", isCorrect: .incorrect)
         ,Answer(text: "falcon keys", isCorrect: .incorrect)
         ,Answer(text: "bit keys", isCorrect: .incorrect)]
-        , questionValue: 50)
+        , questionValue: 50),
+                
+                Multiplechoice(question: "2222 What key can't open locks?", allAnswers: [Answer(text: "donkeys", isCorrect: .correct)
+                ,Answer(text: "super keys", isCorrect: .incorrect)
+                ,Answer(text: "falcon keys", isCorrect: .incorrect)
+                ,Answer(text: "bit keys", isCorrect: .incorrect)]
+                , questionValue: 50)
+    
+    
+    
+    ]
     }
     
     func shuffle(){
         print("shuffle")
         print("segue to multipleChoice VC")
-        question.shuffleAnswers()
+//        questions.first?.shuffleAnswers()
+        
+        questions.shuffle()
+        
+        questions.forEach({ $0.shuffleAnswers() } )
     }
     
     func increaseScore(){
@@ -84,14 +98,14 @@ class Game {
     
     func read() -> String {
         print("view controller loads question")
-        return question.readQuestion()
+        return questions[0].readQuestion()
     }
     func getAnswerTexts() -> [String] {
-        return question.getAnswerTexts()
+        return questions[0].getAnswerTexts()
     }
     func answer(_ ans: Int) -> Bool {
         print("answer picked")
-        if question.guess(answer: ans) {
+        if questions[0].guess(answer: ans) {
             increaseScore()
             return true
         } else {
