@@ -116,7 +116,7 @@ class MultipleChoiceVC: UIViewController {
 
         Game.shared.shuffle()
       
-        questionTextField.text = Game.shared.read()
+        questionTextField.text = Game.shared.getQuestionText()
         let answerTexts = Game.shared.getAnswerTexts()
         answerChoiceAButton.setTitle("\(answerTexts[0])", for: .normal)
         answerChoiceBButton.setTitle("\(answerTexts[1])", for: .normal)
@@ -260,11 +260,9 @@ class MultipleChoiceVC: UIViewController {
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
             print("you're right!")
-            //Add score if correct then update it to gameCenter
-            user.highestScore += 5
-            MainVC.saveScore(score: user.highestScore)
-            MainVC.checkFinishAchievement(userScore: user.highestScore)
-
+            Game.shared.increaseScore()
+            Game.shared.saveScore()
+            Game.shared.checkFinishAchievement()
             checkIfNoMoreQuestions()
         
         } else {
