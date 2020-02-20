@@ -14,11 +14,14 @@ class MultipleChoiceVC: UIViewController {
     
     
     //MARK: - UI Objects
-    lazy var questionTextField: UITextField = {
-        let tf = UITextField()
-        tf.font = UIFont(name: "Times New Roman", size: 25)
+    lazy var questionTextField: UILabel = {
+        let tf = UILabel()
+        tf.font = UIFont(name: "Times New Roman", size: 22)
         tf.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        tf.textAlignment = .center
+        tf.numberOfLines = 3
         tf.layer.cornerRadius = 10
+        tf.clipsToBounds = true
         return tf
         
     }()
@@ -136,7 +139,12 @@ class MultipleChoiceVC: UIViewController {
         // 1. instatiate another VC
         // 2 . push
         let newMC = MultipleChoiceVC()
-        self.navigationController?.pushViewController(newMC, animated: true)
+        navigationController?.pushViewController(newMC, animated: true)
+    }
+    private func increaseGameScore() {
+        Game.shared.increaseScore()
+        Game.shared.saveScore()
+        Game.shared.checkFinishAchievement()
     }
     //MARK: - Setup and Constraints
     private func addViews(){
@@ -260,12 +268,12 @@ class MultipleChoiceVC: UIViewController {
     }
     
     //MARK: - Objc Functions
+    
+    
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
             print("you're right!")
-            Game.shared.increaseScore()
-            Game.shared.saveScore()
-            Game.shared.checkFinishAchievement()
+            increaseGameScore()
             checkIfNoMoreQuestions()
         
         } else {
