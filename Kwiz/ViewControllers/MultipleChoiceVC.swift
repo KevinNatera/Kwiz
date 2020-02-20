@@ -9,10 +9,11 @@
 import UIKit
 
 class MultipleChoiceVC: UIViewController {
-    var game = Game.shared
-    
+    //MARK: - Properties
     let user = User(highestScore: 0, nickname: "Bob")
     
+    
+    //MARK: - UI Objects
     lazy var questionTextField: UITextField = {
         let tf = UITextField()
         tf.font = UIFont(name: "Times New Roman", size: 25)
@@ -105,40 +106,39 @@ class MultipleChoiceVC: UIViewController {
         return button
     }()
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
         addConstraints()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         addTargetsToButtons()
-//        let user = User(highestScore: 0, nickname: "bob")
-//        user.enterName(name: "Bob")
-        //let game = Game.shared
-//        game.start()
-        game.shuffle()
-        //game.read()
-        questionTextField.text = game.read()
-        let answerTexts = game.getAnswerTexts()
+
+        Game.shared.shuffle()
+      
+        questionTextField.text = Game.shared.getQuestionText()
+        let answerTexts = Game.shared.getAnswerTexts()
         answerChoiceAButton.setTitle("\(answerTexts[0])", for: .normal)
         answerChoiceBButton.setTitle("\(answerTexts[1])", for: .normal)
         answerChoiceCButton.setTitle("\(answerTexts[2])", for: .normal)
         answerChoiceDButton.setTitle("\(answerTexts[3])", for: .normal)
-//        if game.answer(0) {
-//            print("you're right!")
-//            game.getCurrentScore()
-//        } else {
-//            print("you lose :(")
-//            game.quit()
-//        }
+
     }
-    
+    //MARK: - Methods
+    private func checkIfNoMoreQuestions() {
+        if Game.shared.isQuestionsEmpty() {
+            //MARK: TODO: present end alert
+        } else {
+            goToNextQuestion()
+        }
+    }
     private func goToNextQuestion() {
         // 1. instatiate another VC
         // 2 . push
         let newMC = MultipleChoiceVC()
         self.navigationController?.pushViewController(newMC, animated: true)
     }
-    
+    //MARK: - Setup and Constraints
     private func addViews(){
         view.addSubview(questionTextField)
         view.addSubview(answerChoiceAButton)
@@ -258,24 +258,18 @@ class MultipleChoiceVC: UIViewController {
         answerChoiceCButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
         answerChoiceDButton.addTarget(self, action: #selector(buttonPicked(sender:)), for: .touchUpInside)
     }
+    
+    //MARK: - Objc Functions
     @objc private func buttonPicked(sender: UIButton) {
-        if game.answer(sender.tag) {
+        if Game.shared.answer(sender.tag) {
             print("you're right!")
-            let scale = ScaleVC()
-            //Add score if correct then update it to gameCenter
-            user.highestScore += 5
-            MainVC.saveScore(score: user.highestScore)
-            MainVC.checkFinishAchievement(userScore: user.highestScore)
-//            scale.modalPresentationStyle = .fullScreen
-//            present(scale, animated: true, completion: nil)
-            goToNextQuestion()
-            //game.getCurrentScore()
+            Game.shared.increaseScore()
+            Game.shared.saveScore()
+            Game.shared.checkFinishAchievement()
+            checkIfNoMoreQuestions()
+        
         } else {
-            print("you lose :(")
-            UIView.animate(withDuration: 2) {
-                self.userLivesImageOne.alpha = 0.0
-            }
-            //game.quit()
+            Game.shared.reduceLives()
         }
     }
     

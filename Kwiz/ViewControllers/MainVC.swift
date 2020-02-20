@@ -76,26 +76,11 @@ class MainVC: UIViewController {
         view.addSubview(button)
     }
     
-    static func saveScore(score:Int){
-        if GKLocalPlayer.local.isAuthenticated {
-            let scoreResponse = GKScore(leaderboardIdentifier: "kwiz.leaderboard.highscore")
-            scoreResponse.value = Int64(score)
-            let scoreArr: [GKScore] = [scoreResponse]
-            GKScore.report(scoreArr, withCompletionHandler: nil)
-        }
-        
-    }
     
-    static func checkFinishAchievement(userScore: Int){
-        if(userScore >= 5) {
-            let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
-            achieved.percentComplete = 100
-            achieved.showsCompletionBanner = true
-            //GKAchievement.resetAchievements(completionHandler: nil)
-            let achievementArr: [GKAchievement] = [achieved]
-            GKAchievement.report(achievementArr, withCompletionHandler: nil)
-        }
-    }
+        
+    
+    
+    
     
     //MARK: Objc Function
     @objc func segueToQuestion() {
@@ -111,8 +96,8 @@ class MainVC: UIViewController {
         let navigationController = UINavigationController(rootViewController: multipleChoice)
         navigationController.navigationBar.isTranslucent = false
         
-//        multipleChoice.modalPresentationStyle = .fullScreen
         Game.shared.start()
+        Game.shared.setUser(user: User(highestScore: 0, nickname: "Bob"))
         present(navigationController, animated: true, completion: nil)
         
     }
