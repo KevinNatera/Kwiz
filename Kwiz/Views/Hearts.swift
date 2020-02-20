@@ -64,8 +64,11 @@ class HeartsStackView: UIStackView {
         case .two:
             userLivesImageOne.alpha = 0
         case .one:
+            userLivesImageOne.alpha = 0
             userLivesImageTwo.alpha = 0
         case .none:
+            userLivesImageOne.alpha = 0
+            userLivesImageTwo.alpha = 0
             userLivesImageThree.alpha = 0
         }
     }
