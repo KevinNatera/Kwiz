@@ -43,13 +43,38 @@ class Game {
         ,Answer(text: "super keys", isCorrect: .incorrect)
         ,Answer(text: "falcon keys", isCorrect: .incorrect)
         ,Answer(text: "bit keys", isCorrect: .incorrect)]
-        , questionValue: 50),
+        , questionValue: 5),
                 
-                Multiplechoice(question: "2222 What key can't open locks?", allAnswers: [Answer(text: "donkeys", isCorrect: .correct)
-                ,Answer(text: "super keys", isCorrect: .incorrect)
-                ,Answer(text: "falcon keys", isCorrect: .incorrect)
-                ,Answer(text: "bit keys", isCorrect: .incorrect)]
-                , questionValue: 50)
+                Multiplechoice(question: "What makes a vacuum good?", allAnswers: [Answer(text: "it sucks", isCorrect: .correct)
+                ,Answer(text: "copacity", isCorrect: .incorrect)
+                ,Answer(text: "dust devourer", isCorrect: .incorrect)
+                ,Answer(text: "cleaner", isCorrect: .incorrect)]
+                , questionValue: 5),
+                Multiplechoice(question: "I have 10 cookies and you took 5, what do you have?", allAnswers: [Answer(text: "a black eye and a broken hand", isCorrect: .correct)
+                ,Answer(text: "5 cookies", isCorrect: .incorrect)
+                ,Answer(text: "joy", isCorrect: .incorrect)
+                ,Answer(text: "a sweet tooth", isCorrect: .incorrect)]
+                , questionValue: 5),
+    Multiplechoice(question: "Where is the best place to hide something?", allAnswers: [Answer(text: "link to the second page in google", isCorrect: .correct)
+    ,Answer(text: "in a forest", isCorrect: .incorrect)
+    ,Answer(text: "your pocket", isCorrect: .incorrect)
+    ,Answer(text: "plain sight", isCorrect: .incorrect)]
+    , questionValue: 5),
+    Multiplechoice(question: "What is the most curious letter?", allAnswers: [Answer(text: "the letter Y", isCorrect: .correct)
+    ,Answer(text: "the letter C", isCorrect: .incorrect)
+    ,Answer(text: "a love letter", isCorrect: .incorrect)
+    ,Answer(text: "the letter Q", isCorrect: .incorrect)]
+    , questionValue: 5),
+    Multiplechoice(question: "You're in a dark cave with only one match, a lump of coal, a stove, and a kerosene lamp. You have the option of lighting one. Which do you light first?", allAnswers: [Answer(text: "the match", isCorrect: .correct)
+    ,Answer(text: "the lump of coal", isCorrect: .incorrect)
+    ,Answer(text: "the stove", isCorrect: .incorrect)
+    ,Answer(text: "the kerosene lamp", isCorrect: .incorrect)]
+    , questionValue: 5),
+    Multiplechoice(question: "I have a head like a cat. I have feet like a cat, but I am not a cat. What am I?", allAnswers: [Answer(text: "a kitten", isCorrect: .correct)
+    ,Answer(text: "a fox", isCorrect: .incorrect)
+    ,Answer(text: "a mongoose", isCorrect: .incorrect)
+    ,Answer(text: "a pokemon", isCorrect: .incorrect)]
+    , questionValue: 5)
     
     
     
