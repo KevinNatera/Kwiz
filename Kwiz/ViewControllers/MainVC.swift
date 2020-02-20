@@ -7,18 +7,27 @@
 //
 
 import UIKit
+import GameKit
 
 class MainVC: UIViewController {
     
     //MARK: - UIObjects
     var startButton = UIButton()
-    var rankingButton = UIButton()
+    
+    lazy var rankingButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(leaderboard), for: .touchUpInside)
+        return button
+    }()
+    
     var settingButton = UIButton()
     var kwizImage: UIImageView = {
         var view = UIImageView()
-        view.image = UIImage(named: "Kwiz")
+        view.image = UIImage(named: "logo")
         return view
     }()
+    
+    
     
     //MARK: - Setup
     private func setupStackViewWithButtons() {
@@ -37,6 +46,8 @@ class MainVC: UIViewController {
         updateTitleOnButton(button: startButton, title: "START")
         updateTitleOnButton(button: rankingButton, title: "RANKING")
         updateTitleOnButton(button: settingButton, title: "SETTINGS")
+        
+        startButton.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
     }
     private func setupImageConstraints() {
         view.addSubview(kwizImage)
@@ -64,7 +75,44 @@ class MainVC: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
     }
-
+    
+    static func saveScore(score:Int){
+        if GKLocalPlayer.local.isAuthenticated {
+            let scoreResponse = GKScore(leaderboardIdentifier: "kwiz.leaderboard.highscore")
+            scoreResponse.value = Int64(score)
+            let scoreArr: [GKScore] = [scoreResponse]
+            GKScore.report(scoreArr, withCompletionHandler: nil)
+        }
+        
+    }
+    
+    static func checkFinishAchievement(userScore: Int){
+        if(userScore >= 5) {
+            let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
+            achieved.percentComplete = 100
+            achieved.showsCompletionBanner = true
+            //GKAchievement.resetAchievements(completionHandler: nil)
+            let achievementArr: [GKAchievement] = [achieved]
+            GKAchievement.report(achievementArr, withCompletionHandler: nil)
+        }
+    }
+    
+    //MARK: Objc Function
+    @objc func segueToQuestion() {
+        let multipleChoice = MultipleChoiceVC()
+        multipleChoice.modalPresentationStyle = .fullScreen
+        present(multipleChoice, animated: true, completion: nil)
+        
+    }
+    
+    @objc func leaderboard() {
+        let vc = GKGameCenterViewController()
+        vc.gameCenterDelegate = self
+        vc.viewState = .leaderboards
+        vc.leaderboardIdentifier = "kwiz.leaderboard.highscore"
+        present(vc, animated: true, completion: nil)
+    }
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +120,14 @@ class MainVC: UIViewController {
         setupButtons()
         setupStackViewWithButtons()
         setupImageConstraints()
-
+        GameCenterHelper.helper.viewController = self
+        GKAchievement.resetAchievements(completionHandler: nil)
     }
+    
+}
 
+extension MainVC: GKGameCenterControllerDelegate {
+  func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+    gameCenterViewController.dismiss(animated: true, completion: nil)
+  }
 }

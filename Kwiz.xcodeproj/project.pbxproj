@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,8 +17,25 @@
 		0B45FF7C23DF4E2200F3084D /* KwizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF7B23DF4E2200F3084D /* KwizUITests.swift */; };
 		0B45FF8E23DF51B500F3084D /* LaunchScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */; };
 		0B45FF9023DF51DA00F3084D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF8F23DF51DA00F3084D /* LoginVC.swift */; };
+		0B4FA97E23FC43D800DAD57A /* ResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */; };
+		0B4FA98023FC43EB00DAD57A /* Hearts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FA97F23FC43EB00DAD57A /* Hearts.swift */; };
+		1498EC0D8D6E0D7C5537CF62 /* Pods_Kwiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EA99F43E532CE5D175E389 /* Pods_Kwiz.framework */; };
 		4D5801B323E09B4B00CA8FAE /* MultiplechoiceQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5801B223E09B4B00CA8FAE /* MultiplechoiceQuestions.swift */; };
+		850FB83D23E386E2003EFC2B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850FB83C23E386E2003EFC2B /* GameKit.framework */; };
+		850FB84023E3910C003EFC2B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83E23E3910B003EFC2B /* MainVC.swift */; };
+		850FB84123E3910C003EFC2B /* TickleQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */; };
 		85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85412AE523E093F900F9488C /* MultiplechoiceModel.swift */; };
+		8546AB4723F72D3400793167 /* CorrectAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8546AB4623F72D3400793167 /* CorrectAnswerView.swift */; };
+		85D91E8523F1E25B002F4E98 /* LockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D91E8423F1E25A002F4E98 /* LockVC.swift */; };
+		85D91E8923F1E284002F4E98 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D91E8623F1E284002F4E98 /* UserModel.swift */; };
+		85D91E8A23F1E284002F4E98 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D91E8823F1E284002F4E98 /* GameModel.swift */; };
+		85D91E8B23F1E292002F4E98 /* ScaleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D91E8323F1E25A002F4E98 /* ScaleVC.swift */; };
+		85D91E8C23F1E2AD002F4E98 /* MultiplechoiceQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D91E8723F1E284002F4E98 /* MultiplechoiceQuestions.swift */; };
+		85D91E8E23F1EAB5002F4E98 /* GameCenterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D91E8D23F1EAB5002F4E98 /* GameCenterHelper.swift */; };
+		85F9A9A623F6F01300DDBEFD /* AdvertisementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F9A9A523F6F01300DDBEFD /* AdvertisementVC.swift */; };
+		85F9A9A823F70A3700DDBEFD /* 6285nafas.json in Resources */ = {isa = PBXBuildFile; fileRef = 85F9A9A723F70A3700DDBEFD /* 6285nafas.json */; };
+		E3BE11B9C2B58B36972019F8 /* Pods_KwizTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1168795AAFA5CA84A25C7F9E /* Pods_KwizTests.framework */; };
+		F6AD0342DDB5CBF1EC2F6A5E /* Pods_Kwiz_KwizUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A44C9DE223DF978C13B5AC5 /* Pods_Kwiz_KwizUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		081BA4CE9B3D12DDF3E2FBCC /* Pods-Kwiz-KwizUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz-KwizUITests.debug.xcconfig"; path = "Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0B45FF5623DF4E1F00F3084D /* Kwiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kwiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B45FF5923DF4E2000F3084D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B45FF5B23DF4E2000F3084D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,8 +73,33 @@
 		0B45FF7D23DF4E2200F3084D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenVC.swift; sourceTree = "<group>"; };
 		0B45FF8F23DF51DA00F3084D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVC.swift; sourceTree = "<group>"; };
+		0B4FA97F23FC43EB00DAD57A /* Hearts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hearts.swift; sourceTree = "<group>"; };
+		0B4FA98323FC561F00DAD57A /* 7393-fireworks.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "7393-fireworks.json"; sourceTree = "<group>"; };
+		1168795AAFA5CA84A25C7F9E /* Pods_KwizTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KwizTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A44C9DE223DF978C13B5AC5 /* Pods_Kwiz_KwizUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kwiz_KwizUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AE6DC94F9C730C862438106 /* Pods-KwizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KwizTests.release.xcconfig"; path = "Target Support Files/Pods-KwizTests/Pods-KwizTests.release.xcconfig"; sourceTree = "<group>"; };
 		4D5801B223E09B4B00CA8FAE /* MultiplechoiceQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplechoiceQuestions.swift; sourceTree = "<group>"; };
+		72431F948CD3A2A552657A84 /* Pods-Kwiz-KwizUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz-KwizUITests.release.xcconfig"; path = "Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests.release.xcconfig"; sourceTree = "<group>"; };
+		72EA99F43E532CE5D175E389 /* Pods_Kwiz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kwiz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7626E7B4B2FC8E49C295D490 /* Pods-Kwiz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz.release.xcconfig"; path = "Target Support Files/Pods-Kwiz/Pods-Kwiz.release.xcconfig"; sourceTree = "<group>"; };
+		850FB83A23E386D6003EFC2B /* Kwiz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kwiz.entitlements; sourceTree = "<group>"; };
+		850FB83C23E386E2003EFC2B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		850FB83E23E3910B003EFC2B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickleQuestionVC.swift; sourceTree = "<group>"; };
 		85412AE523E093F900F9488C /* MultiplechoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplechoiceModel.swift; sourceTree = "<group>"; };
+		85412AEF23E3473800F9488C /* ViewsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsFile.swift; sourceTree = "<group>"; };
+		8546AB4623F72D3400793167 /* CorrectAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerView.swift; sourceTree = "<group>"; };
+		85D91E8323F1E25A002F4E98 /* ScaleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleVC.swift; sourceTree = "<group>"; };
+		85D91E8423F1E25A002F4E98 /* LockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockVC.swift; sourceTree = "<group>"; };
+		85D91E8623F1E284002F4E98 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		85D91E8723F1E284002F4E98 /* MultiplechoiceQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplechoiceQuestions.swift; sourceTree = "<group>"; };
+		85D91E8823F1E284002F4E98 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		85D91E8D23F1EAB5002F4E98 /* GameCenterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterHelper.swift; sourceTree = "<group>"; };
+		85F9A9A523F6F01300DDBEFD /* AdvertisementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertisementVC.swift; sourceTree = "<group>"; };
+		85F9A9A723F70A3700DDBEFD /* 6285nafas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 6285nafas.json; sourceTree = "<group>"; };
+		86B6F335A5D794A3751A63E3 /* Pods-Kwiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz.debug.xcconfig"; path = "Target Support Files/Pods-Kwiz/Pods-Kwiz.debug.xcconfig"; sourceTree = "<group>"; };
+		B3AD9F16E25DBFD7CCD93BF5 /* Pods-KwizTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KwizTests.debug.xcconfig"; path = "Target Support Files/Pods-KwizTests/Pods-KwizTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				850FB83D23E386E2003EFC2B /* GameKit.framework in Frameworks */,
+				1498EC0D8D6E0D7C5537CF62 /* Pods_Kwiz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3BE11B9C2B58B36972019F8 /* Pods_KwizTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6AD0342DDB5CBF1EC2F6A5E /* Pods_Kwiz_KwizUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +138,8 @@
 				0B45FF6F23DF4E2200F3084D /* KwizTests */,
 				0B45FF7A23DF4E2200F3084D /* KwizUITests */,
 				0B45FF5723DF4E1F00F3084D /* Products */,
+				850FB83B23E386E2003EFC2B /* Frameworks */,
+				2311A9A97B2ECA000C24320D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,7 +156,8 @@
 		0B45FF5823DF4E1F00F3084D /* Kwiz */ = {
 			isa = PBXGroup;
 			children = (
-				0B45FF8C23DF517800F3084D /* Views */,
+				850FB83A23E386D6003EFC2B /* Kwiz.entitlements */,
+				85412AEE23E3473800F9488C /* Views */,
 				0B45FF8923DF4EB900F3084D /* ViewControllers */,
 				85412AE423E093E200F9488C /* Models */,
 				0B45FF8A23DF4EC600F3084D /* SupportingFiles */,
@@ -136,9 +186,15 @@
 		0B45FF8923DF4EB900F3084D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				85F9A9A523F6F01300DDBEFD /* AdvertisementVC.swift */,
 				0B45FF5D23DF4E2000F3084D /* MultipleChoiceVC.swift */,
+				850FB83E23E3910B003EFC2B /* MainVC.swift */,
+				850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */,
+				85D91E8323F1E25A002F4E98 /* ScaleVC.swift */,
+				85D91E8423F1E25A002F4E98 /* LockVC.swift */,
 				0B45FF8F23DF51DA00F3084D /* LoginVC.swift */,
 				0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */,
+				0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -152,24 +208,57 @@
 				0B45FF6223DF4E2200F3084D /* Assets.xcassets */,
 				0B45FF6423DF4E2200F3084D /* LaunchScreen.storyboard */,
 				0B45FF6723DF4E2200F3084D /* Info.plist */,
+				85F9A9A723F70A3700DDBEFD /* 6285nafas.json */,
+				0B4FA98323FC561F00DAD57A /* 7393-fireworks.json */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		0B45FF8C23DF517800F3084D /* Views */ = {
+		2311A9A97B2ECA000C24320D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				86B6F335A5D794A3751A63E3 /* Pods-Kwiz.debug.xcconfig */,
+				7626E7B4B2FC8E49C295D490 /* Pods-Kwiz.release.xcconfig */,
+				081BA4CE9B3D12DDF3E2FBCC /* Pods-Kwiz-KwizUITests.debug.xcconfig */,
+				72431F948CD3A2A552657A84 /* Pods-Kwiz-KwizUITests.release.xcconfig */,
+				B3AD9F16E25DBFD7CCD93BF5 /* Pods-KwizTests.debug.xcconfig */,
+				3AE6DC94F9C730C862438106 /* Pods-KwizTests.release.xcconfig */,
 			);
-			path = Views;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		850FB83B23E386E2003EFC2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				850FB83C23E386E2003EFC2B /* GameKit.framework */,
+				72EA99F43E532CE5D175E389 /* Pods_Kwiz.framework */,
+				3A44C9DE223DF978C13B5AC5 /* Pods_Kwiz_KwizUITests.framework */,
+				1168795AAFA5CA84A25C7F9E /* Pods_KwizTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		85412AE423E093E200F9488C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				85D91E8D23F1EAB5002F4E98 /* GameCenterHelper.swift */,
 				85412AE523E093F900F9488C /* MultiplechoiceModel.swift */,
+				85D91E8723F1E284002F4E98 /* MultiplechoiceQuestions.swift */,
+				85D91E8823F1E284002F4E98 /* GameModel.swift */,
+				85D91E8623F1E284002F4E98 /* UserModel.swift */,
 				4D5801B223E09B4B00CA8FAE /* MultiplechoiceQuestions.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		85412AEE23E3473800F9488C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B4FA97F23FC43EB00DAD57A /* Hearts.swift */,
+				85412AEF23E3473800F9488C /* ViewsFile.swift */,
+				8546AB4623F72D3400793167 /* CorrectAnswerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,9 +268,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B45FF8023DF4E2200F3084D /* Build configuration list for PBXNativeTarget "Kwiz" */;
 			buildPhases = (
+				165F874D89D17A27414505E8 /* [CP] Check Pods Manifest.lock */,
 				0B45FF5223DF4E1F00F3084D /* Sources */,
 				0B45FF5323DF4E1F00F3084D /* Frameworks */,
 				0B45FF5423DF4E1F00F3084D /* Resources */,
+				547DE9E9F5F86590BC4FD1C4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,6 +287,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B45FF8323DF4E2200F3084D /* Build configuration list for PBXNativeTarget "KwizTests" */;
 			buildPhases = (
+				CFED3DCCC7793EDFA4F02CC2 /* [CP] Check Pods Manifest.lock */,
 				0B45FF6823DF4E2200F3084D /* Sources */,
 				0B45FF6923DF4E2200F3084D /* Frameworks */,
 				0B45FF6A23DF4E2200F3084D /* Resources */,
@@ -214,9 +306,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B45FF8623DF4E2200F3084D /* Build configuration list for PBXNativeTarget "KwizUITests" */;
 			buildPhases = (
+				5CE197570AA4A2E91C3CBE79 /* [CP] Check Pods Manifest.lock */,
 				0B45FF7323DF4E2200F3084D /* Sources */,
 				0B45FF7423DF4E2200F3084D /* Frameworks */,
 				0B45FF7523DF4E2200F3084D /* Resources */,
+				692E2202386EA2767C9AE1CF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -276,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85F9A9A823F70A3700DDBEFD /* 6285nafas.json in Resources */,
 				0B45FF6623DF4E2200F3084D /* LaunchScreen.storyboard in Resources */,
 				0B45FF6323DF4E2200F3084D /* Assets.xcassets in Resources */,
 				0B45FF6123DF4E2000F3084D /* Main.storyboard in Resources */,
@@ -298,18 +393,133 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		165F874D89D17A27414505E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kwiz-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		547DE9E9F5F86590BC4FD1C4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kwiz/Pods-Kwiz-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kwiz/Pods-Kwiz-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kwiz/Pods-Kwiz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CE197570AA4A2E91C3CBE79 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Kwiz-KwizUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		692E2202386EA2767C9AE1CF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFED3DCCC7793EDFA4F02CC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KwizTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0B45FF5223DF4E1F00F3084D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8546AB4723F72D3400793167 /* CorrectAnswerView.swift in Sources */,
+				0B4FA97E23FC43D800DAD57A /* ResultsVC.swift in Sources */,
+				85F9A9A623F6F01300DDBEFD /* AdvertisementVC.swift in Sources */,
+				85D91E8923F1E284002F4E98 /* UserModel.swift in Sources */,
+				4D5801B323E09B4B00CA8FAE /* MultiplechoiceQuestions.swift in Sources */,
+				85D91E8A23F1E284002F4E98 /* GameModel.swift in Sources */,
+				85D91E8523F1E25B002F4E98 /* LockVC.swift in Sources */,
+				850FB84023E3910C003EFC2B /* MainVC.swift in Sources */,
+				850FB84123E3910C003EFC2B /* TickleQuestionVC.swift in Sources */,
+				85D91E8C23F1E2AD002F4E98 /* MultiplechoiceQuestions.swift in Sources */,
+				85D91E8B23F1E292002F4E98 /* ScaleVC.swift in Sources */,
 				85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */,
+				85D91E8E23F1EAB5002F4E98 /* GameCenterHelper.swift in Sources */,
 				0B45FF5E23DF4E2000F3084D /* MultipleChoiceVC.swift in Sources */,
 				0B45FF5A23DF4E2000F3084D /* AppDelegate.swift in Sources */,
 				0B45FF5C23DF4E2000F3084D /* SceneDelegate.swift in Sources */,
 				0B45FF8E23DF51B500F3084D /* LaunchScreenVC.swift in Sources */,
+				0B4FA98023FC43EB00DAD57A /* Hearts.swift in Sources */,
 				0B45FF9023DF51DA00F3084D /* LoginVC.swift in Sources */,
-				4D5801B323E09B4B00CA8FAE /* MultiplechoiceQuestions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,18 +690,20 @@
 		};
 		0B45FF8123DF4E2200F3084D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86B6F335A5D794A3751A63E3 /* Pods-Kwiz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Kwiz/Kwiz.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76CJNGBR35;
+				DEVELOPMENT_TEAM = 26RHXP32FH;
 				INFOPLIST_FILE = Kwiz/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Pursuit.Kwiz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pursuit.kwiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -500,18 +712,20 @@
 		};
 		0B45FF8223DF4E2200F3084D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7626E7B4B2FC8E49C295D490 /* Pods-Kwiz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Kwiz/Kwiz.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76CJNGBR35;
+				DEVELOPMENT_TEAM = 26RHXP32FH;
 				INFOPLIST_FILE = Kwiz/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Pursuit.Kwiz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pursuit.kwiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -520,6 +734,7 @@
 		};
 		0B45FF8423DF4E2200F3084D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3AD9F16E25DBFD7CCD93BF5 /* Pods-KwizTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -542,6 +757,7 @@
 		};
 		0B45FF8523DF4E2200F3084D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AE6DC94F9C730C862438106 /* Pods-KwizTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -564,6 +780,7 @@
 		};
 		0B45FF8723DF4E2200F3084D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 081BA4CE9B3D12DDF3E2FBCC /* Pods-Kwiz-KwizUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -584,6 +801,7 @@
 		};
 		0B45FF8823DF4E2200F3084D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72431F948CD3A2A552657A84 /* Pods-Kwiz-KwizUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

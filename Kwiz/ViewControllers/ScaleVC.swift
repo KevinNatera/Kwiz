@@ -35,9 +35,6 @@ class ScaleVC: UIViewController {
     }()
     var mysteryBox: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
-        
-        
-        
         image.backgroundColor = .brown
         return image
     }()
@@ -63,26 +60,15 @@ class ScaleVC: UIViewController {
         button.isHidden = true
         return button
     }()
-    
-    lazy var userLivesImageOne: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
+    //MARK: back button maybe deleted
+    lazy var backButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 20, y: 52, width: 100, height: 50))
+        button.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
+        button.setImage(UIImage(named: "backArrow"), for: .normal)
+        button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
+        return button
     }()
-    lazy var userLivesImageTwo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    
-    lazy var userLivesImageThree: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
@@ -98,7 +84,7 @@ class ScaleVC: UIViewController {
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
-                pickedCorrectAnswer()
+                //pickedCorrectAnswer()
             }
         }
     }
@@ -114,6 +100,7 @@ class ScaleVC: UIViewController {
     }
     var steelOriginalCenter = CGPoint()
     var featherOriginalCenter = CGPoint()
+    var game = Game.shared
     
     
     //MARK: - Constraints
@@ -218,26 +205,16 @@ class ScaleVC: UIViewController {
             answer.heightAnchor.constraint(equalToConstant: answer.frame.height)])
     }
     private func setUpLivesStackView(){
-        view.addSubview(userLivesImageOne)
-        view.addSubview(userLivesImageTwo)
-        view.addSubview(userLivesImageThree)
-        
-        userLivesImageOne.translatesAutoresizingMaskIntoConstraints = false
-        userLivesImageTwo.translatesAutoresizingMaskIntoConstraints = false
-        userLivesImageThree.translatesAutoresizingMaskIntoConstraints = false
-        
-        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-        stackView.axis = .horizontal
-        stackView.spacing = 5
-        stackView.distribution = .fillEqually
-        self.view.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+//        game.reduceLives()
+//        heartStack = HeartsStackView(livesRemaining: game.getLives())
+        view.addSubview(heartStack)
+        heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 0),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 100)
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            heartStack.widthAnchor.constraint(equalToConstant: 150),
+            heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            heartStack.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
@@ -318,9 +295,8 @@ class ScaleVC: UIViewController {
         featherOriginalCenter = CGPoint(x: feather.center.x, y: feather.center.y - 34)
     }
     private func loselife() {
-        UIView.animate(withDuration: 2) {
-            self.userLivesImageOne.alpha = 0.0
-        }
+        game.reduceLives()
+        heartStack.loseLife(remaining: game.getLives())
     }
     private func pickedCorrectAnswer() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -360,13 +336,22 @@ class ScaleVC: UIViewController {
         
         reset.isHidden = true
     }
+    
+    //this function so we can go back momentarily
+    @objc private func segueToQuestion() {
+        let vc = MainVC()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+        
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
         setConstraints()
         addGestures()
+        view.addSubview(backButton) //adding back button here momentarily
     }
     
 
