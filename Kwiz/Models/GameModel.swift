@@ -20,6 +20,7 @@ class Game {
     private var score: Int
     private var user: User?
     private var questions: [Multiplechoice]
+    private var currentQuestion: Multiplechoice?
     
     
     
@@ -28,9 +29,6 @@ class Game {
     private init() {
         lives = LivesRemaining.three
         score = 0
-        
-        //self.user = user
-        
         questions = Game.getQuestions()
     }
     func setUser(user: User) {
@@ -74,11 +72,7 @@ class Game {
     ,Answer(text: "a fox", isCorrect: .incorrect)
     ,Answer(text: "a mongoose", isCorrect: .incorrect)
     ,Answer(text: "a pokemon", isCorrect: .incorrect)]
-    , questionValue: 5)
-    
-    
-    
-    ]
+    , questionValue: 5)]
     }
     
     func shuffle(){
@@ -89,6 +83,13 @@ class Game {
         questions.shuffle()
         
         questions.forEach({ $0.shuffleAnswers() } )
+        getNewCurrentQuestion()
+    }
+    func getNewCurrentQuestion() {
+        currentQuestion = questions.popLast()
+    }
+    func isQuestionsEmpty() -> Bool {
+        return questions.isEmpty
     }
     
     func increaseScore(){
