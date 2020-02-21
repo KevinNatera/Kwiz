@@ -123,8 +123,7 @@ class MultipleChoiceVC: UIViewController {
         let newMC = MultipleChoiceVC()
         navigationController?.pushViewController(newMC, animated: true)
     }
-    private func increaseGameScore() {
-        Game.shared.increaseScore()
+    private func updateGameCenter() {
         Game.shared.saveScore()
         Game.shared.checkFinishAchievement()
     }
@@ -249,7 +248,7 @@ class MultipleChoiceVC: UIViewController {
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
             print("you're right!")
-            increaseGameScore()
+            updateGameCenter()
             checkIfNoMoreQuestions()
         
         } else {

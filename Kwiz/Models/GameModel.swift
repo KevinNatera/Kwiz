@@ -12,7 +12,6 @@ enum LivesRemaining: Int {
     case three = 3
     case two = 2
     case one = 1
-    case none = 0
 }
 
 class Game {
@@ -168,8 +167,6 @@ class Game {
         case .two:
             lives = .one
         case .one:
-            lives = .none
-        case .none:
             quit()
         }
     }
@@ -194,7 +191,8 @@ class Game {
     
     //MARK: GameCenter
     func checkFinishAchievement(){
-        if(user!.highestScore >= questions.count * 5) {
+        let totalQValue = Game.getQuestions().count * 5
+        if(user!.highestScore >= totalQValue) {
             let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
             achieved.percentComplete = 100
             achieved.showsCompletionBanner = true

@@ -66,10 +66,10 @@ class HeartsStackView: UIStackView {
         case .one:
             userLivesImageOne.alpha = 0
             userLivesImageTwo.alpha = 0
-        case .none:
-            userLivesImageOne.alpha = 0
-            userLivesImageTwo.alpha = 0
-            userLivesImageThree.alpha = 0
+//        case .none:
+//            userLivesImageOne.alpha = 0
+//            userLivesImageTwo.alpha = 0
+//            userLivesImageThree.alpha = 0
         }
     }
     
@@ -91,10 +91,10 @@ class HeartsStackView: UIStackView {
             UIView.animate(withDuration: 2) { [weak self] in
                 self?.userLivesImageTwo.alpha = 0
             }
-        case .none:
-            UIView.animate(withDuration: 2) { [weak self] in
-                self?.userLivesImageThree.alpha = 0
-            }
+//        case .none:
+//            UIView.animate(withDuration: 2) { [weak self] in
+//                self?.userLivesImageThree.alpha = 0
+//            }
         }
     }
     
