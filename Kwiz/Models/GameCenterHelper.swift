@@ -42,29 +42,29 @@ var viewController: UIViewController?
     
     /// this function takes in an Int for the score and sends it to Game Center
     /// - Parameter score: sends the user score up to gamecenter
-    static func pushScoreToGC(score:Int){
-        if GKLocalPlayer.local.isAuthenticated {
-            let scoreResponse = GKScore(leaderboardIdentifier: "kwiz.leaderboard.highscore")
-            scoreResponse.value = Int64(score)
-            let scoreArr: [GKScore] = [scoreResponse]
-            GKScore.report(scoreArr, withCompletionHandler: nil)
-        }
-        
-    }
+//    static func pushScoreToGC(score:Int){
+//        if GKLocalPlayer.local.isAuthenticated {
+//            let scoreResponse = GKScore(leaderboardIdentifier: "kwiz.leaderboard.highscore")
+//            scoreResponse.value = Int64(score)
+//            let scoreArr: [GKScore] = [scoreResponse]
+//            GKScore.report(scoreArr, withCompletionHandler: nil)
+//        }
+//
+//    }
     
     
     /// Checks to see if the user completed the required score for the achievement and then uploads it to Game Center
     /// - Parameter userScore: reads the user current score(Int) while in game
-    static func checkFinishAchievement(userScore: Int){
-        if(userScore >= 5) {
-            let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
-            achieved.percentComplete = 100
-            achieved.showsCompletionBanner = true
-            //GKAchievement.resetAchievements(completionHandler: nil)
-            let achievementArr: [GKAchievement] = [achieved]
-            GKAchievement.report(achievementArr, withCompletionHandler: nil)
-        }
-    }
+//    static func checkFinishAchievement(userScore: Int){
+//        if(userScore >= 5) {
+//            let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
+//            achieved.percentComplete = 100
+//            achieved.showsCompletionBanner = true
+//            //GKAchievement.resetAchievements(completionHandler: nil)
+//            let achievementArr: [GKAchievement] = [achieved]
+//            GKAchievement.report(achievementArr, withCompletionHandler: nil)
+//        }
+//    }
     
 }
 
