@@ -112,7 +112,6 @@ class MultipleChoiceVC: UIViewController {
     //MARK: - Methods
     private func checkIfNoMoreQuestions() {
         if Game.shared.isQuestionsEmpty() {
-            //MARK: TODO: present end alert
             navigationController?.pushViewController(ResultsVC(), animated: true)
         } else {
             goToNextQuestion()
