@@ -19,9 +19,10 @@ class MultipleChoiceVC: UIViewController {
         tf.font = UIFont(name: "Times New Roman", size: 22)
         tf.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         tf.textAlignment = .center
-        tf.numberOfLines = 3
+        tf.numberOfLines = 0
         tf.layer.cornerRadius = 10
         tf.clipsToBounds = true
+        tf.adjustsFontSizeToFitWidth = true
         return tf
         
     }()
@@ -82,25 +83,6 @@ class MultipleChoiceVC: UIViewController {
         return button
     }()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
-    lazy var userLivesImageOne: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    lazy var userLivesImageTwo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    
-    lazy var userLivesImageThree: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
     
     lazy var hintButton: UIButton = {
         let button = UIButton()
@@ -130,7 +112,7 @@ class MultipleChoiceVC: UIViewController {
     //MARK: - Methods
     private func checkIfNoMoreQuestions() {
         if Game.shared.isQuestionsEmpty() {
-            //MARK: TODO: present end alert
+            navigationController?.pushViewController(ResultsVC(), animated: true)
         } else {
             goToNextQuestion()
         }
@@ -153,24 +135,21 @@ class MultipleChoiceVC: UIViewController {
         view.addSubview(answerChoiceBButton)
         view.addSubview(answerChoiceCButton)
         view.addSubview(answerChoiceDButton)
-        view.addSubview(skipButton)
-        view.addSubview(backButton)
-        view.addSubview(userLivesImageOne)
-        view.addSubview(userLivesImageTwo)
-        view.addSubview(userLivesImageThree)
+        //view.addSubview(skipButton)
+        //view.addSubview(backButton)
         heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
         view.addSubview(heartStack)
-        view.addSubview(hintButton)
+        //view.addSubview(hintButton)
         
     }
     
     private func addConstraints(){
         setUpQuestionTF()
         setUpAnswersStackView()
-        setUpBackButton()
-        setUpSkipButton()
+        //setUpBackButton()
+        //setUpSkipButton()
         setUpLivesStackView()
-        setUpHintButton()
+        //setUpHintButton()
         
     }
     
@@ -228,11 +207,6 @@ class MultipleChoiceVC: UIViewController {
     }
     
     private func setUpLivesStackView(){
-//        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-//        stackView.axis = .horizontal
-//        stackView.spacing = 1
-//        stackView.distribution = .fillEqually
-//        self.view.addSubview(stackView)
         
         heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -290,7 +264,7 @@ class MultipleChoiceVC: UIViewController {
         
     }
 
-    
+    //MARK: TODO: make objc func for back, skip, hint button, make alerts for them
     
 }
 

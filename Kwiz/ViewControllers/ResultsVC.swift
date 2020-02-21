@@ -76,6 +76,7 @@ class ResultsVC: UIViewController {
         super.viewDidLoad()
         addSubViews()
         startAnimation()
+        setScore()
     }
     
     
@@ -93,21 +94,31 @@ class ResultsVC: UIViewController {
     private func startAnimation(){
         confetti.play()
     }
+    private func setScore() {
+        //scoreLabel.text = "\(Game.shared.getCurrentScore())"
+    }
 
     
     
     //MARK: - Obj Methods
     
     @objc func retryButtonPressed() {
-        let mc = MultipleChoiceVC()
-        mc.modalPresentationStyle = .fullScreen
-        present(mc, animated: true, completion: nil)
+        let multipleChoice = MultipleChoiceVC()
+        
+        let navigationController = UINavigationController(rootViewController: multipleChoice)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.isHidden = true
+        Game.shared.start()
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {return}
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = navigationController
+        }, completion: nil)
     }
     
     @objc func homeButtonPressed() {
-        let main = MainVC()
-        main.modalPresentationStyle = .fullScreen
-        present(main, animated: true, completion: nil)
+        Game.shared.quit()
     }
     
 }
