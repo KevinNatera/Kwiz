@@ -247,11 +247,12 @@ class MultipleChoiceVC: UIViewController {
     
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
-            print("you're right!")
+            AnswerAlert.shared.answerResult(userResult: UserResult.correct, viewController: self)
             updateGameCenter()
             checkIfNoMoreQuestions()
         
         } else {
+            AnswerAlert.shared.answerResult(userResult: UserResult.wrong, viewController: self)
             heartStack.loseLife(remaining: Game.shared.getLives())
         }
     }
