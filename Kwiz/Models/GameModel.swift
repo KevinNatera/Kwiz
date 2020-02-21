@@ -133,6 +133,8 @@ class Game {
     
     func start() {
         print("start/restart")
+        lives = .three
+        score = 0
         user?.startGame()
         user?.play()
     }
@@ -148,6 +150,12 @@ class Game {
     func quit(){
         print("quit")
         print("back to main view controller")
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {return}
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = MainVC()
+        }, completion: nil)
     }
     
     func timer(){
