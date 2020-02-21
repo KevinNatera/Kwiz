@@ -138,13 +138,6 @@ class Game {
         user?.startGame()
         user?.play()
     }
-    func increaseScore(){
-        print("score")
-        if let question = currentQuestion {
-            score += question.getPoints()
-            user!.updateHighScore(newCurrentScore: score)
-        }
-    }
     
     //MARK: Game
     func quit(){
@@ -184,15 +177,24 @@ class Game {
         return lives
     }
     
+    func increaseScore(){
+        print("score")
+        if let question = currentQuestion {
+            score += question.getPoints()
+            user!.updateHighScore(newCurrentScore: score)
+        }
+    }
+    
     /// global game score
-    func getCurrentScore() {
-        print("recieve \(score)")
+    /// - Returns: users score(Int)
+    func getCurrentScore()-> Int {
+        return user?.highestScore ?? 0
         //Show user score, current score
     }
     
     //MARK: GameCenter
     func checkFinishAchievement(){
-        if(user!.highestScore >= 5) {
+        if(user!.highestScore >= questions.count * 5) {
             let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
             achieved.percentComplete = 100
             achieved.showsCompletionBanner = true
