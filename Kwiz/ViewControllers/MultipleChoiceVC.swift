@@ -82,25 +82,6 @@ class MultipleChoiceVC: UIViewController {
         return button
     }()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
-    lazy var userLivesImageOne: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    lazy var userLivesImageTwo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    
-    lazy var userLivesImageThree: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
     
     lazy var hintButton: UIButton = {
         let button = UIButton()
@@ -131,6 +112,7 @@ class MultipleChoiceVC: UIViewController {
     private func checkIfNoMoreQuestions() {
         if Game.shared.isQuestionsEmpty() {
             //MARK: TODO: present end alert
+            navigationController?.pushViewController(ResultsVC(), animated: true)
         } else {
             goToNextQuestion()
         }
@@ -155,9 +137,6 @@ class MultipleChoiceVC: UIViewController {
         view.addSubview(answerChoiceDButton)
         view.addSubview(skipButton)
         view.addSubview(backButton)
-        view.addSubview(userLivesImageOne)
-        view.addSubview(userLivesImageTwo)
-        view.addSubview(userLivesImageThree)
         heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
         view.addSubview(heartStack)
         view.addSubview(hintButton)
@@ -228,11 +207,6 @@ class MultipleChoiceVC: UIViewController {
     }
     
     private func setUpLivesStackView(){
-//        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-//        stackView.axis = .horizontal
-//        stackView.spacing = 1
-//        stackView.distribution = .fillEqually
-//        self.view.addSubview(stackView)
         
         heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -290,7 +264,7 @@ class MultipleChoiceVC: UIViewController {
         
     }
 
-    
+    //MARK: TODO: make objc func for back, skip, hint button, make alerts for them
     
 }
 
