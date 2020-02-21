@@ -31,7 +31,7 @@ class MainVC: UIViewController {
     
     //MARK: - Setup
     private func setupStackViewWithButtons() {
-        let stackView = UIStackView(arrangedSubviews: [startButton,rankingButton,settingButton])
+        let stackView = UIStackView(arrangedSubviews: [startButton,rankingButton])
         stackView.axis = .vertical
         stackView.spacing = view.frame.size.height / 9
         stackView.distribution = .fillEqually
@@ -45,7 +45,7 @@ class MainVC: UIViewController {
     private func setupButtons() {
         updateTitleOnButton(button: startButton, title: "START")
         updateTitleOnButton(button: rankingButton, title: "RANKING")
-        updateTitleOnButton(button: settingButton, title: "SETTINGS")
+        //updateTitleOnButton(button: settingButton, title: "SETTINGS")
         
         startButton.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
     }
@@ -76,32 +76,35 @@ class MainVC: UIViewController {
         view.addSubview(button)
     }
     
-    static func saveScore(score:Int){
-        if GKLocalPlayer.local.isAuthenticated {
-            let scoreResponse = GKScore(leaderboardIdentifier: "kwiz.leaderboard.highscore")
-            scoreResponse.value = Int64(score)
-            let scoreArr: [GKScore] = [scoreResponse]
-            GKScore.report(scoreArr, withCompletionHandler: nil)
-        }
-        
-    }
     
-    static func checkFinishAchievement(userScore: Int){
-        if(userScore >= 5) {
-            let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
-            achieved.percentComplete = 100
-            achieved.showsCompletionBanner = true
-            //GKAchievement.resetAchievements(completionHandler: nil)
-            let achievementArr: [GKAchievement] = [achieved]
-            GKAchievement.report(achievementArr, withCompletionHandler: nil)
-        }
-    }
+        
+    
+    
+    
     
     //MARK: Objc Function
     @objc func segueToQuestion() {
+        
+        // 1. Instantiate navigation controller
+        // 2. Instantiate firstVC
+        // 3. Set nav controller as rootVC
+        // 4. Push the first VC
+        
+        
         let multipleChoice = MultipleChoiceVC()
-        multipleChoice.modalPresentationStyle = .fullScreen
-        present(multipleChoice, animated: true, completion: nil)
+        
+        let navigationController = UINavigationController(rootViewController: multipleChoice)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.isHidden = true
+        Game.shared.start()
+        Game.shared.setUser(user: User(highestScore: 0, nickname: "Bob"))
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {return}
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = navigationController
+        }, completion: nil)
+        
         
     }
     

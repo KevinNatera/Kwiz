@@ -74,20 +74,7 @@ class ScaleVC: UIViewController {
     var steelPanGesture = UIPanGestureRecognizer()
     var featherPanGesture = UIPanGestureRecognizer()
     
-    var steelCenter = CGPoint() {
-        didSet {
-            if inputBox.frame.contains(steelCenter) {
-                steel.center = inputBox.center
-                rotate(view: steel)
-                loselife()
-                reset.isHidden = false
-            } else if answer.frame.contains(steelCenter) {
-                steel.center = answer.center
-                showSolution()
-                //pickedCorrectAnswer()
-            }
-        }
-    }
+    var steelCenter = CGPoint()
     var featherCenter = CGPoint() {
         didSet {
             if inputBox.frame.contains(featherCenter) {
@@ -310,13 +297,41 @@ class ScaleVC: UIViewController {
     
     //MARK: Objc Func
     @objc private func draggedSteel(_ sender: UIPanGestureRecognizer) {
-        steel.transform = CGAffineTransform.identity
-        feather.transform = CGAffineTransform.identity
-        view.bringSubviewToFront(steel)
-        let translation = sender.translation(in: view)
-        steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
-        sender.setTranslation(CGPoint.zero, in: view)
-        steelCenter = steel.center
+        
+        switch sender.state {
+        case .ended:
+            print("ended")
+            if inputBox.frame.contains(steelCenter) {
+                
+                steel.transform = CGAffineTransform.identity
+                feather.transform = CGAffineTransform.identity
+                view.bringSubviewToFront(steel)
+                let translation = sender.translation(in: view)
+                steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
+                sender.setTranslation(CGPoint.zero, in: view)
+                steelCenter = steel.center
+                
+                steel.center = inputBox.center
+                rotate(view: steel)
+                loselife()
+                reset.isHidden = false
+            } else if answer.frame.contains(steelCenter) {
+                steel.center = answer.center
+                showSolution()
+                //pickedCorrectAnswer()
+            }
+        default:
+            print("something")
+            steel.transform = CGAffineTransform.identity
+            feather.transform = CGAffineTransform.identity
+            view.bringSubviewToFront(steel)
+            let translation = sender.translation(in: view)
+            steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
+            sender.setTranslation(CGPoint.zero, in: view)
+            steelCenter = steel.center
+        }
+
+       
     }
     @objc private func draggedFeather(_ sender: UIPanGestureRecognizer) {
         steel.transform = CGAffineTransform.identity
