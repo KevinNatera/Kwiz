@@ -19,9 +19,10 @@ class MultipleChoiceVC: UIViewController {
         tf.font = UIFont(name: "Times New Roman", size: 22)
         tf.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
         tf.textAlignment = .center
-        tf.numberOfLines = 3
+        tf.numberOfLines = 0
         tf.layer.cornerRadius = 10
         tf.clipsToBounds = true
+        tf.adjustsFontSizeToFitWidth = true
         return tf
         
     }()
@@ -135,21 +136,21 @@ class MultipleChoiceVC: UIViewController {
         view.addSubview(answerChoiceBButton)
         view.addSubview(answerChoiceCButton)
         view.addSubview(answerChoiceDButton)
-        view.addSubview(skipButton)
-        view.addSubview(backButton)
+        //view.addSubview(skipButton)
+        //view.addSubview(backButton)
         heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
         view.addSubview(heartStack)
-        view.addSubview(hintButton)
+        //view.addSubview(hintButton)
         
     }
     
     private func addConstraints(){
         setUpQuestionTF()
         setUpAnswersStackView()
-        setUpBackButton()
-        setUpSkipButton()
+        //setUpBackButton()
+        //setUpSkipButton()
         setUpLivesStackView()
-        setUpHintButton()
+        //setUpHintButton()
         
     }
     
