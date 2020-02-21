@@ -158,6 +158,7 @@ class MultipleChoiceVC: UIViewController {
         view.addSubview(userLivesImageOne)
         view.addSubview(userLivesImageTwo)
         view.addSubview(userLivesImageThree)
+        heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
         view.addSubview(heartStack)
         view.addSubview(hintButton)
         

@@ -95,10 +95,16 @@ class MainVC: UIViewController {
         
         let navigationController = UINavigationController(rootViewController: multipleChoice)
         navigationController.navigationBar.isTranslucent = false
-        
+        navigationController.navigationBar.isHidden = true
         Game.shared.start()
         Game.shared.setUser(user: User(highestScore: 0, nickname: "Bob"))
-        present(navigationController, animated: true, completion: nil)
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {return}
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = navigationController
+        }, completion: nil)
+        
         
     }
     
