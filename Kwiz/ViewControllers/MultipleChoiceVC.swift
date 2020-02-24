@@ -98,8 +98,9 @@ class MultipleChoiceVC: UIViewController {
         addConstraints()
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         addTargetsToButtons()
+        
 
-        Game.shared.shuffle()
+        //Game.shared.shuffle()
       
         questionTextField.text = Game.shared.getQuestionText()
         let answerTexts = Game.shared.getAnswerTexts()
@@ -110,10 +111,11 @@ class MultipleChoiceVC: UIViewController {
 
     }
     //MARK: - Methods
-    private func checkIfNoMoreQuestions() {
+    private func checkIfNoMoreQuestionsThenRespond() {
         if Game.shared.isQuestionsEmpty() {
             navigationController?.pushViewController(ResultsVC(), animated: true)
         } else {
+            Game.shared.getNewCurrentQuestion()
             goToNextQuestion()
         }
     }
@@ -247,12 +249,12 @@ class MultipleChoiceVC: UIViewController {
     
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
-            AnswerAlert.shared.answerResult(userResult: UserResult.correct, viewController: self)
+            //AnswerAlert.shared.answerResult(userResult: UserResult.correct, viewController: self)
             updateGameCenter()
-            checkIfNoMoreQuestions()
+            checkIfNoMoreQuestionsThenRespond()
         
         } else {
-            AnswerAlert.shared.answerResult(userResult: UserResult.wrong, viewController: self)
+            //AnswerAlert.shared.answerResult(userResult: UserResult.wrong, viewController: self)
             heartStack.loseLife(remaining: Game.shared.getLives())
         }
     }
