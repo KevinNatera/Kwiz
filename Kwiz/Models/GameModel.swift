@@ -80,7 +80,7 @@ class Game {
         questions.shuffle()
         
         questions.forEach({ $0.shuffleAnswers() } )
-        getNewCurrentQuestion()
+        //getNewCurrentQuestion()
     }
     func getNewCurrentQuestion() {
         currentQuestion = questions.popLast()
@@ -134,6 +134,7 @@ class Game {
         print("start/restart")
         lives = .three
         score = 0
+        questions = Game.getQuestions()
         user?.startGame()
         user?.play()
     }

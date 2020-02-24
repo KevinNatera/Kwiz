@@ -109,6 +109,9 @@ class ResultsVC: UIViewController {
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.isHidden = true
         Game.shared.start()
+       
+        Game.shared.shuffle()
+        Game.shared.getNewCurrentQuestion()
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
             let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
             else {return}
