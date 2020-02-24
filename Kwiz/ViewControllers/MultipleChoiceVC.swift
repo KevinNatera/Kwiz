@@ -249,13 +249,13 @@ class MultipleChoiceVC: UIViewController {
     
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
-            //AnswerAlert.shared.answerResult(userResult: UserResult.correct, viewController: self)
-            updateGameCenter()
-            checkIfNoMoreQuestionsThenRespond()
+            answerResult(userResult: UserResult.correct, viewController: self)
+            
+           
         
         } else {
-            //AnswerAlert.shared.answerResult(userResult: UserResult.wrong, viewController: self)
-            heartStack.loseLife(remaining: Game.shared.getLives())
+            answerResult(userResult: UserResult.wrong, viewController: self)
+            
         }
     }
     
@@ -265,6 +265,30 @@ class MultipleChoiceVC: UIViewController {
         present(vc, animated: true, completion: nil)
         
     }
+    
+    func answerResult(userResult:UserResult, viewController: UIViewController){
+            
+            switch userResult {
+            case .correct:
+                let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained 5 points!", preferredStyle: .alert)
+                viewController.present(alert, animated: true)
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: {self.updateGameCenter()
+                        self.checkIfNoMoreQuestionsThenRespond()})
+                }
+                
+                
+            case .wrong:
+                let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    alert.dismiss(animated: true, completion: {self.heartStack.loseLife(remaining: Game.shared.getLives())})
+                }
+                viewController.present(alert, animated: true)
+            }
+        }
+        
 
     //MARK: TODO: make objc func for back, skip, hint button, make alerts for them
     
