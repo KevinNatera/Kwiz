@@ -95,7 +95,7 @@ class ResultsVC: UIViewController {
         confetti.play()
     }
     private func setScore() {
-        //scoreLabel.text = "\(Game.shared.getCurrentScore())"
+        scoreLabel.text = "\(Game.shared.getCurrentScore())!!!"
     }
 
     
