@@ -61,14 +61,18 @@ class LockVC: UIViewController {
     }()
     let handle: UIView = {
         let knob = UIView(frame: .zero)
-        knob.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
+        knob.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         knob.layer.borderColor = UIColor.black.cgColor
         knob.layer.borderWidth = 10
         knob.layer.cornerRadius = 30
         return knob
     }()
-    
+    let heartStack = HeartsStackView()
+    //MARK: Gestures
     let panGesture = UIPanGestureRecognizer()
+    let usernameGesture = UITapGestureRecognizer()
+    let passwordGesture = UITapGestureRecognizer()
+    let signInGesture = UITapGestureRecognizer()
     
     //MARK: - Constraints
     private func setupConstraints() {
@@ -81,6 +85,7 @@ class LockVC: UIViewController {
         constrainTextBox()
         constrainTextBox2()
         constrainHandle()
+        constrainHeartStack()
     }
     private func constrainLoginLabel() {
         view.addSubview(loginLabel)
@@ -156,6 +161,16 @@ class LockVC: UIViewController {
             handle.leadingAnchor.constraint(equalTo: lockView.centerXAnchor, constant: -20 - 85),
             handle.topAnchor.constraint(equalTo: lockView.topAnchor, constant: 60)])
     }
+    private func constrainHeartStack() {
+        view.addSubview(heartStack)
+        heartStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            heartStack.widthAnchor.constraint(equalToConstant: 150),
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            heartStack.heightAnchor.constraint(equalToConstant: 60)])
+        //heartStack.isHidden = true
+    }
     
     //MARK: Methods
     @objc func draggedView(sender: UIPanGestureRecognizer) {
@@ -163,22 +178,63 @@ class LockVC: UIViewController {
         let touch = sender.location(in: view.superview)
         let origin = view.layer.position
         let point = CGPoint(x: touch.x - origin.x, y: touch.y - origin.y)
-        guard point.y > 0, point.x > 0 else { return }
+        print(point.x)
+        guard point.y > 0, point.x > 0 else {
+            if point.x <= 0 {
+                return
+            }
+            return
+            
+        }
         
         let angle = point.x == 0 ? .pi/2 : atan(Double(point.y / point.x))
-        print(touch)
-        print(angle)
+        //print(touch)
+        //print(angle)
         handle.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
     }
+    @objc private func tappedUsernameBox() {
+        print("tapped username box")
+    }
+    @objc private func tappedPasswordBox() {
+        print("tapped password box")
+    }
+    @objc private func tappedSignIn() {
+        print("tapped sign in")
+    }
+    
+    //MARK: Gesture Functions
+    private func addGestures() {
+        addPanGestureToHandle()
+        addTapGestureToUsernameBox()
+        addTapGestureToPasswordBox()
+        addTapGestureToSignIn()
+    }
+    private func addPanGestureToHandle() {
+        panGesture.addTarget(self, action: #selector(draggedView))
+        handle.addGestureRecognizer(panGesture)
+    }
+    private func addTapGestureToUsernameBox() {
+        usernameGesture.addTarget(self, action: #selector(tappedUsernameBox))
+        textBox.addGestureRecognizer(usernameGesture)
+    }
+    private func addTapGestureToPasswordBox() {
+        passwordGesture.addTarget(self, action: #selector(tappedPasswordBox))
+        textBox2.addGestureRecognizer(passwordGesture)
+    }
+    private func addTapGestureToSignIn() {
+        signUpLabel.isUserInteractionEnabled = true
+        signInGesture.addTarget(self, action: #selector(tappedSignIn))
+        signUpLabel.addGestureRecognizer(signInGesture)
+    }
+    
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
+        //view.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         setupConstraints()
-        panGesture.addTarget(self, action: #selector(draggedView))
-        handle.addGestureRecognizer(panGesture)
-        
+        addGestures()
 
     }
 
