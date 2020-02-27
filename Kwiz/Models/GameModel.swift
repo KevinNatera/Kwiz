@@ -35,41 +35,41 @@ class Game {
     //MARK: Questions
     /// internal game function to get questions
    static private func getQuestions() -> [Multiplechoice] {
-        return [Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "donkeys", isCorrect: .correct)
-        ,Answer(text: "super keys", isCorrect: .incorrect)
-        ,Answer(text: "falcon keys", isCorrect: .incorrect)
-        ,Answer(text: "bit keys", isCorrect: .incorrect)]
+        return [Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "Donkeys", isCorrect: .correct)
+        ,Answer(text: "Super keys", isCorrect: .incorrect)
+        ,Answer(text: "Falcon keys", isCorrect: .incorrect)
+        ,Answer(text: "Bit keys", isCorrect: .incorrect)]
         , questionValue: 5),
                 
-                Multiplechoice(question: "What makes a vacuum good?", allAnswers: [Answer(text: "it sucks", isCorrect: .correct)
-                ,Answer(text: "copacity", isCorrect: .incorrect)
-                ,Answer(text: "dust devourer", isCorrect: .incorrect)
-                ,Answer(text: "cleaner", isCorrect: .incorrect)]
+                Multiplechoice(question: "What makes a vacuum good?", allAnswers: [Answer(text: "It sucks", isCorrect: .correct)
+                ,Answer(text: "Capacity", isCorrect: .incorrect)
+                ,Answer(text: "Dust devourer", isCorrect: .incorrect)
+                ,Answer(text: "Cleaner", isCorrect: .incorrect)]
                 , questionValue: 5),
-                Multiplechoice(question: "I have 10 cookies and you took 5, what do you have?", allAnswers: [Answer(text: "a black eye and a broken hand", isCorrect: .correct)
+                Multiplechoice(question: "I have 10 cookies and you took 5, what do you have?", allAnswers: [Answer(text: "A black eye and a broken hand", isCorrect: .correct)
                 ,Answer(text: "5 cookies", isCorrect: .incorrect)
-                ,Answer(text: "joy", isCorrect: .incorrect)
-                ,Answer(text: "a sweet tooth", isCorrect: .incorrect)]
+                ,Answer(text: "Joy", isCorrect: .incorrect)
+                ,Answer(text: "A sweet tooth", isCorrect: .incorrect)]
                 , questionValue: 5),
-    Multiplechoice(question: "Where is the best place to hide something?", allAnswers: [Answer(text: "link to the second page in google", isCorrect: .correct)
-    ,Answer(text: "in a forest", isCorrect: .incorrect)
-    ,Answer(text: "your pocket", isCorrect: .incorrect)
-    ,Answer(text: "plain sight", isCorrect: .incorrect)]
+    Multiplechoice(question: "Where is the best place to hide something?", allAnswers: [Answer(text: "Link to the second page in google", isCorrect: .correct)
+    ,Answer(text: "In a forest", isCorrect: .incorrect)
+    ,Answer(text: "Your pocket", isCorrect: .incorrect)
+    ,Answer(text: "Plain sight", isCorrect: .incorrect)]
     , questionValue: 5),
     Multiplechoice(question: "What is the most curious letter?", allAnswers: [Answer(text: "the letter Y", isCorrect: .correct)
-    ,Answer(text: "the letter C", isCorrect: .incorrect)
-    ,Answer(text: "a love letter", isCorrect: .incorrect)
-    ,Answer(text: "the letter Q", isCorrect: .incorrect)]
+    ,Answer(text: "The letter C", isCorrect: .incorrect)
+    ,Answer(text: "A love letter", isCorrect: .incorrect)
+    ,Answer(text: "The letter Q", isCorrect: .incorrect)]
     , questionValue: 5),
-    Multiplechoice(question: "You're in a dark cave with only one match, a lump of coal, a stove, and a kerosene lamp. You have the option of lighting one. Which do you light first?", allAnswers: [Answer(text: "the match", isCorrect: .correct)
-    ,Answer(text: "the lump of coal", isCorrect: .incorrect)
-    ,Answer(text: "the stove", isCorrect: .incorrect)
-    ,Answer(text: "the kerosene lamp", isCorrect: .incorrect)]
+    Multiplechoice(question: "You're in a dark cave with only one match, a lump of coal, a stove, and a kerosene lamp. You have the option of lighting one. Which do you light first?", allAnswers: [Answer(text: "The match", isCorrect: .correct)
+    ,Answer(text: "The lump of coal", isCorrect: .incorrect)
+    ,Answer(text: "The stove", isCorrect: .incorrect)
+    ,Answer(text: "The kerosene lamp", isCorrect: .incorrect)]
     , questionValue: 5),
     Multiplechoice(question: "I have a head like a cat. I have feet like a cat, but I am not a cat. What am I?", allAnswers: [Answer(text: "a kitten", isCorrect: .correct)
-    ,Answer(text: "a fox", isCorrect: .incorrect)
-    ,Answer(text: "a mongoose", isCorrect: .incorrect)
-    ,Answer(text: "a pokemon", isCorrect: .incorrect)]
+    ,Answer(text: "A fox", isCorrect: .incorrect)
+    ,Answer(text: "A mongoose", isCorrect: .incorrect)
+    ,Answer(text: "A pokemon", isCorrect: .incorrect)]
     , questionValue: 5)]
     }
     
@@ -147,7 +147,7 @@ class Game {
             let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
             else {return}
         UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                window.rootViewController = MainVC()
+                window.rootViewController = ResultsVC()
         }, completion: nil)
     }
     
