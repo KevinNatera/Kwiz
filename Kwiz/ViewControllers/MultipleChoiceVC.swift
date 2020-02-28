@@ -16,8 +16,9 @@ class MultipleChoiceVC: UIViewController {
     //MARK: - UI Objects
     lazy var questionTextField: UILabel = {
         let tf = UILabel()
-        tf.font = UIFont(name: "Times New Roman", size: 22)
-        tf.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        tf.font = UIFont(name: "Verdana-Bold", size: 22)
+        tf.backgroundColor = #colorLiteral(red: 0.9682953954, green: 0.2332102954, blue: 0.00375417457, alpha: 1)
+        tf.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         tf.textAlignment = .center
         tf.numberOfLines = 0
         tf.layer.cornerRadius = 10
@@ -29,40 +30,44 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceAButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.8897868991, green: 0.3494265079, blue: 0.2590676546, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 0
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
         
     }()
     
     lazy var answerChoiceBButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 1
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
         
     }()
     
     lazy var answerChoiceCButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 2
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
         
     }()
     
     lazy var answerChoiceDButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.6353338957, green: 0.7361501455, blue: 1, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Regular", size: 20)
+        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 3
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
         
     }()
@@ -70,14 +75,14 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var skipButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
         button.setImage(UIImage(named: "forwardArrow"), for: .normal)
         return button
     }()
     
     lazy var backButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
         button.setImage(UIImage(named: "backArrow"), for: .normal)
         button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
@@ -86,7 +91,7 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var hintButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
         button.setImage(UIImage(named: "hint"), for: .normal)
         return button
     }()
@@ -96,7 +101,7 @@ class MultipleChoiceVC: UIViewController {
         super.viewDidLoad()
         addViews()
         addConstraints()
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.3806488216, green: 0.5188760161, blue: 0.915720582, alpha: 1)
         addTargetsToButtons()
         
 
