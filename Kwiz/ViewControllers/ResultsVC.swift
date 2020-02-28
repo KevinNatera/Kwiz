@@ -124,7 +124,12 @@ class ResultsVC: UIViewController {
     }
     
     @objc func homeButtonPressed() {
-        Game.shared.quit()
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {return}
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                window.rootViewController = MainVC()
+        }, completion: nil)
     }
     
 }
