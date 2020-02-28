@@ -37,9 +37,9 @@ class ResultsVC: UIViewController {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: view.center.x - 200, y: 100, width: 400, height: 80)
-        label.backgroundColor = .blue
-        label.text = "RESULTS"
-        label.font = label.font.withSize(30)
+        label.backgroundColor = #colorLiteral(red: 0.7813532948, green: 0.9324833751, blue: 0.9999832511, alpha: 1)
+        label.text = "SCORE"
+        label.font = UIFont(name: "Verdana-Bold", size: 30)
         label.textAlignment = .center
         return label
     }()
@@ -47,9 +47,9 @@ class ResultsVC: UIViewController {
     lazy var scoreLabel: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: view.center.x - 200, y: 200, width: 400, height: 80)
-        label.backgroundColor = .blue
+        label.backgroundColor = #colorLiteral(red: 0.7813532948, green: 0.9324833751, blue: 0.9999832511, alpha: 1)
         label.text = "> 9000!!!"
-        label.font = label.font.withSize(50)
+        label.font = UIFont(name: "Verdana-Bold", size: 50)
         label.textAlignment = .center
         return label
     }()
@@ -58,7 +58,8 @@ class ResultsVC: UIViewController {
         let button = UIButton()
         button.frame = CGRect(x: view.center.x - 100, y: 650, width: 200, height: 50)
         button.setTitle("Retry", for: .normal)
-        button.backgroundColor = .green
+        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 20)
+        button.backgroundColor = #colorLiteral(red: 0.4573904276, green: 0.8313733935, blue: 0.2300189435, alpha: 1)
         button.addTarget(self, action: #selector(retryButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -67,13 +68,15 @@ class ResultsVC: UIViewController {
         let button = UIButton()
         button.frame = CGRect(x: view.center.x - 100, y: 750, width: 200, height: 50)
         button.setTitle("Home", for: .normal)
-        button.backgroundColor = .red
+        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 20)
+        button.backgroundColor = #colorLiteral(red: 0.9645542502, green: 0.1859400272, blue: 0.1500017643, alpha: 1)
         button.addTarget(self, action: #selector(homeButtonPressed), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.3806488216, green: 0.5188760161, blue: 0.915720582, alpha: 1)
         addSubViews()
         startAnimation()
         setScore()
