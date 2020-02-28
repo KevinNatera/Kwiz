@@ -33,14 +33,14 @@ class MainVC: UIViewController {
     private func setupStackViewWithButtons() {
         let stackView = UIStackView(arrangedSubviews: [startButton,rankingButton])
         stackView.axis = .vertical
-        stackView.spacing = view.frame.size.height / 9
+        stackView.spacing = 50
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.size.height / 3 + 30)])
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)])
     }
     private func setupButtons() {
         updateTitleOnButton(button: startButton, title: "START")
@@ -63,9 +63,9 @@ class MainVC: UIViewController {
     //MARK: - Functions
     private func updateTitleOnButton(button: UIButton, title: String) {
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.6798086851, green: 0.9229053351, blue: 0.9803921569, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.7813532948, green: 0.9324833751, blue: 0.9999832511, alpha: 1)
         button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 40)
+        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 30)
         button.contentEdgeInsets = UIEdgeInsets(top: 20, left: 40, bottom: 20, right: 40)
         
         button.frame = CGRect(x: 0, y: 0, width: view.frame.size.width * 4 / 5, height: view.frame.size.height / 8)
@@ -121,7 +121,7 @@ class MainVC: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.4241105914, green: 0.3439905345, blue: 0.7182968259, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.3806488216, green: 0.5188760161, blue: 0.915720582, alpha: 1)
         setupButtons()
         setupStackViewWithButtons()
         setupImageConstraints()
