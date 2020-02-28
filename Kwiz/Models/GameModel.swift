@@ -23,7 +23,6 @@ class Game {
     private var currentQuestion: Multiplechoice?
     
     
-    
     /// game requires user to exist, games always start with 3 lives and a score of 0
     /// - Parameter user: <#user description#>
     private init() {
@@ -51,12 +50,12 @@ class Game {
                 ,Answer(text: "Joy", isCorrect: .incorrect)
                 ,Answer(text: "A sweet tooth", isCorrect: .incorrect)]
                 , questionValue: 5),
-    Multiplechoice(question: "Where is the best place to hide something?", allAnswers: [Answer(text: "Link to the second page in google", isCorrect: .correct)
+    Multiplechoice(question: "Where is the best place to hide something?", allAnswers: [Answer(text: "Link to the second page on google", isCorrect: .correct)
     ,Answer(text: "In a forest", isCorrect: .incorrect)
     ,Answer(text: "Your pocket", isCorrect: .incorrect)
     ,Answer(text: "Plain sight", isCorrect: .incorrect)]
     , questionValue: 5),
-    Multiplechoice(question: "What is the most curious letter?", allAnswers: [Answer(text: "the letter Y", isCorrect: .correct)
+    Multiplechoice(question: "What is the most curious letter?", allAnswers: [Answer(text: "The letter Y", isCorrect: .correct)
     ,Answer(text: "The letter C", isCorrect: .incorrect)
     ,Answer(text: "A love letter", isCorrect: .incorrect)
     ,Answer(text: "The letter Q", isCorrect: .incorrect)]
@@ -66,7 +65,7 @@ class Game {
     ,Answer(text: "The stove", isCorrect: .incorrect)
     ,Answer(text: "The kerosene lamp", isCorrect: .incorrect)]
     , questionValue: 5),
-    Multiplechoice(question: "I have a head like a cat. I have feet like a cat, but I am not a cat. What am I?", allAnswers: [Answer(text: "a kitten", isCorrect: .correct)
+    Multiplechoice(question: "I have a head like a cat. I have feet like a cat, but I am not a cat. What am I?", allAnswers: [Answer(text: "A kitten", isCorrect: .correct)
     ,Answer(text: "A fox", isCorrect: .incorrect)
     ,Answer(text: "A mongoose", isCorrect: .incorrect)
     ,Answer(text: "A pokemon", isCorrect: .incorrect)]
