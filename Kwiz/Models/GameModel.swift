@@ -86,11 +86,9 @@ class Game {
     
     func shuffle(){
         print("shuffle")
-        print("segue to multipleChoice VC")
-        
         questions.shuffle()
-        
         questions.forEach({ $0.shuffleAnswers() } )
+        specialQuestions = allSpecialQuestions.shuffled()
         //getNewCurrentQuestion()
     }
     func getNewCurrentQuestion() {
@@ -132,6 +130,46 @@ class Game {
         }
         return false
     }
+    func switchAndGetNextTypeOfQuestion() {
+        switch nextType {
+        case .firstMC:
+            getNewCurrentQuestion()
+            if let _ = currentQuestion {
+                nextType = .secondMC
+            } else {
+                getNewSpecialQuestion()
+                if let _ = currentSQ {
+                    nextType = .special
+                } else {
+                    quit()
+                }
+            }
+        case .secondMC:
+            getNewSpecialQuestion()
+            if let _ = currentSQ {
+                nextType = .special
+            } else {
+                getNewCurrentQuestion()
+                if let _ = currentQuestion {
+                    nextType = .firstMC
+                } else {
+                    quit()
+                }
+            }
+        case .special:
+            getNewCurrentQuestion()
+            if let _ = currentQuestion {
+                nextType = .firstMC
+            } else {
+                getNewSpecialQuestion()
+                if let _ = currentSQ {
+                    nextType = .special
+                } else {
+                    quit()
+                }
+            }
+        }
+    }
     
     //MARK: - Special Questions
     func getNewSpecialQuestion() {
@@ -156,7 +194,8 @@ class Game {
         questions = Game.getQuestions()
         user?.startGame()
         user?.play()
-        specialQuestions = allSpecialQuestions.shuffled()
+        shuffle()
+        //switchAndGetNextTypeOfQuestion()
     }
     
     //MARK: - Game
@@ -204,6 +243,9 @@ class Game {
             score += question.getPoints()
             user!.updateHighScore(newCurrentScore: score)
         }
+    }
+    func getNextType() -> NextTypeOfQuestion {
+        return nextType
     }
     
     /// global game score
