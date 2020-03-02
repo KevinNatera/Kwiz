@@ -24,3 +24,15 @@ func getVCFromSpecial(question: SpecialQuestion?) -> UIViewController {
         return ResultsVC()
     }
 }
+
+func useNextTypeToCallVC(nextType: NextTypeOfQuestion) -> UIViewController {
+    switch nextType {
+    case .firstMC:
+        return MultipleChoiceVC()
+    case .secondMC:
+        return MultipleChoiceVC()
+    case .special:
+        let sq = Game.shared.getCurrentSpecialQuestion()
+        return getVCFromSpecial(question: sq)
+    }
+}
