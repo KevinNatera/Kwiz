@@ -12,6 +12,12 @@ enum LivesRemaining: Int {
     case three = 3
     case two = 2
     case one = 1
+    case none = 0
+}
+enum NextTypeOfQuestion {
+    case firstMC
+    case secondMC
+    case special
 }
 
 class Game {
@@ -21,6 +27,9 @@ class Game {
     private var user: User?
     private var questions: [Multiplechoice]
     private var currentQuestion: Multiplechoice?
+    private var specialQuestions: [SpecialQuestion]
+    private var currentSQ: SpecialQuestion?
+    private var nextType: NextTypeOfQuestion
     
     
     /// game requires user to exist, games always start with 3 lives and a score of 0
@@ -28,10 +37,13 @@ class Game {
     private init() {
         lives = LivesRemaining.three
         score = 0
-        questions = Game.getQuestions()
+        questions = Game.getQuestions().shuffled()
+        questions.forEach({ $0.shuffleAnswers() } )
+        specialQuestions = allSpecialQuestions.shuffled()
+        nextType = .firstMC
     }
     
-    //MARK: Questions
+    //MARK: - Questions
     /// internal game function to get questions
    static private func getQuestions() -> [Multiplechoice] {
         return [Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "Donkeys", isCorrect: .correct)
@@ -121,7 +133,15 @@ class Game {
         return false
     }
     
-    //MARK: User
+    //MARK: - Special Questions
+    func getNewSpecialQuestion() {
+        currentSQ = specialQuestions.popLast()
+    }
+    func getCurrentSpecialQuestion() -> SpecialQuestion? {
+        return currentSQ
+    }
+    
+    //MARK: - User
     func setUser(user: User) {
         self.user = user
     }
@@ -136,9 +156,10 @@ class Game {
         questions = Game.getQuestions()
         user?.startGame()
         user?.play()
+        specialQuestions = allSpecialQuestions.shuffled()
     }
     
-    //MARK: Game
+    //MARK: - Game
     func quit(){
         print("quit")
         print("back to main view controller")
@@ -167,6 +188,9 @@ class Game {
         case .two:
             lives = .one
         case .one:
+            lives = .none
+            quit()
+        case .none:
             quit()
         }
     }
@@ -189,7 +213,7 @@ class Game {
         //Show user score, current score
     }
     
-    //MARK: GameCenter
+    //MARK: - GameCenter
     func checkFinishAchievement(){
         let totalQValue = Game.getQuestions().count * 5
         if(user!.highestScore >= totalQValue) {
