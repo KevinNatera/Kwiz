@@ -35,9 +35,6 @@ class ScaleVC: UIViewController {
     }()
     var mysteryBox: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
-        
-        
-        
         image.backgroundColor = .brown
         return image
     }()
@@ -71,44 +68,13 @@ class ScaleVC: UIViewController {
         button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
     }()
-    lazy var userLivesImageOne: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    lazy var userLivesImageTwo: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
-    
-    lazy var userLivesImageThree: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "hearts")
-       
-        return imageView
-    }()
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
     //MARK: - Properties
     var steelPanGesture = UIPanGestureRecognizer()
     var featherPanGesture = UIPanGestureRecognizer()
     
-    var steelCenter = CGPoint() {
-        didSet {
-            if inputBox.frame.contains(steelCenter) {
-                steel.center = inputBox.center
-                rotate(view: steel)
-                loselife()
-                reset.isHidden = false
-            } else if answer.frame.contains(steelCenter) {
-                steel.center = answer.center
-                showSolution()
-                //pickedCorrectAnswer()
-            }
-        }
-    }
+    var steelCenter = CGPoint()
     var featherCenter = CGPoint() {
         didSet {
             if inputBox.frame.contains(featherCenter) {
@@ -121,6 +87,7 @@ class ScaleVC: UIViewController {
     }
     var steelOriginalCenter = CGPoint()
     var featherOriginalCenter = CGPoint()
+    var game = Game.shared
     
     
     //MARK: - Constraints
@@ -225,26 +192,16 @@ class ScaleVC: UIViewController {
             answer.heightAnchor.constraint(equalToConstant: answer.frame.height)])
     }
     private func setUpLivesStackView(){
-        view.addSubview(userLivesImageOne)
-        view.addSubview(userLivesImageTwo)
-        view.addSubview(userLivesImageThree)
-        
-        userLivesImageOne.translatesAutoresizingMaskIntoConstraints = false
-        userLivesImageTwo.translatesAutoresizingMaskIntoConstraints = false
-        userLivesImageThree.translatesAutoresizingMaskIntoConstraints = false
-        
-        let stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-        stackView.axis = .horizontal
-        stackView.spacing = 5
-        stackView.distribution = .fillEqually
-        self.view.addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+//        game.reduceLives()
+//        heartStack = HeartsStackView(livesRemaining: game.getLives())
+        view.addSubview(heartStack)
+        heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            stackView.widthAnchor.constraint(equalToConstant: 150),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 60)
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            heartStack.widthAnchor.constraint(equalToConstant: 150),
+            heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            heartStack.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
@@ -325,9 +282,8 @@ class ScaleVC: UIViewController {
         featherOriginalCenter = CGPoint(x: feather.center.x, y: feather.center.y - 34)
     }
     private func loselife() {
-        UIView.animate(withDuration: 2) {
-            self.userLivesImageOne.alpha = 0.0
-        }
+        game.reduceLives()
+        heartStack.loseLife(remaining: game.getLives())
     }
     private func pickedCorrectAnswer() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -341,13 +297,41 @@ class ScaleVC: UIViewController {
     
     //MARK: Objc Func
     @objc private func draggedSteel(_ sender: UIPanGestureRecognizer) {
-        steel.transform = CGAffineTransform.identity
-        feather.transform = CGAffineTransform.identity
-        view.bringSubviewToFront(steel)
-        let translation = sender.translation(in: view)
-        steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
-        sender.setTranslation(CGPoint.zero, in: view)
-        steelCenter = steel.center
+        
+        switch sender.state {
+        case .ended:
+            print("ended")
+            if inputBox.frame.contains(steelCenter) {
+                
+                steel.transform = CGAffineTransform.identity
+                feather.transform = CGAffineTransform.identity
+                view.bringSubviewToFront(steel)
+                let translation = sender.translation(in: view)
+                steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
+                sender.setTranslation(CGPoint.zero, in: view)
+                steelCenter = steel.center
+                
+                steel.center = inputBox.center
+                rotate(view: steel)
+                loselife()
+                reset.isHidden = false
+            } else if answer.frame.contains(steelCenter) {
+                steel.center = answer.center
+                showSolution()
+                //pickedCorrectAnswer()
+            }
+        default:
+            print("something")
+            steel.transform = CGAffineTransform.identity
+            feather.transform = CGAffineTransform.identity
+            view.bringSubviewToFront(steel)
+            let translation = sender.translation(in: view)
+            steel.center = CGPoint(x: steel.center.x + translation.x, y: steel.center.y + translation.y)
+            sender.setTranslation(CGPoint.zero, in: view)
+            steelCenter = steel.center
+        }
+
+       
     }
     @objc private func draggedFeather(_ sender: UIPanGestureRecognizer) {
         steel.transform = CGAffineTransform.identity

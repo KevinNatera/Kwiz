@@ -38,5 +38,10 @@ class User {
         nickname = name
     }
     
+    func updateHighScore(newCurrentScore: Int) {
+        if newCurrentScore > highestScore {
+            highestScore = newCurrentScore
+        }
+    }
     
 }
