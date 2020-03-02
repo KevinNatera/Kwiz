@@ -21,7 +21,7 @@ class AdvertisementVC: UIViewController {
     }()
     var groupOneLabel: UILabel = {
         let label = UILabel()
-        label.text = "💪Prepare to get Rock Hard!!\n\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
+        label.text = "💪Get rock hard muscles with FitBuddy!!\n\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
         label.textAlignment = .center
         label.numberOfLines = 15
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 25)
@@ -166,11 +166,6 @@ class AdvertisementVC: UIViewController {
         userLivesImageTwo.isHidden = false
         userLivesImageThree.isHidden = false
         center = stackView.center
-//        UIView.animate(withDuration: 2) { [weak self] in
-//            self?.stackView.center = CGPoint(x: (self?.center.x ?? 0) - 10, y: self?.center.y ?? 0)
-//            self?.stackView.center = CGPoint(x: (self?.center.x ?? 0) + 20, y: self?.center.y ?? 0)
-//            self?.stackView.center = CGPoint(x: (self?.center.x ?? 0) - 10, y: self?.center.y ?? 0)
-//        }
     }
     //MARK: Objc Functions
     @objc private func loselife() {
@@ -180,7 +175,9 @@ class AdvertisementVC: UIViewController {
         }
     }
     @objc private func downloadButtonPressed() {
-        print("segue to next question")
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     //MARK: - LifeCycle
