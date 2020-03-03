@@ -68,6 +68,8 @@ class LockVC: UIViewController {
         return knob
     }()
     let heartStack = HeartsStackView()
+    
+    var segueFuncAlreadyRan = false
     //MARK: Gestures
     let panGesture = UIPanGestureRecognizer()
     let usernameGesture = UITapGestureRecognizer()
@@ -181,16 +183,24 @@ class LockVC: UIViewController {
         print(point.x)
         guard point.y > 0, point.x > 0 else {
             if point.x <= 0 {
+                segue(funcAlreadyCalled: segueFuncAlreadyRan)
                 return
             }
             return
-            
         }
         
         let angle = point.x == 0 ? .pi/2 : atan(Double(point.y / point.x))
         //print(touch)
         //print(angle)
         handle.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
+    }
+    func segue(funcAlreadyCalled: Bool) {
+        if !funcAlreadyCalled {
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        navigationController?.pushViewController(vc, animated: true)
+            segueFuncAlreadyRan = true
+        }
     }
     @objc private func tappedUsernameBox() {
         print("tapped username box")

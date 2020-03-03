@@ -61,13 +61,13 @@ class ScaleVC: UIViewController {
         return button
     }()
     //MARK: back button maybe deleted
-    lazy var backButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 20, y: 52, width: 100, height: 50))
-        button.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
-        button.setImage(UIImage(named: "backArrow"), for: .normal)
-        button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
-        return button
-    }()
+//    lazy var backButton: UIButton = {
+//        let button = UIButton(frame: CGRect(x: 20, y: 52, width: 100, height: 50))
+//        button.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
+//        button.setImage(UIImage(named: "backArrow"), for: .normal)
+//        button.addTarget(self, action: #selector(segueToViewController), for: .touchUpInside)
+//        return button
+//    }()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
     //MARK: - Properties
@@ -286,10 +286,11 @@ class ScaleVC: UIViewController {
         heartStack.loseLife(remaining: game.getLives())
     }
     private func pickedCorrectAnswer() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let lock = LockVC()
-            lock.modalPresentationStyle = .fullScreen
-            self.present(lock, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0)  { [weak self] in
+            self?.segueToViewController()
+//            let lock = LockVC()
+//            lock.modalPresentationStyle = .fullScreen
+//            self.present(lock, animated: true, completion: nil)
         }
         
     }
@@ -318,7 +319,7 @@ class ScaleVC: UIViewController {
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
-                //pickedCorrectAnswer()
+                pickedCorrectAnswer()
             }
         default:
             print("something")
@@ -353,10 +354,10 @@ class ScaleVC: UIViewController {
     }
     
     //this function so we can go back momentarily
-    @objc private func segueToQuestion() {
-        let vc = MainVC()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+    private func segueToViewController() {
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        navigationController?.pushViewController(vc, animated: true)
         
     }
 
@@ -366,7 +367,7 @@ class ScaleVC: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
         setConstraints()
         addGestures()
-        view.addSubview(backButton) //adding back button here momentarily
+        //view.addSubview(backButton) //adding back button here momentarily
     }
     
 

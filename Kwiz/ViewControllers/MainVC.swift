@@ -98,7 +98,6 @@ class MainVC: UIViewController {
         navigationController.navigationBar.isHidden = true
         Game.shared.start()
         Game.shared.setUser(user: User(highestScore: 0, nickname: "Bob"))
-        Game.shared.shuffle()
         Game.shared.getNewCurrentQuestion()
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
             let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window

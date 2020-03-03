@@ -84,7 +84,7 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
         button.setImage(UIImage(named: "backArrow"), for: .normal)
-        button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
     }()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
@@ -117,18 +117,20 @@ class MultipleChoiceVC: UIViewController {
     }
     //MARK: - Methods
     private func checkIfNoMoreQuestionsThenRespond() {
-        if Game.shared.isQuestionsEmpty() {
-            navigationController?.pushViewController(ResultsVC(), animated: true)
-        } else {
-            Game.shared.getNewCurrentQuestion()
-            goToNextQuestion()
-        }
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        goToNextViewController(vc: vc)
+//        if Game.shared.isQuestionsEmpty() {
+//            navigationController?.pushViewController(ResultsVC(), animated: true)
+//        } else {
+//            Game.shared.getNewCurrentQuestion()
+//            goToNextQuestion(vc: ResultsVC())
+//        }
     }
-    private func goToNextQuestion() {
+    private func goToNextViewController(vc: UIViewController) {
         // 1. instatiate another VC
         // 2 . push
-        let newMC = MultipleChoiceVC()
-        navigationController?.pushViewController(newMC, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     private func updateGameCenter() {
         Game.shared.saveScore()
@@ -255,12 +257,8 @@ class MultipleChoiceVC: UIViewController {
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
             answerResult(userResult: UserResult.correct, viewController: self)
-            
-           
-        
         } else {
             answerResult(userResult: UserResult.wrong, viewController: self)
-            
         }
     }
     
