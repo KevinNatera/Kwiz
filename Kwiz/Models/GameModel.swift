@@ -178,6 +178,13 @@ class Game {
     func getCurrentSpecialQuestion() -> SpecialQuestion? {
         return currentSQ
     }
+    func increaseScoreForSpecialQuestions() {
+        if let question = currentSQ {
+            score += question.points
+            user!.updateHighScore(newCurrentScore: score)
+            updatesGameCenter()
+        }
+    }
     
     //MARK: - User
     func setUser(user: User) {
@@ -242,6 +249,7 @@ class Game {
         if let question = currentQuestion {
             score += question.getPoints()
             user!.updateHighScore(newCurrentScore: score)
+            updatesGameCenter()
         }
     }
     func getNextType() -> NextTypeOfQuestion {
@@ -256,8 +264,12 @@ class Game {
     }
     
     //MARK: - GameCenter
+    func updatesGameCenter() {
+        saveScore()
+        checkFinishAchievement()
+    }
     func checkFinishAchievement(){
-        let totalQValue = Game.getQuestions().count * 5
+        let totalQValue = (Game.getQuestions().count * 5) + (allSpecialQuestions.count * 10)
         if(user!.highestScore >= totalQValue) {
             let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
             achieved.percentComplete = 100

@@ -194,22 +194,29 @@ class LockVC: UIViewController {
         //print(angle)
         handle.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
     }
-    func segue(funcAlreadyCalled: Bool) {
+    private func segue(funcAlreadyCalled: Bool) {
         if !funcAlreadyCalled {
+        Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
             segueFuncAlreadyRan = true
         }
     }
+    private func loseLivesInLockVC() {
+        Game.shared.reduceLives()
+        heartStack.loseLife(remaining: Game.shared.getLives())
+    }
+    
+    //MARK: Objc Func
     @objc private func tappedUsernameBox() {
-        print("tapped username box")
+        loseLivesInLockVC()
     }
     @objc private func tappedPasswordBox() {
-        print("tapped password box")
+        loseLivesInLockVC()
     }
     @objc private func tappedSignIn() {
-        print("tapped sign in")
+        loseLivesInLockVC()
     }
     
     //MARK: Gesture Functions
