@@ -67,6 +67,8 @@ class TickleQuestionVC: UIViewController {
         return  button
     }()
     
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
+    
     
     
     //MARK: - ViewDidload
@@ -74,6 +76,7 @@ class TickleQuestionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
+        setUpLivesStackView()
         randomizeAnswers()
     }
     
@@ -157,7 +160,18 @@ class TickleQuestionVC: UIViewController {
         view.addSubview(wrongAnswer2)
         view.addSubview(wrongAnswer3)
         view.addSubview(correctAnswer)
+        view.addSubview(heartStack)
+        
     }
+    private func setUpLivesStackView(){
+            heartStack.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+                heartStack.widthAnchor.constraint(equalToConstant: 150),
+                heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                heartStack.heightAnchor.constraint(equalToConstant: 60)
+            ])
+        }
     
     private func randomizeAnswers() {
         let num = Int.random(in: 1...8)
