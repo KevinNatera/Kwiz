@@ -74,6 +74,7 @@ class AdvertisementVC: UIViewController {
         return imageView
     }()
     var stackView = UIStackView()
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
     //MARK: - Properties
     var center = CGPoint.zero
@@ -129,24 +130,22 @@ class AdvertisementVC: UIViewController {
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
     }
     private func setUpLivesStackView(){
-        stackView = UIStackView(arrangedSubviews: [userLivesImageOne, userLivesImageTwo, userLivesImageThree])
-        stackView.axis = .horizontal
-        stackView.spacing = 1
-        stackView.distribution = .fillEqually
-        self.view.addSubview(stackView)
+        heartStack.isHidden = true
+        view.addSubview(heartStack)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: adLabel.topAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 60),
-            stackView.widthAnchor.constraint(equalToConstant: 150)
+            heartStack.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -20),
+            heartStack.bottomAnchor.constraint(equalTo: adLabel.topAnchor),
+            heartStack.heightAnchor.constraint(equalToConstant: 60),
+            heartStack.widthAnchor.constraint(equalToConstant: 150)
         ])
         
     }
     private func constrainInfoButton() {
         view.addSubview(infoButton)
         infoButton.translatesAutoresizingMaskIntoConstraints = false
+        infoButton.addTarget(self, action: #selector(loselife), for: .touchUpInside)
         NSLayoutConstraint.activate([
             infoButton.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 5),
             infoButton.leadingAnchor.constraint(equalTo: closeButton.leadingAnchor)])
@@ -162,17 +161,14 @@ class AdvertisementVC: UIViewController {
             }, completion: nil)
     }
     private func showLives() {
-        userLivesImageOne.isHidden = false
-        userLivesImageTwo.isHidden = false
-        userLivesImageThree.isHidden = false
-        center = stackView.center
+        heartStack.isHidden = false
+        center = heartStack.center
     }
     //MARK: Objc Functions
     @objc private func loselife() {
         showLives()
-        UIView.animate(withDuration: 2) {
-            self.userLivesImageOne.alpha = 0.0
-        }
+        Game.shared.reduceLives()
+        heartStack.loseLife(remaining: Game.shared.getLives())
     }
     @objc private func downloadButtonPressed() {
         Game.shared.increaseScoreForSpecialQuestions()

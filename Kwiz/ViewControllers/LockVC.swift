@@ -207,6 +207,8 @@ class LockVC: UIViewController {
         Game.shared.reduceLives()
         heartStack.loseLife(remaining: Game.shared.getLives())
     }
+    
+    //MARK: Objc Func
     @objc private func tappedUsernameBox() {
         loseLivesInLockVC()
     }
