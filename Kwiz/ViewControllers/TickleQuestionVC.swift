@@ -83,16 +83,9 @@ class TickleQuestionVC: UIViewController {
     //MARK: - Objc Funcs
     
     @objc func wrongAnswerPressed(sender: UIButton) {
-        
-        lives -= 1
-        
-        print("lives \(lives)")
-        if lives <= 0 {
-            //Trigger Game Over Sequence
-            print("gg scrub")
-        }
+        Game.shared.reduceLives()
+        heartStack.loseLife(remaining: Game.shared.getLives())
     }
-    
     
     
     @objc func swipeHandler(gestureRecognizer : UIPanGestureRecognizer) {
