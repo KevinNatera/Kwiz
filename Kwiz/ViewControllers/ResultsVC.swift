@@ -14,7 +14,7 @@ class ResultsVC: UIViewController {
     
     //MARK: - Properties
     
-    lazy var confetti: AnimationView = {
+    lazy var winAnimation: AnimationView = {
         let view = AnimationView(name: "3427-ribbon")
         view.contentMode = .scaleToFill
         view.respectAnimationFrameRate = false
@@ -24,8 +24,8 @@ class ResultsVC: UIViewController {
         return view
     }()
     
-    lazy var fireWorks: AnimationView = {
-           let view = AnimationView(name: "3427-ribbon")
+    lazy var loseAnimation: AnimationView = {
+           let view = AnimationView(name: "16477-rain-background-animation")
            view.contentMode = .scaleToFill
            view.respectAnimationFrameRate = false
            view.animationSpeed = 1.0
@@ -91,12 +91,18 @@ class ResultsVC: UIViewController {
         view.addSubview(scoreLabel)
         view.addSubview(retryButton)
         view.addSubview(homeButton)
-        view.addSubview(confetti)
+        view.addSubview(winAnimation)
     }
     
     private func startAnimation(){
-        confetti.play()
+        switch Game.shared.getLives() {
+        case .none:
+            loseAnimation.play()
+        default:
+            winAnimation.play()
+        }
     }
+    
     private func setScore() {
         scoreLabel.text = "\(Game.shared.getCurrentScore())!!!"
     }
