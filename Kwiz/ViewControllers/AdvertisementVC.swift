@@ -175,6 +175,7 @@ class AdvertisementVC: UIViewController {
         }
     }
     @objc private func downloadButtonPressed() {
+        Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)

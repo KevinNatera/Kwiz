@@ -137,7 +137,7 @@ class TickleQuestionVC: UIViewController {
                 correctAnswer.backgroundColor = .green
                 //Trigger segue into next question after a delay
                 tickles = 0
-                print("grats")
+                Game.shared.increaseScoreForSpecialQuestions()
                 Game.shared.switchAndGetNextTypeOfQuestion()
                 let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
                 navigationController?.pushViewController(vc, animated: true)

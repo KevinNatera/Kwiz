@@ -355,6 +355,7 @@ class ScaleVC: UIViewController {
     
     //this function so we can go back momentarily
     private func segueToViewController() {
+        Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
