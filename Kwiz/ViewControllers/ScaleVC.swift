@@ -75,16 +75,8 @@ class ScaleVC: UIViewController {
     var featherPanGesture = UIPanGestureRecognizer()
     
     var steelCenter = CGPoint()
-    var featherCenter = CGPoint() {
-        didSet {
-            if inputBox.frame.contains(featherCenter) {
-                feather.center = inputBox.center
-                rotate(view: feather)
-                loselife()
-                reset.isHidden = false
-            }
-        }
-    }
+    var featherCenter = CGPoint()
+
     var steelOriginalCenter = CGPoint()
     var featherOriginalCenter = CGPoint()
     var game = Game.shared
@@ -192,9 +184,6 @@ class ScaleVC: UIViewController {
             answer.heightAnchor.constraint(equalToConstant: answer.frame.height)])
     }
     private func setUpLivesStackView(){
-
-//        game.reduceLives()
-//        heartStack = HeartsStackView(livesRemaining: game.getLives())
         view.addSubview(heartStack)
         heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -286,11 +275,8 @@ class ScaleVC: UIViewController {
         heartStack.loseLife(remaining: game.getLives())
     }
     private func pickedCorrectAnswer() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0)  { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)  { [weak self] in
             self?.segueToViewController()
-//            let lock = LockVC()
-//            lock.modalPresentationStyle = .fullScreen
-//            self.present(lock, animated: true, completion: nil)
         }
         
     }
@@ -335,13 +321,35 @@ class ScaleVC: UIViewController {
        
     }
     @objc private func draggedFeather(_ sender: UIPanGestureRecognizer) {
-        steel.transform = CGAffineTransform.identity
-        feather.transform = CGAffineTransform.identity
-        view.bringSubviewToFront(feather)
-        let translation = sender.translation(in: view)
-        feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
-        sender.setTranslation(CGPoint.zero, in: view)
-        featherCenter = feather.center
+        switch sender.state {
+        case .ended:
+            print("ended")
+            if inputBox.frame.contains(featherCenter) {
+                
+                steel.transform = CGAffineTransform.identity
+                feather.transform = CGAffineTransform.identity
+                view.bringSubviewToFront(feather)
+                let translation = sender.translation(in: view)
+                feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
+                sender.setTranslation(CGPoint.zero, in: view)
+                featherCenter = feather.center
+                
+                feather.center = inputBox.center
+                rotate(view: feather)
+                loselife()
+                reset.isHidden = false
+            }
+        default:
+            steel.transform = CGAffineTransform.identity
+            feather.transform = CGAffineTransform.identity
+            view.bringSubviewToFront(feather)
+            let translation = sender.translation(in: view)
+            feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
+            sender.setTranslation(CGPoint.zero, in: view)
+            featherCenter = feather.center
+        }
+        
+        
     }
     @objc private func resetPressed() {
         steel.center = steelOriginalCenter
