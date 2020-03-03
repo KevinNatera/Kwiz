@@ -67,6 +67,8 @@ class TickleQuestionVC: UIViewController {
         return  button
     }()
     
+    var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
+    
     
     
     //MARK: - ViewDidload
@@ -74,22 +76,16 @@ class TickleQuestionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
+        setUpLivesStackView()
         randomizeAnswers()
     }
     
     //MARK: - Objc Funcs
     
     @objc func wrongAnswerPressed(sender: UIButton) {
-        
-        lives -= 1
-        
-        print("lives \(lives)")
-        if lives <= 0 {
-            //Trigger Game Over Sequence
-            print("gg scrub")
-        }
+        Game.shared.reduceLives()
+        heartStack.loseLife(remaining: Game.shared.getLives())
     }
-    
     
     
     @objc func swipeHandler(gestureRecognizer : UIPanGestureRecognizer) {
@@ -137,7 +133,7 @@ class TickleQuestionVC: UIViewController {
                 correctAnswer.backgroundColor = .green
                 //Trigger segue into next question after a delay
                 tickles = 0
-                print("grats")
+                Game.shared.increaseScoreForSpecialQuestions()
                 Game.shared.switchAndGetNextTypeOfQuestion()
                 let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
                 navigationController?.pushViewController(vc, animated: true)
@@ -157,7 +153,18 @@ class TickleQuestionVC: UIViewController {
         view.addSubview(wrongAnswer2)
         view.addSubview(wrongAnswer3)
         view.addSubview(correctAnswer)
+        view.addSubview(heartStack)
+        
     }
+    private func setUpLivesStackView(){
+            heartStack.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+                heartStack.widthAnchor.constraint(equalToConstant: 150),
+                heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                heartStack.heightAnchor.constraint(equalToConstant: 60)
+            ])
+        }
     
     private func randomizeAnswers() {
         let num = Int.random(in: 1...8)
