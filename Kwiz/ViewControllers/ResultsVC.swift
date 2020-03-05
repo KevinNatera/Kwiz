@@ -91,6 +91,7 @@ class ResultsVC: UIViewController {
         addTitleConstraints()
         addScoreConstraints()
         addRetryConstraints()
+        addHomeButtonConstraints()
     }
     private func addTitleConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +116,14 @@ class ResultsVC: UIViewController {
             retryButton.widthAnchor.constraint(equalToConstant: 200),
             retryButton.heightAnchor.constraint(equalToConstant: 50),
             retryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: 200)])
+    }
+    private func addHomeButtonConstraints() {
+        homeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            homeButton.topAnchor.constraint(equalTo: retryButton.bottomAnchor, constant: 50),
+            homeButton.widthAnchor.constraint(equalTo: retryButton.widthAnchor),
+            homeButton.heightAnchor.constraint(equalTo: retryButton.heightAnchor),
+            homeButton.centerXAnchor.constraint(equalTo: retryButton.centerXAnchor)])
     }
     
     //MARK: - Private Methods
