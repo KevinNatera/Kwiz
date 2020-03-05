@@ -16,7 +16,7 @@ class MultipleChoiceVC: UIViewController {
     //MARK: - UI Objects
     lazy var questionTextField: UILabel = {
         let tf = UILabel()
-        tf.font = UIFont(name: "Verdana-Bold", size: 22)
+        tf.font = UIFont(name: "AvenirNext-DemiBold", size: 30)
         tf.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         tf.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         tf.textAlignment = .center
@@ -36,8 +36,7 @@ class MultipleChoiceVC: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
-//        button.layer.shadowColor = UIColor.white.cgColor
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 0
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -50,7 +49,7 @@ class MultipleChoiceVC: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 1
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -63,7 +62,7 @@ class MultipleChoiceVC: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 2
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -76,7 +75,7 @@ class MultipleChoiceVC: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 3
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -112,7 +111,7 @@ class MultipleChoiceVC: UIViewController {
         super.viewDidLoad()
         addViews()
         addConstraints()
-        view.backgroundColor = #colorLiteral(red: 0.3904388547, green: 0.4836898446, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.4326986074, green: 0.5668497086, blue: 1, alpha: 1)
         addTargetsToButtons()
         
 
@@ -175,9 +174,9 @@ class MultipleChoiceVC: UIViewController {
     private func setUpQuestionTF(){
         questionTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            questionTextField.heightAnchor.constraint(equalToConstant: 100),
+            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            questionTextField.heightAnchor.constraint(equalToConstant: 150),
             questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
             
             questionTextField.bottomAnchor.constraint(equalTo: answerChoiceAButton.topAnchor, constant:
@@ -198,7 +197,7 @@ class MultipleChoiceVC: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
             stackView.leadingAnchor.constraint(equalTo: questionTextField.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: questionTextField.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 85)
+            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 65)
         ])
     }
     
