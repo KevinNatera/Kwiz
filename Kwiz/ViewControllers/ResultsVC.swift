@@ -14,7 +14,7 @@ class ResultsVC: UIViewController {
     
     //MARK: - Properties
     
-    lazy var confetti: AnimationView = {
+    lazy var winAnimation: AnimationView = {
         let view = AnimationView(name: "3427-ribbon")
         view.contentMode = .scaleToFill
         view.respectAnimationFrameRate = false
@@ -24,13 +24,14 @@ class ResultsVC: UIViewController {
         return view
     }()
     
-    lazy var fireWorks: AnimationView = {
-           let view = AnimationView(name: "3427-ribbon")
+    lazy var loseAnimation: AnimationView = {
+           let view = AnimationView(name: "9990-explosion")
            view.contentMode = .scaleToFill
            view.respectAnimationFrameRate = false
            view.animationSpeed = 1.0
-           view.frame = CGRect(x: self.view.center.x - 200, y: 50, width: 400, height: 900)
+           view.frame = CGRect(x: self.view.center.x - 200, y: 50, width: 400, height: 700)
            view.isUserInteractionEnabled = false
+        view.alpha = 0
            return view
        }()
 
@@ -80,6 +81,7 @@ class ResultsVC: UIViewController {
         addSubViews()
         startAnimation()
         setScore()
+        print("Lives left: \(Game.shared.getLives())")
     }
     
     
@@ -91,11 +93,20 @@ class ResultsVC: UIViewController {
         view.addSubview(scoreLabel)
         view.addSubview(retryButton)
         view.addSubview(homeButton)
-        view.addSubview(confetti)
+        view.addSubview(winAnimation)
+        view.addSubview(loseAnimation)
+        
     }
     
     private func startAnimation(){
-        confetti.play()
+        switch Game.shared.getLives() {
+        case .none:
+            loseAnimation.alpha = 1
+            loseAnimation.play()
+        default:
+            winAnimation.play()
+        }
+    
     }
     private func setScore() {
         scoreLabel.text = "\(Game.shared.getCurrentScore())!!!"

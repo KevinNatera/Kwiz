@@ -20,6 +20,7 @@
 		0B4FA97E23FC43D800DAD57A /* ResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */; };
 		0B4FA98023FC43EB00DAD57A /* Hearts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FA97F23FC43EB00DAD57A /* Hearts.swift */; };
 		0B6D3EA123FF330D005B80ED /* 3427-ribbon.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B6D3EA023FF330D005B80ED /* 3427-ribbon.json */; };
+		0B88E807240F08E60031D18A /* 9990-explosion.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B88E806240F08E60031D18A /* 9990-explosion.json */; };
 		1498EC0D8D6E0D7C5537CF62 /* Pods_Kwiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EA99F43E532CE5D175E389 /* Pods_Kwiz.framework */; };
 		4D06C0562409A1AB008587E5 /* SpecialQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D06C0552409A1AB008587E5 /* SpecialQuestions.swift */; };
 		4D48ADC92409A62D0037CA4A /* GetVCFromSpecialQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48ADC82409A62D0037CA4A /* GetVCFromSpecialQuestion.swift */; };
@@ -78,6 +79,7 @@
 		0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVC.swift; sourceTree = "<group>"; };
 		0B4FA97F23FC43EB00DAD57A /* Hearts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hearts.swift; sourceTree = "<group>"; };
 		0B6D3EA023FF330D005B80ED /* 3427-ribbon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "3427-ribbon.json"; sourceTree = "<group>"; };
+		0B88E806240F08E60031D18A /* 9990-explosion.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "9990-explosion.json"; sourceTree = "<group>"; };
 		1168795AAFA5CA84A25C7F9E /* Pods_KwizTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KwizTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A44C9DE223DF978C13B5AC5 /* Pods_Kwiz_KwizUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kwiz_KwizUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE6DC94F9C730C862438106 /* Pods-KwizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KwizTests.release.xcconfig"; path = "Target Support Files/Pods-KwizTests/Pods-KwizTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				0B45FF6723DF4E2200F3084D /* Info.plist */,
 				85F9A9A723F70A3700DDBEFD /* 6285nafas.json */,
 				0B6D3EA023FF330D005B80ED /* 3427-ribbon.json */,
+				0B88E806240F08E60031D18A /* 9990-explosion.json */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B88E807240F08E60031D18A /* 9990-explosion.json in Resources */,
 				0B6D3EA123FF330D005B80ED /* 3427-ribbon.json in Resources */,
 				85F9A9A823F70A3700DDBEFD /* 6285nafas.json in Resources */,
 				0B45FF6623DF4E2200F3084D /* LaunchScreen.storyboard in Resources */,
