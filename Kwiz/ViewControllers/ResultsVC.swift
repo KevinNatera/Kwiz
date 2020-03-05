@@ -75,16 +75,56 @@ class ResultsVC: UIViewController {
         return button
     }()
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.3806488216, green: 0.5188760161, blue: 0.915720582, alpha: 1)
         addSubViews()
+        addAllConstraints()
         startAnimation()
         setScore()
         print("Lives left: \(Game.shared.getLives())")
     }
     
-    
+    //MARK: - Contraints
+    private func addAllConstraints() {
+        addTitleConstraints()
+        addScoreConstraints()
+        addRetryConstraints()
+        addHomeButtonConstraints()
+    }
+    private func addTitleConstraints() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 60),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 7),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
+            titleLabel.heightAnchor.constraint(equalToConstant: 80)])
+    }
+    private func addScoreConstraints() {
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scoreLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            scoreLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            scoreLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            scoreLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor)])
+    }
+    private func addRetryConstraints() {
+        retryButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            retryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            retryButton.widthAnchor.constraint(equalToConstant: 200),
+            retryButton.heightAnchor.constraint(equalToConstant: 50),
+            retryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: 200)])
+    }
+    private func addHomeButtonConstraints() {
+        homeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            homeButton.topAnchor.constraint(equalTo: retryButton.bottomAnchor, constant: 50),
+            homeButton.widthAnchor.constraint(equalTo: retryButton.widthAnchor),
+            homeButton.heightAnchor.constraint(equalTo: retryButton.heightAnchor),
+            homeButton.centerXAnchor.constraint(equalTo: retryButton.centerXAnchor)])
+    }
     
     //MARK: - Private Methods
     
