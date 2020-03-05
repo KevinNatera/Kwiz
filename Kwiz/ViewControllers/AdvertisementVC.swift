@@ -43,7 +43,7 @@ class AdvertisementVC: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: UIImage.SymbolWeight.medium)
         button.setImage(UIImage.init(systemName: "x.circle", withConfiguration: config), for: .normal)
         button.tintColor = .black
-        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.8694844842, green: 0.8631995916, blue: 0.8742966056, alpha: 1)
         return button
     }()
     var infoButton: UIButton = {
@@ -51,7 +51,7 @@ class AdvertisementVC: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: UIImage.SymbolWeight.medium)
         button.setImage(UIImage.init(systemName: "info.circle", withConfiguration: config), for: .normal)
         button.tintColor = .black
-        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.8694844842, green: 0.8631995916, blue: 0.8742966056, alpha: 1)
         return button
     }()
     lazy var userLivesImageOne: UIImageView = {
