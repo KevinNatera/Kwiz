@@ -61,7 +61,7 @@ class LockVC: UIViewController {
     }()
     let handle: UIView = {
         let knob = UIView(frame: .zero)
-        knob.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        knob.backgroundColor = #colorLiteral(red: 0.4312569201, green: 0.3756824136, blue: 0.9097105861, alpha: 1)
         knob.layer.borderColor = UIColor.black.cgColor
         knob.layer.borderWidth = 10
         knob.layer.cornerRadius = 30
@@ -249,7 +249,7 @@ class LockVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //view.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.4312569201, green: 0.3756824136, blue: 0.9097105861, alpha: 1)
         setupConstraints()
         addGestures()
 
