@@ -75,16 +75,29 @@ class ResultsVC: UIViewController {
         return button
     }()
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.3806488216, green: 0.5188760161, blue: 0.915720582, alpha: 1)
         addSubViews()
+        addAllConstraints()
         startAnimation()
         setScore()
         print("Lives left: \(Game.shared.getLives())")
     }
     
-    
+    //MARK: - Contraints
+    private func addAllConstraints() {
+        addTitleConstraints()
+    }
+    private func addTitleConstraints() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 60),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 7),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
+            titleLabel.heightAnchor.constraint(equalToConstant: 80)])
+    }
     
     //MARK: - Private Methods
     
