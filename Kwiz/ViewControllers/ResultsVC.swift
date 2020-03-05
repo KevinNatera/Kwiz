@@ -89,6 +89,7 @@ class ResultsVC: UIViewController {
     //MARK: - Contraints
     private func addAllConstraints() {
         addTitleConstraints()
+        addScoreConstraints()
     }
     private func addTitleConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -97,6 +98,14 @@ class ResultsVC: UIViewController {
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 7),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
             titleLabel.heightAnchor.constraint(equalToConstant: 80)])
+    }
+    private func addScoreConstraints() {
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scoreLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15),
+            scoreLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            scoreLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            scoreLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor)])
     }
     
     //MARK: - Private Methods
