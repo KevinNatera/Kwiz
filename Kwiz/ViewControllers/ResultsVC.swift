@@ -115,7 +115,7 @@ class ResultsVC: UIViewController {
             retryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             retryButton.widthAnchor.constraint(equalToConstant: 200),
             retryButton.heightAnchor.constraint(equalToConstant: 50),
-            retryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: 200)])
+            retryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150)])
     }
     private func addHomeButtonConstraints() {
         homeButton.translatesAutoresizingMaskIntoConstraints = false
