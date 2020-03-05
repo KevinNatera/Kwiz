@@ -90,6 +90,7 @@ class ResultsVC: UIViewController {
     private func addAllConstraints() {
         addTitleConstraints()
         addScoreConstraints()
+        addRetryConstraints()
     }
     private func addTitleConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +107,14 @@ class ResultsVC: UIViewController {
             scoreLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             scoreLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
             scoreLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor)])
+    }
+    private func addRetryConstraints() {
+        retryButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            retryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            retryButton.widthAnchor.constraint(equalToConstant: 200),
+            retryButton.heightAnchor.constraint(equalToConstant: 50),
+            retryButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: 200)])
     }
     
     //MARK: - Private Methods
