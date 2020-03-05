@@ -22,7 +22,7 @@ class ScaleVC: UIViewController {
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
-        label.font = UIFont(name: "Verdana-Bold", size: 30)
+        label.font = UIFont(name: "AmericanTypewriter-CondensedBold", size: 45)
         return label
     }()
     var steel: UIImageView = {
@@ -228,10 +228,10 @@ class ScaleVC: UIViewController {
     private func setupLabelsInBoxes(text: String, superview: UIView, color: UIColor) {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         label.text = text
-        label.font = UIFont(name: "Verdana", size: 20)
+        label.font = UIFont(name: "AmericanTypewriter-Condensed", size: 20)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = .white
+        label.textColor = .black
         superview.addSubview(label)
         
         
@@ -377,7 +377,7 @@ class ScaleVC: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.541631639, green: 0.3382864892, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.7897956371, blue: 0.3367378712, alpha: 1)
         setConstraints()
         addGestures()
         //view.addSubview(backButton) //adding back button here momentarily
