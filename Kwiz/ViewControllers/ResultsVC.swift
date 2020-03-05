@@ -38,39 +38,55 @@ class ResultsVC: UIViewController {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: view.center.x - 200, y: 100, width: 400, height: 80)
-        label.backgroundColor = #colorLiteral(red: 0.7813532948, green: 0.9324833751, blue: 0.9999832511, alpha: 1)
+        label.backgroundColor = #colorLiteral(red: 0.4326986074, green: 0.5668497086, blue: 1, alpha: 1)
         label.text = "SCORE"
-        label.font = UIFont(name: "Verdana-Bold", size: 30)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 30)
         label.textAlignment = .center
+        label.textColor = .white
+        label.layer.cornerRadius = 20
+        label.layer.borderColor = UIColor.white.cgColor
+        label.layer.borderWidth = 2
+        label.clipsToBounds = true
         return label
     }()
     
     lazy var scoreLabel: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: view.center.x - 200, y: 200, width: 400, height: 80)
-        label.backgroundColor = #colorLiteral(red: 0.7813532948, green: 0.9324833751, blue: 0.9999832511, alpha: 1)
+        label.backgroundColor = #colorLiteral(red: 0.4326986074, green: 0.5668497086, blue: 1, alpha: 1)
         label.text = "> 9000!!!"
-        label.font = UIFont(name: "Verdana-Bold", size: 50)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 50)
         label.textAlignment = .center
+        label.textColor = .white
+        label.layer.cornerRadius = 20
+        label.layer.borderColor = UIColor.white.cgColor
+        label.layer.borderWidth = 2
+        label.clipsToBounds = true
         return label
     }()
     
     lazy var retryButton: UIButton = {
         let button = UIButton()
-        button.frame = CGRect(x: view.center.x - 100, y: 650, width: 200, height: 50)
+        button.frame = CGRect(x: view.center.x - 100, y: 650, width: 200, height: 100)
         button.setTitle("Retry", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 20)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
         button.backgroundColor = #colorLiteral(red: 0.4573904276, green: 0.8313733935, blue: 0.2300189435, alpha: 1)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
         button.addTarget(self, action: #selector(retryButtonPressed), for: .touchUpInside)
         return button
     }()
     
     lazy var homeButton: UIButton = {
         let button = UIButton()
-        button.frame = CGRect(x: view.center.x - 100, y: 750, width: 200, height: 50)
+        button.frame = CGRect(x: view.center.x - 100, y: 750, width: 200, height: 100)
         button.setTitle("Home", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 20)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
         button.backgroundColor = #colorLiteral(red: 0.9645542502, green: 0.1859400272, blue: 0.1500017643, alpha: 1)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
         button.addTarget(self, action: #selector(homeButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -78,7 +94,7 @@ class ResultsVC: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.3806488216, green: 0.5188760161, blue: 0.915720582, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         addSubViews()
         addAllConstraints()
         startAnimation()
@@ -97,8 +113,8 @@ class ResultsVC: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 60),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 7),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -7),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             titleLabel.heightAnchor.constraint(equalToConstant: 80)])
     }
     private func addScoreConstraints() {
@@ -114,7 +130,7 @@ class ResultsVC: UIViewController {
         NSLayoutConstraint.activate([
             retryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             retryButton.widthAnchor.constraint(equalToConstant: 200),
-            retryButton.heightAnchor.constraint(equalToConstant: 50),
+            retryButton.heightAnchor.constraint(equalToConstant: 75),
             retryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150)])
     }
     private func addHomeButtonConstraints() {
