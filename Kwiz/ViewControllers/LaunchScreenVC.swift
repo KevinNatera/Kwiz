@@ -94,17 +94,12 @@ class LaunchScreenVC: UIViewController {
     }
     
     func lottieViewConstraint(){
-        lottieView.translatesAutoresizingMaskIntoConstraints = false
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        logoK.translatesAutoresizingMaskIntoConstraints = false
-        logoW.translatesAutoresizingMaskIntoConstraints = false
-        logoI.translatesAutoresizingMaskIntoConstraints = false
-        logoZ.translatesAutoresizingMaskIntoConstraints = false
-        
-        //        view.addSubview(logo)
-        //        view.addSubview(lottieView)
-        view.insertSubview(logo, at: 1)
+        let items: [UIView] = [lottieView, logo, logoK, logoW, logoI, logoZ]
+        items.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
+        items.forEach({view.addSubview($0)})
+
         view.insertSubview(lottieView, at: 0)
+        view.insertSubview(logo, at: 1)
         view.insertSubview(logoK, at: 2)
         view.insertSubview(logoW, at: 3)
         view.insertSubview(logoI, at: 4)
