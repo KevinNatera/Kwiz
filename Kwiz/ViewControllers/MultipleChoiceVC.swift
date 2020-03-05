@@ -22,6 +22,8 @@ class MultipleChoiceVC: UIViewController {
         tf.textAlignment = .center
         tf.numberOfLines = 0
         tf.layer.cornerRadius = 10
+        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderWidth = 2
         tf.clipsToBounds = true
         tf.adjustsFontSizeToFitWidth = true
         return tf
@@ -32,6 +34,9 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+//        button.layer.shadowColor = UIColor.white.cgColor
         button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 0
         button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -43,6 +48,8 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
         button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 1
         button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -54,6 +61,8 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
         button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 2
         button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -65,6 +74,8 @@ class MultipleChoiceVC: UIViewController {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
         button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
         button.tag = 3
         button.titleLabel?.adjustsFontSizeToFitWidth = true
