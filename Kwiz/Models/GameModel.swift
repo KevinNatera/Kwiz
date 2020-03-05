@@ -197,6 +197,7 @@ class Game {
     func start() {
         print("start/restart")
         lives = .three
+        nextType = .firstMC
         score = 0
         questions = Game.getQuestions()
         user?.startGame()
@@ -259,7 +260,8 @@ class Game {
     /// global game score
     /// - Returns: users score(Int)
     func getCurrentScore()-> Int {
-        return user?.highestScore ?? 0
+        //return user?.highestScore ?? 0
+        return score
         //Show user score, current score
     }
     
@@ -270,7 +272,7 @@ class Game {
     }
     func checkFinishAchievement(){
         let totalQValue = (Game.getQuestions().count * 5) + (allSpecialQuestions.count * 10)
-        if(user!.highestScore >= totalQValue) {
+        if(score >= totalQValue) {
             let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
             achieved.percentComplete = 100
             achieved.showsCompletionBanner = true
