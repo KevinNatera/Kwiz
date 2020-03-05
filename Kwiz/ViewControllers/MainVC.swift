@@ -53,10 +53,11 @@ class MainVC: UIViewController {
         view.addSubview(kwizImage)
         kwizImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            kwizImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            kwizImage.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant:  -100),
-            kwizImage.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: 100),
-            kwizImage.heightAnchor.constraint(equalToConstant: 200)])
+            kwizImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+//            kwizImage.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant:  -80),
+//            kwizImage.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: 80),
+            kwizImage.widthAnchor.constraint(equalToConstant: 425),
+            kwizImage.heightAnchor.constraint(equalToConstant: 300)])
         
     }
     
@@ -65,7 +66,9 @@ class MainVC: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 30)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 30)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
         button.contentEdgeInsets = UIEdgeInsets(top: 20, left: 40, bottom: 20, right: 40)
         
         button.frame = CGRect(x: 0, y: 0, width: view.frame.size.width * 4 / 5, height: view.frame.size.height / 8)
@@ -120,7 +123,7 @@ class MainVC: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.3904388547, green: 0.4836898446, blue: 1, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.4326986074, green: 0.5668497086, blue: 1, alpha: 1)
         setupButtons()
         setupStackViewWithButtons()
         setupImageConstraints()
