@@ -10,12 +10,13 @@ import UIKit
 import Lottie
 
 class LaunchScreenVC: UIViewController {
-    
+
     lazy var lottieView: AnimationView = {
         let view = AnimationView(name: "6285nafas")
         view.contentMode = .scaleToFill
         view.respectAnimationFrameRate = false
         view.animationSpeed = 1.5
+        view.layer.zPosition = 0
         
         return view
     }()
@@ -23,6 +24,7 @@ class LaunchScreenVC: UIViewController {
     lazy var logo: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "logoclear")
+        view.layer.zPosition = 1
         
         return view
     }()
@@ -31,6 +33,7 @@ class LaunchScreenVC: UIViewController {
         let view = UIImageView()
         view.image = UIImage(named: "logoK")
         view.isHidden = false
+        view.layer.zPosition = 1
         
         return view
     }()
@@ -39,6 +42,7 @@ class LaunchScreenVC: UIViewController {
         let view = UIImageView()
         view.image = UIImage(named: "logoW")
         view.isHidden = false
+        view.layer.zPosition = 1
         
         return view
     }()
@@ -47,6 +51,7 @@ class LaunchScreenVC: UIViewController {
         let view = UIImageView()
         view.image = UIImage(named: "logoI")
         view.isHidden = false
+        view.layer.zPosition = 1
         
         return view
     }()
@@ -55,7 +60,7 @@ class LaunchScreenVC: UIViewController {
         let view = UIImageView()
         view.image = UIImage(named: "logoZ")
         view.isHidden = false
-        
+        view.layer.zPosition = 1
         return view
     }()
     
@@ -89,21 +94,19 @@ class LaunchScreenVC: UIViewController {
             self.present(vc, animated: true, completion: nil)
             
         }
-        
-        
     }
     
     func lottieViewConstraint(){
         let items: [UIView] = [lottieView, logo, logoK, logoW, logoI, logoZ]
         items.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
-        items.forEach({view.addSubview($0)})
-
+//        items.forEach({view.addSubview($0)})
+        
         view.insertSubview(lottieView, at: 0)
         view.insertSubview(logo, at: 1)
-        view.insertSubview(logoK, at: 2)
-        view.insertSubview(logoW, at: 3)
-        view.insertSubview(logoI, at: 4)
-        view.insertSubview(logoZ, at: 5)
+        view.insertSubview(logoK, at: 1)
+        view.insertSubview(logoW, at: 1)
+        view.insertSubview(logoI, at: 1)
+        view.insertSubview(logoZ, at: 1)
         
         NSLayoutConstraint.activate([
             
@@ -113,8 +116,7 @@ class LaunchScreenVC: UIViewController {
             lottieView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            logo.heightAnchor.constraint(equalToConstant: 200),
+            logo.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
             logo.widthAnchor.constraint(equalToConstant: 200),
             
             logoK.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10),
@@ -137,7 +139,4 @@ class LaunchScreenVC: UIViewController {
             
         ])
     }
-    
-    
-    
 }
