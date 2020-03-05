@@ -17,22 +17,33 @@ class TickleQuestionVC: UIViewController {
     
     lazy var question: UILabel = {
         let label = UILabel()
-        label.frame = CGRect(x: view.center.x - 200, y: 100, width: 400, height: 50)
-        label.backgroundColor = .red
+        label.frame = CGRect(x: view.center.x - 200, y: 150, width: 400, height: 150)
+        label.backgroundColor = #colorLiteral(red: 0.6741243005, green: 0.8899512887, blue: 1, alpha: 1)
         label.text = "How many tickles does it take to make a squid laugh?"
         label.textColor = .black
         label.font = label.font.withSize(20)
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 20
+        label.font = UIFont(name: "HoeflerText-Black", size: 35)!
+        label.layer.borderColor = UIColor.white.cgColor
+        label.layer.borderWidth = 2
         label.textAlignment = .center
         label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     lazy var wrongAnswer1: UIButton = {
         let button = UIButton()
         button.setTitle("Like three", for: .normal)
-        button.frame = CGRect(x: view.center.x - 150, y: 250, width: 300, height: 50)
-        button.backgroundColor = .red
+        button.frame = CGRect(x: view.center.x - 150, y: 355, width: 300, height: 70)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.backgroundColor = #colorLiteral(red: 0.6741243005, green: 0.8899512887, blue: 1, alpha: 1)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "HoeflerText-Regular", size: 30)!
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
@@ -40,9 +51,14 @@ class TickleQuestionVC: UIViewController {
     lazy var wrongAnswer2: UIButton = {
         let button = UIButton()
         button.setTitle("The Right Answer", for: .normal)
-        button.frame = CGRect(x: view.center.x - 150, y: 350, width: 300, height: 50)
-        button.backgroundColor = .red
+        button.frame = CGRect(x: view.center.x - 150, y: 455, width: 300, height: 70)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.backgroundColor = #colorLiteral(red: 0.6741243005, green: 0.8899512887, blue: 1, alpha: 1)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "HoeflerText-Regular", size: 30)!
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
@@ -50,9 +66,14 @@ class TickleQuestionVC: UIViewController {
     lazy var wrongAnswer3: UIButton = {
         let button = UIButton()
         button.setTitle("Witty Spongebob Reference", for: .normal)
-        button.frame = CGRect(x: view.center.x - 150, y: 450, width: 300, height: 50)
-        button.backgroundColor = .red
+        button.frame = CGRect(x: view.center.x - 150, y: 555, width: 300, height: 70)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.backgroundColor = #colorLiteral(red: 0.6741243005, green: 0.8899512887, blue: 1, alpha: 1)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "HoeflerText-Regular", size: 30)!
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
@@ -60,9 +81,14 @@ class TickleQuestionVC: UIViewController {
     lazy var correctAnswer: UIButton = {
         let button = UIButton()
         button.setTitle(">:(", for: .normal)
-        button.frame = CGRect(x: view.center.x - 150, y: 550, width: 300, height: 50)
-        button.backgroundColor = .red
+        button.frame = CGRect(x: view.center.x - 150, y: 655, width: 300, height: 70)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.backgroundColor = #colorLiteral(red: 0.6741243005, green: 0.8899512887, blue: 1, alpha: 1)
         button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "HoeflerText-Regular", size: 30)!
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.addTarget(self, action: #selector(wrongAnswerPressed), for: .touchUpInside)
         return  button
     }()
@@ -147,7 +173,7 @@ class TickleQuestionVC: UIViewController {
     
     private func addSubViews() {
         self.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(swipeHandler(gestureRecognizer:))))
-        view.backgroundColor = .purple
+        view.backgroundColor = #colorLiteral(red: 0.3411764706, green: 0.7215686275, blue: 1, alpha: 1)
         view.addSubview(question)
         view.addSubview(wrongAnswer1)
         view.addSubview(wrongAnswer2)

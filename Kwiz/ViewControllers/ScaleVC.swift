@@ -19,23 +19,25 @@ class ScaleVC: UIViewController {
         let label = UILabel()
         label.text = "Balance the scale"
         label.textAlignment = .center
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
-        label.font = UIFont(name: "Times New Roman", size: 40)
+        label.font = UIFont(name: "AmericanTypewriter-CondensedBold", size: 45)
         return label
     }()
     var steel: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
-        image.backgroundColor = .gray
+        image.backgroundColor = #colorLiteral(red: 0.6950650215, green: 0.689879775, blue: 0.6986576915, alpha: 1)
         return image
     }()
     var feather: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
-        image.backgroundColor = #colorLiteral(red: 1, green: 0.8688890338, blue: 0.8717179298, alpha: 1)
+        image.backgroundColor = #colorLiteral(red: 0.8061974645, green: 0.9113429189, blue: 0.992636025, alpha: 1)
         return image
     }()
     var mysteryBox: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
-        image.backgroundColor = .brown
+        image.backgroundColor = #colorLiteral(red: 0.7217288613, green: 0.548459053, blue: 0.4073687196, alpha: 1)
         return image
     }()
     var inputBox: UIImageView = {
@@ -94,9 +96,9 @@ class ScaleVC: UIViewController {
         constrainFeather()
         constrainReset()
         setUpLivesStackView()
-        setupLabelsInBoxes(text: "?", superview: mysteryBox, color: .white)
+        setupLabelsInBoxes(text: "?", superview: mysteryBox, color: .black)
         setupLabelsInBoxes(text: "Feathers", superview: feather, color: .black)
-        setupLabelsInBoxes(text: "Steel", superview: steel, color: .white)
+        setupLabelsInBoxes(text: "Steel", superview: steel, color: .black)
         
         makeTriangle()
         
@@ -119,6 +121,8 @@ class ScaleVC: UIViewController {
         promptLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             promptLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+            promptLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            promptLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             promptLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
     private func constrainSteel() {
@@ -224,10 +228,10 @@ class ScaleVC: UIViewController {
     private func setupLabelsInBoxes(text: String, superview: UIView, color: UIColor) {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         label.text = text
-        label.font = UIFont(name: "System", size: 20)
+        label.font = UIFont(name: "AmericanTypewriter-Condensed", size: 20)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = .white
+        label.textColor = .black
         superview.addSubview(label)
         
         
@@ -373,7 +377,7 @@ class ScaleVC: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.7897956371, blue: 0.3367378712, alpha: 1)
         setConstraints()
         addGestures()
         //view.addSubview(backButton) //adding back button here momentarily

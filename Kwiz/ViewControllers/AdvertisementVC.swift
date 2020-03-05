@@ -12,9 +12,9 @@ class AdvertisementVC: UIViewController {
     //MARK: - Objects
     var adLabel: UILabel = {
         let label = UILabel()
-        label.text = "You exercised your mind for a while now,\n\nHow about exercising your body?"
+        label.text = "You exercised your mind for a while now ...\n\nHow about exercising your body?"
         label.numberOfLines = 5
-        label.font = UIFont(name: "Avenir-BlackOblique", size: 25)
+        label.font = UIFont(name: "Verdana-Bold", size: 25)
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         return label
@@ -31,7 +31,7 @@ class AdvertisementVC: UIViewController {
         let button = UIButton()
         button.setTitle("Download Today!", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Arial-BoldMT", size: 20)
+        button.titleLabel?.font = UIFont(name: "Verdana-Bold", size: 20)
         button.layer.borderColor = UIColor.orange.cgColor
         button.layer.borderWidth = 10
         button.backgroundColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
@@ -43,7 +43,7 @@ class AdvertisementVC: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: UIImage.SymbolWeight.medium)
         button.setImage(UIImage.init(systemName: "x.circle", withConfiguration: config), for: .normal)
         button.tintColor = .black
-        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.8694844842, green: 0.8631995916, blue: 0.8742966056, alpha: 1)
         return button
     }()
     var infoButton: UIButton = {
@@ -51,7 +51,7 @@ class AdvertisementVC: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: UIImage.SymbolWeight.medium)
         button.setImage(UIImage.init(systemName: "info.circle", withConfiguration: config), for: .normal)
         button.tintColor = .black
-        button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.8694844842, green: 0.8631995916, blue: 0.8742966056, alpha: 1)
         return button
     }()
     lazy var userLivesImageOne: UIImageView = {
@@ -104,7 +104,7 @@ class AdvertisementVC: UIViewController {
             groupOneLabel.topAnchor.constraint(equalTo: adLabel.bottomAnchor, constant: 20),
             groupOneLabel.leadingAnchor.constraint(equalTo: adLabel.leadingAnchor),
             groupOneLabel.trailingAnchor.constraint(equalTo: adLabel.trailingAnchor),
-            groupOneLabel.heightAnchor.constraint(equalToConstant: 280)])
+            groupOneLabel.heightAnchor.constraint(equalToConstant: 350)])
     }
     private func constrainDownloadButton() {
         view.addSubview(downloadButton)
@@ -180,7 +180,7 @@ class AdvertisementVC: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.7633551359, blue: 0.2501748204, alpha: 1)
         setupConstraints()
         //animateDownloadButton()
 
