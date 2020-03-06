@@ -174,14 +174,19 @@ class MultipleChoiceVC: UIViewController {
     private func setUpQuestionTF(){
         questionTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            questionTextField.heightAnchor.constraint(equalToConstant: 150),
-            questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+//            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+//            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            questionTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            questionTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+            questionTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
             
-            questionTextField.bottomAnchor.constraint(equalTo: answerChoiceAButton.topAnchor, constant:
-                50),
+            //questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+            
+            //questionTextField.bottomAnchor.constraint(equalTo: answerChoiceAButton.topAnchor, constant:
+               // 50),
+            
         ])
+        //view.frame.height / 2
         
     }
     
