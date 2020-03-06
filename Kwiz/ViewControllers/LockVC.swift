@@ -67,7 +67,7 @@ class LockVC: UIViewController {
         knob.layer.cornerRadius = 30
         return knob
     }()
-    let heartStack = HeartsStackView()
+    let heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
     var segueFuncAlreadyRan = false
     //MARK: Gestures
@@ -190,8 +190,6 @@ class LockVC: UIViewController {
         }
         
         let angle = point.x == 0 ? .pi/2 : atan(Double(point.y / point.x))
-        //print(touch)
-        //print(angle)
         handle.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
     }
     private func segue(funcAlreadyCalled: Bool) {
