@@ -21,7 +21,7 @@ class AdvertisementVC: UIViewController {
     }()
     var groupOneLabel: UILabel = {
         let label = UILabel()
-        label.text = "💪Get rock hard muscles with FitBuddy!!\n\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
+        label.text = "💪Get rock hard muscles with Ab-tive!!\n\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
         label.textAlignment = .center
         label.numberOfLines = 15
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 25)
@@ -75,9 +75,13 @@ class AdvertisementVC: UIViewController {
     }()
     var stackView = UIStackView()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
-    
-    //MARK: - Properties
-    var center = CGPoint.zero
+    var imageLogo: UIImageView = {
+        let logo = UIImageView()
+        logo.contentMode = .scaleAspectFit
+        logo.image = UIImage(named: "AbtiveLogo")
+        return logo
+    }()
+
     
     //MARK: - Setup/ Constraints
     private func setupConstraints() {
@@ -87,6 +91,7 @@ class AdvertisementVC: UIViewController {
         constrainCloseButton()
         setUpLivesStackView()
         constrainInfoButton()
+        constrainImage()
     }
     private func constrainAdLabel() {
         view.addSubview(adLabel)
@@ -152,6 +157,15 @@ class AdvertisementVC: UIViewController {
         view.layoutIfNeeded()
         infoButton.layer.cornerRadius = infoButton.frame.height / 2
     }
+    private func constrainImage() {
+        view.addSubview(imageLogo)
+        imageLogo.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageLogo.bottomAnchor.constraint(equalTo: downloadButton.topAnchor, constant: -8),
+            imageLogo.centerXAnchor.constraint(equalTo: downloadButton.centerXAnchor),
+            imageLogo.widthAnchor.constraint(equalTo: downloadButton.widthAnchor, multiplier: 1.5),
+            imageLogo.heightAnchor.constraint(equalTo: downloadButton.heightAnchor, multiplier: 0.9)])
+    }
     
     //MARK: - Functions
     private func animateDownloadButton() {
@@ -162,7 +176,6 @@ class AdvertisementVC: UIViewController {
     }
     private func showLives() {
         heartStack.isHidden = false
-        center = heartStack.center
     }
     private func segueToNextVC() {
         Game.shared.increaseScoreForSpecialQuestions()
