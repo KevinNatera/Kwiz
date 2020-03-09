@@ -164,17 +164,45 @@ class AdvertisementVC: UIViewController {
         heartStack.isHidden = false
         center = heartStack.center
     }
-    //MARK: Objc Functions
-    @objc private func loselife() {
-        showLives()
-        Game.shared.reduceLives()
-        heartStack.loseLife(remaining: Game.shared.getLives())
-    }
-    @objc private func downloadButtonPressed() {
+    private func segueToNextVC() {
         Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
+    }
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
+        
+        switch userResult {
+        case .correct:
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained 5 points!", preferredStyle: .alert)
+            viewController.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.segueToNextVC()
+                    })
+            }
+            
+            
+        case .wrong:
+            let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.showLives()
+                    Game.shared.reduceLives()
+                    self?.heartStack.loseLife(remaining: Game.shared.getLives())})
+            }
+            viewController.present(alert, animated: true)
+        }
+    }
+    
+    //MARK: - Objc Functions
+    @objc private func loselife() {
+        answerResult(userResult: .wrong, viewController: self)
+    }
+    @objc private func downloadButtonPressed() {
+        answerResult(userResult: .correct, viewController: self)
     }
 
     //MARK: - LifeCycle

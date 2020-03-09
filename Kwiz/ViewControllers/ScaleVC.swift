@@ -289,8 +289,8 @@ class ScaleVC: UIViewController {
             let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained 5 points!", preferredStyle: .alert)
             viewController.present(alert, animated: true)
             let when = DispatchTime.now() + 1
-            DispatchQueue.main.asyncAfter(deadline: when) { [weak self] in
-                alert.dismiss(animated: true, completion: {
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                alert.dismiss(animated: true, completion: { [weak self] in
                     Game.shared.updatesGameCenter()
                     self?.pickedCorrectAnswer()})
             }
