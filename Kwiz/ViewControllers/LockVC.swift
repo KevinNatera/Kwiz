@@ -209,7 +209,7 @@ class LockVC: UIViewController {
         
         switch userResult {
         case .correct:
-            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained 5 points!", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained \(Game.shared.getCurrentSpecialQuestion()?.points ?? 5) points!", preferredStyle: .alert)
             viewController.present(alert, animated: true)
             let when = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: when) {
