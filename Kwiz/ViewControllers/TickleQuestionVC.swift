@@ -14,6 +14,7 @@ class TickleQuestionVC: UIViewController {
     
     var lives = 3
     var tickles = 1.01
+    var correctlyAnswered = false
     
     lazy var question: UILabel = {
         let label = UILabel()
@@ -146,18 +147,20 @@ class TickleQuestionVC: UIViewController {
             
             
             if tickles < 10.0 {
-                
+                if !correctlyAnswered {
                 correctAnswer.setTitle(String(Int(tickles)), for: .normal)
+                }
                 
                 //animation logic
                 
                 print(tickles)
             } else {
-                
+                tickles = 0
+                correctlyAnswered = true
                 correctAnswer.setTitle("TEN-TICKLES!!! :D", for: .normal)
                 correctAnswer.backgroundColor = .green
                 //Trigger segue into next question after a delay
-                tickles = 0
+                
                 answerResult(userResult: .correct, viewController: self)
             }
             
