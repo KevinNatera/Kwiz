@@ -14,6 +14,7 @@ class TickleQuestionVC: UIViewController {
     
     var lives = 3
     var tickles = 1.01
+    var correctlyAnswered = false
     
     lazy var question: UILabel = {
         let label = UILabel()
@@ -109,8 +110,7 @@ class TickleQuestionVC: UIViewController {
     //MARK: - Objc Funcs
     
     @objc func wrongAnswerPressed(sender: UIButton) {
-        Game.shared.reduceLives()
-        heartStack.loseLife(remaining: Game.shared.getLives())
+        answerResult(userResult: .wrong, viewController: self)
     }
     
     
@@ -147,23 +147,21 @@ class TickleQuestionVC: UIViewController {
             
             
             if tickles < 10.0 {
-                
+                if !correctlyAnswered {
                 correctAnswer.setTitle(String(Int(tickles)), for: .normal)
+                }
                 
                 //animation logic
                 
                 print(tickles)
             } else {
-                
+                tickles = 0
+                correctlyAnswered = true
                 correctAnswer.setTitle("TEN-TICKLES!!! :D", for: .normal)
                 correctAnswer.backgroundColor = .green
                 //Trigger segue into next question after a delay
-                tickles = 0
-                Game.shared.increaseScoreForSpecialQuestions()
-                Game.shared.switchAndGetNextTypeOfQuestion()
-                let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
-                navigationController?.pushViewController(vc, animated: true)
                 
+                answerResult(userResult: .correct, viewController: self)
             }
             
         }
@@ -231,6 +229,40 @@ class TickleQuestionVC: UIViewController {
             print("default")
         }
     }
+    
+    private func segueToNextVC() {
+        Game.shared.increaseScoreForSpecialQuestions()
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
+        
+        switch userResult {
+        case .correct:
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained 5 points!", preferredStyle: .alert)
+            viewController.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) { [weak self] in
+                alert.dismiss(animated: true, completion: {
+                    Game.shared.updatesGameCenter()
+                    self?.segueToNextVC()})
+            }
+            
+            
+        case .wrong:
+            let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    Game.shared.reduceLives()
+                    self?.heartStack.loseLife(remaining: Game.shared.getLives())})
+            }
+            viewController.present(alert, animated: true)
+        }
+    }
+    
 }
 
 

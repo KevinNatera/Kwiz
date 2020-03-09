@@ -99,6 +99,7 @@ class MainVC: UIViewController {
         let navigationController = UINavigationController(rootViewController: multipleChoice)
         navigationController.navigationBar.isTranslucent = false
         navigationController.navigationBar.isHidden = true
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
         Game.shared.start()
         Game.shared.setUser(user: User(highestScore: 0, nickname: "Bob"))
         Game.shared.getNewCurrentQuestion()
