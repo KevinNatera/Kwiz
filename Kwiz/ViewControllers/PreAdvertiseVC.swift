@@ -29,6 +29,7 @@ class PreAdvertiseVC: MultipleChoiceVC {
     private func setUpQuestionTF(){
             questionTextField.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
+                questionTextField.topAnchor.constraint(equalTo: heartStack.bottomAnchor, constant: 10),
                 questionTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 questionTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
                 questionTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
@@ -44,20 +45,22 @@ class PreAdvertiseVC: MultipleChoiceVC {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
-            stackView.leadingAnchor.constraint(equalTo: questionTextField.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: questionTextField.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 65)
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            stackView.leadingAnchor.constraint(equalTo: questionTextField.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: questionTextField.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 50),
+            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85)
         ])
     }
     private func setUpLivesStackView(){
         
         heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            heartStack.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
-            heartStack.heightAnchor.constraint(equalToConstant: 60),
-            heartStack.widthAnchor.constraint(equalToConstant: 150)
+            heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            heartStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
+            heartStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
 
         ])
     }
