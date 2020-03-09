@@ -21,7 +21,7 @@ class AdvertisementVC: UIViewController {
     }()
     var groupOneLabel: UILabel = {
         let label = UILabel()
-        label.text = "💪Get rock hard muscles with Ab-tive!!\n\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
+        label.text = "💪Get rock hard muscles with Ab-tive!!\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
         label.textAlignment = .center
         label.numberOfLines = 15
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 25)
@@ -101,16 +101,16 @@ class AdvertisementVC: UIViewController {
             adLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             adLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
             adLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25),
-            adLabel.heightAnchor.constraint(equalToConstant: 200)])
+            adLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)])
     }
     private func constrainGroupOneLabel() {
         view.addSubview(groupOneLabel)
         groupOneLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            groupOneLabel.topAnchor.constraint(equalTo: adLabel.bottomAnchor, constant: 20),
+            groupOneLabel.topAnchor.constraint(equalTo: adLabel.bottomAnchor, constant: 10),
             groupOneLabel.leadingAnchor.constraint(equalTo: adLabel.leadingAnchor),
             groupOneLabel.trailingAnchor.constraint(equalTo: adLabel.trailingAnchor),
-            groupOneLabel.heightAnchor.constraint(equalToConstant: 350)])
+            groupOneLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3)])
     }
     private func constrainDownloadButton() {
         view.addSubview(downloadButton)
@@ -121,7 +121,7 @@ class AdvertisementVC: UIViewController {
             downloadButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             downloadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             downloadButton.widthAnchor.constraint(equalToConstant: 220),
-            downloadButton.heightAnchor.constraint(equalToConstant: 100)])
+            downloadButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.08)])
     }
     private func constrainCloseButton() {
         view.addSubview(closeButton)
@@ -159,13 +159,18 @@ class AdvertisementVC: UIViewController {
         infoButton.layer.cornerRadius = infoButton.frame.height / 2
     }
     private func constrainImage() {
+        view.layoutIfNeeded()
+        let distance = (groupOneLabel.frame.maxY - downloadButton.frame.minY) / 2
+        
+        
         view.addSubview(imageLogo)
         imageLogo.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageLogo.bottomAnchor.constraint(equalTo: downloadButton.topAnchor, constant: -8),
             imageLogo.centerXAnchor.constraint(equalTo: downloadButton.centerXAnchor),
+            imageLogo.centerYAnchor.constraint(equalTo: view.topAnchor, constant: distance),
             imageLogo.widthAnchor.constraint(equalTo: downloadButton.widthAnchor, multiplier: 1.5),
-            imageLogo.heightAnchor.constraint(equalTo: downloadButton.heightAnchor, multiplier: 0.9)])
+            imageLogo.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)])
     }
     
     //MARK: - Functions
