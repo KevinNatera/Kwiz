@@ -21,7 +21,7 @@ class AdvertisementVC: UIViewController {
     }()
     var groupOneLabel: UILabel = {
         let label = UILabel()
-        label.text = "💪Get rock hard muscles with FitBuddy!!\n\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
+        label.text = "💪Get rock hard muscles with Ab-tive!!\n\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
         label.textAlignment = .center
         label.numberOfLines = 15
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 25)
@@ -75,9 +75,14 @@ class AdvertisementVC: UIViewController {
     }()
     var stackView = UIStackView()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
-    
-    //MARK: - Properties
-    var center = CGPoint.zero
+    var imageLogo: UIImageView = {
+        let logo = UIImageView()
+        logo.contentMode = .scaleAspectFit
+        logo.image = UIImage(named: "AbtiveLogo")
+        return logo
+    }()
+    var adDelegate: Advertisable?
+
     
     //MARK: - Setup/ Constraints
     private func setupConstraints() {
@@ -87,6 +92,7 @@ class AdvertisementVC: UIViewController {
         constrainCloseButton()
         setUpLivesStackView()
         constrainInfoButton()
+        constrainImage()
     }
     private func constrainAdLabel() {
         view.addSubview(adLabel)
@@ -152,6 +158,15 @@ class AdvertisementVC: UIViewController {
         view.layoutIfNeeded()
         infoButton.layer.cornerRadius = infoButton.frame.height / 2
     }
+    private func constrainImage() {
+        view.addSubview(imageLogo)
+        imageLogo.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            imageLogo.bottomAnchor.constraint(equalTo: downloadButton.topAnchor, constant: -8),
+            imageLogo.centerXAnchor.constraint(equalTo: downloadButton.centerXAnchor),
+            imageLogo.widthAnchor.constraint(equalTo: downloadButton.widthAnchor, multiplier: 1.5),
+            imageLogo.heightAnchor.constraint(equalTo: downloadButton.heightAnchor, multiplier: 0.9)])
+    }
     
     //MARK: - Functions
     private func animateDownloadButton() {
@@ -162,19 +177,48 @@ class AdvertisementVC: UIViewController {
     }
     private func showLives() {
         heartStack.isHidden = false
-        center = heartStack.center
     }
-    //MARK: Objc Functions
-    @objc private func loselife() {
-        showLives()
-        Game.shared.reduceLives()
-        heartStack.loseLife(remaining: Game.shared.getLives())
-    }
-    @objc private func downloadButtonPressed() {
+    private func segueToNextVC() {
         Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
+    }
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
+        
+        switch userResult {
+        case .correct:
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained \(Game.shared.getCurrentSpecialQuestion()?.points ?? 5) points!", preferredStyle: .alert)
+            viewController.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.dismiss(animated: true, completion: { [weak self] in
+                        self?.adDelegate?.segue()
+                    })
+                })
+            }
+            
+            
+        case .wrong:
+            let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.showLives()
+                    Game.shared.reduceLives()
+                    self?.heartStack.loseLife(remaining: Game.shared.getLives())})
+            }
+            viewController.present(alert, animated: true)
+        }
+    }
+    
+    //MARK: - Objc Functions
+    @objc private func loselife() {
+        answerResult(userResult: .wrong, viewController: self)
+    }
+    @objc private func downloadButtonPressed() {
+        answerResult(userResult: .correct, viewController: self)
     }
 
     //MARK: - LifeCycle

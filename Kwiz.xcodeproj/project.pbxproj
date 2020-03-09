@@ -24,6 +24,7 @@
 		1498EC0D8D6E0D7C5537CF62 /* Pods_Kwiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EA99F43E532CE5D175E389 /* Pods_Kwiz.framework */; };
 		4D06C0562409A1AB008587E5 /* SpecialQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D06C0552409A1AB008587E5 /* SpecialQuestions.swift */; };
 		4D48ADC92409A62D0037CA4A /* GetVCFromSpecialQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48ADC82409A62D0037CA4A /* GetVCFromSpecialQuestion.swift */; };
+		4D48ADF42416C5610037CA4A /* PreAdvertiseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48ADF32416C5610037CA4A /* PreAdvertiseVC.swift */; };
 		850FB83D23E386E2003EFC2B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850FB83C23E386E2003EFC2B /* GameKit.framework */; };
 		850FB84023E3910C003EFC2B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83E23E3910B003EFC2B /* MainVC.swift */; };
 		850FB84123E3910C003EFC2B /* TickleQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */; };
@@ -85,6 +86,7 @@
 		3AE6DC94F9C730C862438106 /* Pods-KwizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KwizTests.release.xcconfig"; path = "Target Support Files/Pods-KwizTests/Pods-KwizTests.release.xcconfig"; sourceTree = "<group>"; };
 		4D06C0552409A1AB008587E5 /* SpecialQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialQuestions.swift; sourceTree = "<group>"; };
 		4D48ADC82409A62D0037CA4A /* GetVCFromSpecialQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVCFromSpecialQuestion.swift; sourceTree = "<group>"; };
+		4D48ADF32416C5610037CA4A /* PreAdvertiseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAdvertiseVC.swift; sourceTree = "<group>"; };
 		72431F948CD3A2A552657A84 /* Pods-Kwiz-KwizUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz-KwizUITests.release.xcconfig"; path = "Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests.release.xcconfig"; sourceTree = "<group>"; };
 		72EA99F43E532CE5D175E389 /* Pods_Kwiz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kwiz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7626E7B4B2FC8E49C295D490 /* Pods-Kwiz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz.release.xcconfig"; path = "Target Support Files/Pods-Kwiz/Pods-Kwiz.release.xcconfig"; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				0B45FF8F23DF51DA00F3084D /* LoginVC.swift */,
 				0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */,
 				0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */,
+				4D48ADF32416C5610037CA4A /* PreAdvertiseVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				4D48ADC92409A62D0037CA4A /* GetVCFromSpecialQuestion.swift in Sources */,
 				85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */,
 				85D91E8E23F1EAB5002F4E98 /* GameCenterHelper.swift in Sources */,
+				4D48ADF42416C5610037CA4A /* PreAdvertiseVC.swift in Sources */,
 				0B45FF5E23DF4E2000F3084D /* MultipleChoiceVC.swift in Sources */,
 				4D06C0562409A1AB008587E5 /* SpecialQuestions.swift in Sources */,
 				0B45FF5A23DF4E2000F3084D /* AppDelegate.swift in Sources */,

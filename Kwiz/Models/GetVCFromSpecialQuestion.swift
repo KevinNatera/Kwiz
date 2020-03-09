@@ -11,7 +11,7 @@ import UIKit
 func getVCFromSpecial(question: SpecialQuestion?) -> UIViewController {
     switch question {
     case is Advertisement:
-        return AdvertisementVC()
+        return PreAdvertiseVC()
     case is Tickle:
         return TickleQuestionVC()
     case is Scale:
