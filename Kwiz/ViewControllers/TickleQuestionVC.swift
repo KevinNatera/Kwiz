@@ -228,14 +228,13 @@ class TickleQuestionVC: UIViewController {
     }
     
     private func segueToNextVC() {
-        //tickles = 0
         Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func answerResult(userResult:UserResult, viewController: UIViewController){
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
         
         switch userResult {
         case .correct:
