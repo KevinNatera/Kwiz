@@ -279,14 +279,35 @@ class ScaleVC: UIViewController {
         heartStack.loseLife(remaining: game.getLives())
     }
     private func pickedCorrectAnswer() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)  { [weak self] in
-            self?.segueToViewController()
-        }
-        
+            segueToViewController()
     }
     
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
+        
+        switch userResult {
+        case .correct:
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained 5 points!", preferredStyle: .alert)
+            viewController.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) { [weak self] in
+                alert.dismiss(animated: true, completion: {
+                    Game.shared.updatesGameCenter()
+                    self?.pickedCorrectAnswer()})
+            }
+            
+            
+        case .wrong:
+            let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.loselife()})
+            }
+            viewController.present(alert, animated: true)
+        }
+    }
     
-    //MARK: Objc Func
+    //MARK: - Objc Func
     @objc private func draggedSteel(_ sender: UIPanGestureRecognizer) {
         
         switch sender.state {
@@ -304,12 +325,14 @@ class ScaleVC: UIViewController {
                 
                 steel.center = inputBox.center
                 rotate(view: steel)
-                loselife()
+                //loselife()
+                answerResult(userResult: .wrong, viewController: self)
                 reset.isHidden = false
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
-                pickedCorrectAnswer()
+                //pickedCorrectAnswer()
+                answerResult(userResult: .correct, viewController: self)
             }
         default:
             print("something")
@@ -340,7 +363,8 @@ class ScaleVC: UIViewController {
                 
                 feather.center = inputBox.center
                 rotate(view: feather)
-                loselife()
+                //loselife()
+                answerResult(userResult: .wrong, viewController: self)
                 reset.isHidden = false
             }
         default:

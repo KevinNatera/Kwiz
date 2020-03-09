@@ -72,7 +72,7 @@ class Game {
     ,Answer(text: "A love letter", isCorrect: .incorrect)
     ,Answer(text: "The letter Q", isCorrect: .incorrect)]
     , questionValue: 5),
-    Multiplechoice(question: "You're in a dark cave with only one match, a lump of coal, a stove, and a kerosene lamp. You have the option of lighting one. Which do you light first?", allAnswers: [Answer(text: "The match", isCorrect: .correct)
+    Multiplechoice(question: "You're in a dark cave with only one match, a lump of coal, a stove, and a kerosene lamp. Which do you light first?", allAnswers: [Answer(text: "The match", isCorrect: .correct)
     ,Answer(text: "The lump of coal", isCorrect: .incorrect)
     ,Answer(text: "The stove", isCorrect: .incorrect)
     ,Answer(text: "The kerosene lamp", isCorrect: .incorrect)]
