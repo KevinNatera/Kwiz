@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol Advertisable {
+    func segue()
+}
 
 class PreAdvertiseVC: MultipleChoiceVC {
     var darkView = UIView()
@@ -78,6 +81,7 @@ class PreAdvertiseVC: MultipleChoiceVC {
         let when = DispatchTime.now() + 1
         DispatchQueue.main.asyncAfter(deadline: when) { [weak self] in
             let ad = AdvertisementVC()
+            ad.adDelegate = self
             ad.modalPresentationStyle = .fullScreen
             self?.present(ad, animated: true, completion: nil)
         }
@@ -101,6 +105,17 @@ class PreAdvertiseVC: MultipleChoiceVC {
             self?.setupDarkView()
         }
     }
+}
+
+extension PreAdvertiseVC: Advertisable {
+    func segue() {
+        Game.shared.increaseScoreForSpecialQuestions()
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
 }
 
 //MARK: TODO fix constraints from MultipleChoice vc

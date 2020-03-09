@@ -81,6 +81,7 @@ class AdvertisementVC: UIViewController {
         logo.image = UIImage(named: "AbtiveLogo")
         return logo
     }()
+    var adDelegate: Advertisable?
 
     
     //MARK: - Setup/ Constraints
@@ -192,8 +193,10 @@ class AdvertisementVC: UIViewController {
             let when = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: when) {
                 alert.dismiss(animated: true, completion: { [weak self] in
-                    self?.segueToNextVC()
+                    self?.dismiss(animated: true, completion: { [weak self] in
+                        self?.adDelegate?.segue()
                     })
+                })
             }
             
             
