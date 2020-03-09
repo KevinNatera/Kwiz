@@ -183,7 +183,7 @@ class LockVC: UIViewController {
         print(point.x)
         guard point.y > 0, point.x > 0 else {
             if point.x <= 0 {
-                segue(funcAlreadyCalled: segueFuncAlreadyRan)
+                answerResult(userResult: .correct, viewController: self)
                 return
             }
             return
@@ -205,16 +205,40 @@ class LockVC: UIViewController {
         Game.shared.reduceLives()
         heartStack.loseLife(remaining: Game.shared.getLives())
     }
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
+        
+        switch userResult {
+        case .correct:
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained 5 points!", preferredStyle: .alert)
+            viewController.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) { [weak self] in
+                alert.dismiss(animated: true, completion: {
+                    Game.shared.updatesGameCenter()
+                    self?.segue(funcAlreadyCalled: self?.segueFuncAlreadyRan ?? false)})
+            }
+            
+            
+        case .wrong:
+            let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.loseLivesInLockVC()})
+            }
+            viewController.present(alert, animated: true)
+        }
+    }
     
-    //MARK: Objc Func
+    //MARK: - Objc Func
     @objc private func tappedUsernameBox() {
-        loseLivesInLockVC()
+        answerResult(userResult: .wrong, viewController: self)
     }
     @objc private func tappedPasswordBox() {
-        loseLivesInLockVC()
+        answerResult(userResult: .wrong, viewController: self)
     }
     @objc private func tappedSignIn() {
-        loseLivesInLockVC()
+        answerResult(userResult: .wrong, viewController: self)
     }
     
     //MARK: Gesture Functions
