@@ -21,7 +21,7 @@ class AdvertisementVC: UIViewController {
     }()
     var groupOneLabel: UILabel = {
         let label = UILabel()
-        label.text = "💪Get rock hard muscles with Ab-tive!!\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
+        label.text = "💪Let's get active with Ab-tive!!\n This app will help you build or join a community at your local gym,\nfind workouts to suit your needs and more!"
         label.textAlignment = .center
         label.numberOfLines = 15
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 25)
