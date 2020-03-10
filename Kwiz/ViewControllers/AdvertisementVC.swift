@@ -186,6 +186,7 @@ class AdvertisementVC: UIViewController {
     private func segueToNextVC() {
         Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
+        Game.shared.updatesGameCenter()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
     }

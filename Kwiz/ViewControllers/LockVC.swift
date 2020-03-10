@@ -196,6 +196,7 @@ class LockVC: UIViewController {
         if !funcAlreadyCalled {
         Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
+            Game.shared.updatesGameCenter()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
             segueFuncAlreadyRan = true
@@ -214,10 +215,17 @@ class LockVC: UIViewController {
             let when = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: when) {
                 alert.dismiss(animated: true, completion: { [weak self] in
-                    Game.shared.updatesGameCenter()
                     self?.segue(funcAlreadyCalled: self?.segueFuncAlreadyRan ?? false)})
             }
-            
+            /*
+             Game.shared.updatesGameCenter()
+             Game.shared.increaseScoreForSpecialQuestions()
+             Game.shared.updatesGameCenter()
+             Game.shared.switchAndGetNextTypeOfQuestion()
+             let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+             navigationController?.pushViewController(vc, animated: true)
+                 segueFuncAlreadyRan = true
+             */
             
         case .wrong:
             let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
