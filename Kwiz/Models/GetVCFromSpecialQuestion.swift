@@ -18,6 +18,8 @@ func getVCFromSpecial(question: SpecialQuestion?) -> UIViewController {
         return ScaleVC()
     case is Lock:
         return LockVC()
+    case is MovingImage:
+        return MovingImageVC()
     case .none:
         return ResultsVC()
     default:

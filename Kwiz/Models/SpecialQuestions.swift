@@ -60,4 +60,16 @@ class Lock: SpecialQuestion {
     static let question = Lock(howToAnswer: "Turn the door handle down all the way", points: 10)
 }
 
-let allSpecialQuestions: [SpecialQuestion] = [Advertisement.question,Tickle.question,Scale.question,Lock.question]
+class MovingImage: SpecialQuestion {
+    private var howToAnswer: String
+    var points : Int
+    
+    init(howToAnswer: String, points: Int) {
+        self.howToAnswer = howToAnswer
+        self.points = points
+    }
+    
+    static let question = MovingImage(howToAnswer: "Find the door to to KH", points: 10)
+}
+
+let allSpecialQuestions: [SpecialQuestion] = [Advertisement.question,Tickle.question,Scale.question,Lock.question,MovingImage.question]
