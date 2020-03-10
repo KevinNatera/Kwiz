@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import GameKit
 
 class LockVC: UIViewController {
-
+    
     //MARK: - Objects
     let loginLabel: UILabel = {
         let label = UILabel()
@@ -194,11 +195,11 @@ class LockVC: UIViewController {
     }
     private func segue(funcAlreadyCalled: Bool) {
         if !funcAlreadyCalled {
-        Game.shared.increaseScoreForSpecialQuestions()
-        Game.shared.switchAndGetNextTypeOfQuestion()
+            Game.shared.increaseScoreForSpecialQuestions()
+            Game.shared.switchAndGetNextTypeOfQuestion()
             Game.shared.updatesGameCenter()
-        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
-        navigationController?.pushViewController(vc, animated: true)
+            let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+            navigationController?.pushViewController(vc, animated: true)
             segueFuncAlreadyRan = true
         }
     }
@@ -224,7 +225,7 @@ class LockVC: UIViewController {
              Game.shared.switchAndGetNextTypeOfQuestion()
              let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
              navigationController?.pushViewController(vc, animated: true)
-                 segueFuncAlreadyRan = true
+             segueFuncAlreadyRan = true
              */
             
         case .wrong:
@@ -275,6 +276,29 @@ class LockVC: UIViewController {
     }
     
     
+    private func showAlert() {
+        
+        let alertVC = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        
+        switch GKLocalPlayer.local.isAuthenticated {
+        case true:
+            alertVC.title = "No internet connection detected."
+            alertVC.message = "Please log back in to continue your progress."
+        case false:
+            alertVC.title = "Login Required!"
+            alertVC.message = "Please login or sign up in order to continue your progress."
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alertVC, animated: true, completion: nil)
+    }
+        
+    }
+    
+  
+    
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -282,7 +306,9 @@ class LockVC: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4312569201, green: 0.3756824136, blue: 0.9097105861, alpha: 1)
         setupConstraints()
         addGestures()
-
+       
+        showAlert()
+        
     }
-
+    
 }
