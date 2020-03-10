@@ -62,6 +62,9 @@ class GameScene: SKScene {
         }
     }
     
+    
+    /// Changes hidden button status to false
+    /// - Parameter rect: takes a CGRect to examine
     func foundWhichButton(rect: CGRect){
         if rect.contains(CGPoint(x: 100, y: 750)) {
             gundam.physicsBody?.affectedByGravity = false
@@ -69,11 +72,9 @@ class GameScene: SKScene {
             onOrOff = false
         }
         else if rect.contains(CGPoint(x: 225, y: 100)) {
-            //print("try me button location")
             onOrOff1 = false
         }
         else if rect.contains(CGPoint(x: 400, y: 500)) {
-            //print("ka-boom locatiopn")
             onOrOff2 = false
         }
     }
