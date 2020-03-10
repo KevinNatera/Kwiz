@@ -233,6 +233,7 @@ class TickleQuestionVC: UIViewController {
     private func segueToNextVC() {
         Game.shared.increaseScoreForSpecialQuestions()
         Game.shared.switchAndGetNextTypeOfQuestion()
+        Game.shared.updatesGameCenter()
         let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -246,7 +247,6 @@ class TickleQuestionVC: UIViewController {
             let when = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: when) {
                 alert.dismiss(animated: true, completion: { [weak self] in
-                    Game.shared.updatesGameCenter()
                     self?.segueToNextVC()})
             }
             
