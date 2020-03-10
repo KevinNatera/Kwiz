@@ -16,7 +16,6 @@
 		0B45FF7123DF4E2200F3084D /* KwizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF7023DF4E2200F3084D /* KwizTests.swift */; };
 		0B45FF7C23DF4E2200F3084D /* KwizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF7B23DF4E2200F3084D /* KwizUITests.swift */; };
 		0B45FF8E23DF51B500F3084D /* LaunchScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */; };
-		0B45FF9023DF51DA00F3084D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF8F23DF51DA00F3084D /* LoginVC.swift */; };
 		0B4FA97E23FC43D800DAD57A /* ResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */; };
 		0B4FA98023FC43EB00DAD57A /* Hearts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FA97F23FC43EB00DAD57A /* Hearts.swift */; };
 		0B6D3EA123FF330D005B80ED /* 3427-ribbon.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B6D3EA023FF330D005B80ED /* 3427-ribbon.json */; };
@@ -76,7 +75,6 @@
 		0B45FF7B23DF4E2200F3084D /* KwizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KwizUITests.swift; sourceTree = "<group>"; };
 		0B45FF7D23DF4E2200F3084D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenVC.swift; sourceTree = "<group>"; };
-		0B45FF8F23DF51DA00F3084D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVC.swift; sourceTree = "<group>"; };
 		0B4FA97F23FC43EB00DAD57A /* Hearts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hearts.swift; sourceTree = "<group>"; };
 		0B6D3EA023FF330D005B80ED /* 3427-ribbon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "3427-ribbon.json"; sourceTree = "<group>"; };
@@ -199,7 +197,6 @@
 				850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */,
 				85D91E8323F1E25A002F4E98 /* ScaleVC.swift */,
 				85D91E8423F1E25A002F4E98 /* LockVC.swift */,
-				0B45FF8F23DF51DA00F3084D /* LoginVC.swift */,
 				0B45FF8D23DF51B500F3084D /* LaunchScreenVC.swift */,
 				0B4FA97D23FC43D800DAD57A /* ResultsVC.swift */,
 				4D48ADF32416C5610037CA4A /* PreAdvertiseVC.swift */,
@@ -533,7 +530,6 @@
 				0B45FF5C23DF4E2000F3084D /* SceneDelegate.swift in Sources */,
 				0B45FF8E23DF51B500F3084D /* LaunchScreenVC.swift in Sources */,
 				0B4FA98023FC43EB00DAD57A /* Hearts.swift in Sources */,
-				0B45FF9023DF51DA00F3084D /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
