@@ -43,10 +43,10 @@ class ResultsVC: UIViewController {
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 30)
         label.textAlignment = .center
         label.textColor = .white
+        label.clipsToBounds = true
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 2
-        label.clipsToBounds = true
         return label
     }()
     
@@ -57,11 +57,12 @@ class ResultsVC: UIViewController {
         label.text = "> 9000!!!"
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 50)
         label.textAlignment = .center
+        label.clipsToBounds = true
         label.textColor = .white
         label.layer.cornerRadius = 20
         label.layer.borderColor = UIColor.white.cgColor
         label.layer.borderWidth = 2
-        label.clipsToBounds = true
+        
         return label
     }()
     
@@ -90,6 +91,11 @@ class ResultsVC: UIViewController {
         button.addTarget(self, action: #selector(homeButtonPressed), for: .touchUpInside)
         return button
     }()
+    var resultImage: UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = .green
+        return image
+    }()
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -108,6 +114,7 @@ class ResultsVC: UIViewController {
         addScoreConstraints()
         addRetryConstraints()
         addHomeButtonConstraints()
+        addResultImageConstraints()
     }
     private func addTitleConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -140,6 +147,15 @@ class ResultsVC: UIViewController {
             homeButton.widthAnchor.constraint(equalTo: retryButton.widthAnchor),
             homeButton.heightAnchor.constraint(equalTo: retryButton.heightAnchor),
             homeButton.centerXAnchor.constraint(equalTo: retryButton.centerXAnchor)])
+    }
+    private func addResultImageConstraints() {
+        view.addSubview(resultImage)
+        resultImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            resultImage.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: view.frame.height * 0.05),
+            resultImage.bottomAnchor.constraint(equalTo: retryButton.topAnchor, constant: -view.frame.height * 0.05),
+            resultImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            resultImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
     
     //MARK: - Private Methods
