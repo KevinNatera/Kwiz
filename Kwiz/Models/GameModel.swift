@@ -185,6 +185,9 @@ class Game {
             updatesGameCenter()
         }
     }
+    func getSpecialQHint() -> String {
+        return currentSQ?.hint ?? "Hint unavailable"
+    }
     
     //MARK: - User
     func setUser(user: User) {
