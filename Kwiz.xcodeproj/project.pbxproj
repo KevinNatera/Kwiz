@@ -27,6 +27,8 @@
 		850FB83D23E386E2003EFC2B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850FB83C23E386E2003EFC2B /* GameKit.framework */; };
 		850FB84023E3910C003EFC2B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83E23E3910B003EFC2B /* MainVC.swift */; };
 		850FB84123E3910C003EFC2B /* TickleQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */; };
+		851F2EF4241FFFC00012FA09 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851F2EF3241FFFBF0012FA09 /* SoundManager.swift */; };
+		851F2EF7242000690012FA09 /* Sephiroth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 851F2EF6242000690012FA09 /* Sephiroth.mp3 */; };
 		85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85412AE523E093F900F9488C /* MultiplechoiceModel.swift */; };
 		8546AB4723F72D3400793167 /* CorrectAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8546AB4623F72D3400793167 /* CorrectAnswerView.swift */; };
 		85521FC52417FD5F004BBBED /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85521FC42417FD5F004BBBED /* GameScene.swift */; };
@@ -95,6 +97,8 @@
 		850FB83C23E386E2003EFC2B /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		850FB83E23E3910B003EFC2B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickleQuestionVC.swift; sourceTree = "<group>"; };
+		851F2EF3241FFFBF0012FA09 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		851F2EF6242000690012FA09 /* Sephiroth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Sephiroth.mp3; path = ../../../../../Downloads/Sephiroth.mp3; sourceTree = "<group>"; };
 		85412AE523E093F900F9488C /* MultiplechoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplechoiceModel.swift; sourceTree = "<group>"; };
 		85412AEF23E3473800F9488C /* ViewsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsFile.swift; sourceTree = "<group>"; };
 		8546AB4623F72D3400793167 /* CorrectAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerView.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				85412AEE23E3473800F9488C /* Views */,
 				0B45FF8923DF4EB900F3084D /* ViewControllers */,
 				85412AE423E093E200F9488C /* Models */,
+				851F2EF5242000390012FA09 /* Music */,
 				0B45FF8A23DF4EC600F3084D /* SupportingFiles */,
 			);
 			path = Kwiz;
@@ -251,6 +256,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		851F2EF5242000390012FA09 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				851F2EF6242000690012FA09 /* Sephiroth.mp3 */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		85412AE423E093E200F9488C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +275,7 @@
 				4D06C0552409A1AB008587E5 /* SpecialQuestions.swift */,
 				4D48ADC82409A62D0037CA4A /* GetVCFromSpecialQuestion.swift */,
 				85521FC42417FD5F004BBBED /* GameScene.swift */,
+				851F2EF3241FFFBF0012FA09 /* SoundManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B88E807240F08E60031D18A /* 9990-explosion.json in Resources */,
+				851F2EF7242000690012FA09 /* Sephiroth.mp3 in Resources */,
 				85521FC72417FD7B004BBBED /* Scene.sks in Resources */,
 				0B6D3EA123FF330D005B80ED /* 3427-ribbon.json in Resources */,
 				85F9A9A823F70A3700DDBEFD /* 6285nafas.json in Resources */,
@@ -533,6 +548,7 @@
 				85521FC92417FDD9004BBBED /* MovingImageVC.swift in Sources */,
 				4D48ADC92409A62D0037CA4A /* GetVCFromSpecialQuestion.swift in Sources */,
 				85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */,
+				851F2EF4241FFFC00012FA09 /* SoundManager.swift in Sources */,
 				85521FC52417FD5F004BBBED /* GameScene.swift in Sources */,
 				85D91E8E23F1EAB5002F4E98 /* GameCenterHelper.swift in Sources */,
 				4D48ADF42416C5610037CA4A /* PreAdvertiseVC.swift in Sources */,
