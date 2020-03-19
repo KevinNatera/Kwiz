@@ -24,7 +24,8 @@
 		0B88E807240F08E60031D18A /* 9990-explosion.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B88E806240F08E60031D18A /* 9990-explosion.json */; };
 		1498EC0D8D6E0D7C5537CF62 /* Pods_Kwiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EA99F43E532CE5D175E389 /* Pods_Kwiz.framework */; };
 		4D06C0562409A1AB008587E5 /* SpecialQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D06C0552409A1AB008587E5 /* SpecialQuestions.swift */; };
-		4D0E08C924215F68005C25FF /* SephirothTheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E08C824215F68005C25FF /* SephirothTheme.mp3 */; };
+		4D0E08CD2423BFBC005C25FF /* Pillow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E08CC2423BFBC005C25FF /* Pillow.mp3 */; };
+		4D0E08CF2423C163005C25FF /* Steel.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4D0E08CE2423C163005C25FF /* Steel.mp3 */; };
 		4D48ADC92409A62D0037CA4A /* GetVCFromSpecialQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48ADC82409A62D0037CA4A /* GetVCFromSpecialQuestion.swift */; };
 		4D48ADF42416C5610037CA4A /* PreAdvertiseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D48ADF32416C5610037CA4A /* PreAdvertiseVC.swift */; };
 		850FB83D23E386E2003EFC2B /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 850FB83C23E386E2003EFC2B /* GameKit.framework */; };
@@ -92,7 +93,8 @@
 		3A44C9DE223DF978C13B5AC5 /* Pods_Kwiz_KwizUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kwiz_KwizUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE6DC94F9C730C862438106 /* Pods-KwizTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KwizTests.release.xcconfig"; path = "Target Support Files/Pods-KwizTests/Pods-KwizTests.release.xcconfig"; sourceTree = "<group>"; };
 		4D06C0552409A1AB008587E5 /* SpecialQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialQuestions.swift; sourceTree = "<group>"; };
-		4D0E08C824215F68005C25FF /* SephirothTheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SephirothTheme.mp3; sourceTree = "<group>"; };
+		4D0E08CC2423BFBC005C25FF /* Pillow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pillow.mp3; sourceTree = "<group>"; };
+		4D0E08CE2423C163005C25FF /* Steel.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Steel.mp3; sourceTree = "<group>"; };
 		4D48ADC82409A62D0037CA4A /* GetVCFromSpecialQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetVCFromSpecialQuestion.swift; sourceTree = "<group>"; };
 		4D48ADF32416C5610037CA4A /* PreAdvertiseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreAdvertiseVC.swift; sourceTree = "<group>"; };
 		72431F948CD3A2A552657A84 /* Pods-Kwiz-KwizUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz-KwizUITests.release.xcconfig"; path = "Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -264,9 +266,9 @@
 		851F2EF5242000390012FA09 /* Music */ = {
 			isa = PBXGroup;
 			children = (
-
 				0B0C628424215F1E00A05C56 /* SephirothTheme.mp3 */,
-
+				4D0E08CC2423BFBC005C25FF /* Pillow.mp3 */,
+				4D0E08CE2423C163005C25FF /* Steel.mp3 */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -407,16 +409,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D0E08CF2423C163005C25FF /* Steel.mp3 in Resources */,
 				0B88E807240F08E60031D18A /* 9990-explosion.json in Resources */,
-
 				0B0C628524215F1E00A05C56 /* SephirothTheme.mp3 in Resources */,
-
 				85521FC72417FD7B004BBBED /* Scene.sks in Resources */,
 				0B6D3EA123FF330D005B80ED /* 3427-ribbon.json in Resources */,
 				85F9A9A823F70A3700DDBEFD /* 6285nafas.json in Resources */,
 				0B45FF6623DF4E2200F3084D /* LaunchScreen.storyboard in Resources */,
 				0B45FF6323DF4E2200F3084D /* Assets.xcassets in Resources */,
 				0B45FF6123DF4E2000F3084D /* Main.storyboard in Resources */,
+				4D0E08CD2423BFBC005C25FF /* Pillow.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

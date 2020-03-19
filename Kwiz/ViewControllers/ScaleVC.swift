@@ -311,9 +311,8 @@ class ScaleVC: UIViewController {
         
         switch sender.state {
         case .ended:
-            print("ended")
+            SoundManager.shared.playOnce(sound: "steel")
             if inputBox.frame.contains(steelCenter) {
-                
                 steel.transform = CGAffineTransform.identity
                 feather.transform = CGAffineTransform.identity
                 view.bringSubviewToFront(steel)
@@ -324,13 +323,12 @@ class ScaleVC: UIViewController {
                 
                 steel.center = inputBox.center
                 rotate(view: steel)
-                //loselife()
+                
                 answerResult(userResult: .wrong, viewController: self)
                 reset.isHidden = false
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
-                //pickedCorrectAnswer()
                 answerResult(userResult: .correct, viewController: self)
             }
         default:
@@ -349,7 +347,7 @@ class ScaleVC: UIViewController {
     @objc private func draggedFeather(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .ended:
-            print("ended")
+            SoundManager.shared.playOnce(sound: "feather")
             if inputBox.frame.contains(featherCenter) {
                 
                 steel.transform = CGAffineTransform.identity
@@ -362,7 +360,6 @@ class ScaleVC: UIViewController {
                 
                 feather.center = inputBox.center
                 rotate(view: feather)
-                //loselife()
                 answerResult(userResult: .wrong, viewController: self)
                 reset.isHidden = false
             }
