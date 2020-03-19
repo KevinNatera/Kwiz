@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B0C628524215F1E00A05C56 /* SephirothTheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0B0C628424215F1E00A05C56 /* SephirothTheme.mp3 */; };
+		0B0C628D2421605100A05C56 /* TutorialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0C628C2421605100A05C56 /* TutorialVC.swift */; };
 		0B45FF5A23DF4E2000F3084D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF5923DF4E2000F3084D /* AppDelegate.swift */; };
 		0B45FF5C23DF4E2000F3084D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF5B23DF4E2000F3084D /* SceneDelegate.swift */; };
 		0B45FF5E23DF4E2000F3084D /* MultipleChoiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B45FF5D23DF4E2000F3084D /* MultipleChoiceVC.swift */; };
@@ -28,7 +30,6 @@
 		850FB84023E3910C003EFC2B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83E23E3910B003EFC2B /* MainVC.swift */; };
 		850FB84123E3910C003EFC2B /* TickleQuestionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */; };
 		851F2EF4241FFFC00012FA09 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851F2EF3241FFFBF0012FA09 /* SoundManager.swift */; };
-		851F2EF7242000690012FA09 /* Sephiroth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 851F2EF6242000690012FA09 /* Sephiroth.mp3 */; };
 		85412AE623E093F900F9488C /* MultiplechoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85412AE523E093F900F9488C /* MultiplechoiceModel.swift */; };
 		8546AB4723F72D3400793167 /* CorrectAnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8546AB4623F72D3400793167 /* CorrectAnswerView.swift */; };
 		85521FC52417FD5F004BBBED /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85521FC42417FD5F004BBBED /* GameScene.swift */; };
@@ -65,6 +66,8 @@
 
 /* Begin PBXFileReference section */
 		081BA4CE9B3D12DDF3E2FBCC /* Pods-Kwiz-KwizUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kwiz-KwizUITests.debug.xcconfig"; path = "Target Support Files/Pods-Kwiz-KwizUITests/Pods-Kwiz-KwizUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B0C628424215F1E00A05C56 /* SephirothTheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SephirothTheme.mp3; sourceTree = "<group>"; };
+		0B0C628C2421605100A05C56 /* TutorialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialVC.swift; sourceTree = "<group>"; };
 		0B45FF5623DF4E1F00F3084D /* Kwiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kwiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B45FF5923DF4E2000F3084D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B45FF5B23DF4E2000F3084D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,7 +101,6 @@
 		850FB83E23E3910B003EFC2B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickleQuestionVC.swift; sourceTree = "<group>"; };
 		851F2EF3241FFFBF0012FA09 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		851F2EF6242000690012FA09 /* Sephiroth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Sephiroth.mp3; path = ../../../../../Downloads/Sephiroth.mp3; sourceTree = "<group>"; };
 		85412AE523E093F900F9488C /* MultiplechoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplechoiceModel.swift; sourceTree = "<group>"; };
 		85412AEF23E3473800F9488C /* ViewsFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsFile.swift; sourceTree = "<group>"; };
 		8546AB4623F72D3400793167 /* CorrectAnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				85F9A9A523F6F01300DDBEFD /* AdvertisementVC.swift */,
+				0B0C628C2421605100A05C56 /* TutorialVC.swift */,
 				0B45FF5D23DF4E2000F3084D /* MultipleChoiceVC.swift */,
 				850FB83E23E3910B003EFC2B /* MainVC.swift */,
 				850FB83F23E3910C003EFC2B /* TickleQuestionVC.swift */,
@@ -259,7 +262,7 @@
 		851F2EF5242000390012FA09 /* Music */ = {
 			isa = PBXGroup;
 			children = (
-				851F2EF6242000690012FA09 /* Sephiroth.mp3 */,
+				0B0C628424215F1E00A05C56 /* SephirothTheme.mp3 */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -401,7 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B88E807240F08E60031D18A /* 9990-explosion.json in Resources */,
-				851F2EF7242000690012FA09 /* Sephiroth.mp3 in Resources */,
+				0B0C628524215F1E00A05C56 /* SephirothTheme.mp3 in Resources */,
 				85521FC72417FD7B004BBBED /* Scene.sks in Resources */,
 				0B6D3EA123FF330D005B80ED /* 3427-ribbon.json in Resources */,
 				85F9A9A823F70A3700DDBEFD /* 6285nafas.json in Resources */,
@@ -540,6 +543,7 @@
 				85F9A9A623F6F01300DDBEFD /* AdvertisementVC.swift in Sources */,
 				85D91E8923F1E284002F4E98 /* UserModel.swift in Sources */,
 				85D91E8A23F1E284002F4E98 /* GameModel.swift in Sources */,
+				0B0C628D2421605100A05C56 /* TutorialVC.swift in Sources */,
 				85D91E8523F1E25B002F4E98 /* LockVC.swift in Sources */,
 				850FB84023E3910C003EFC2B /* MainVC.swift in Sources */,
 				850FB84123E3910C003EFC2B /* TickleQuestionVC.swift in Sources */,
