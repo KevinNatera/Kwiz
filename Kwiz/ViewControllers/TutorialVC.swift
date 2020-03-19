@@ -55,6 +55,14 @@ class TutorialVC: UIViewController {
         //segue to multiplechoiceVC
     }
     
+    lazy var whiteScreen: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: 1000, height: 1000)
+        view.backgroundColor = .white
+        view.layer.zPosition = 1
+        return view
+    }()
+    
     
     //MARK: - Private Methods
     private func addSubviews() {
@@ -62,6 +70,31 @@ class TutorialVC: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
         view.addSubview(startButton)
+        view.addSubview(whiteScreen)
+    }
+    
+    private func fadeInViews() {
+        UIView.animate(withDuration: 1) {
+            self.whiteScreen.alpha = 0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1)  {
+            UIView.animate(withDuration: 2) {
+                self.titleLabel.alpha = 1
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            UIView.animate(withDuration: 4) {
+                self.descriptionLabel.alpha = 1
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            UIView.animate(withDuration: 4) {
+                self.startButton.alpha = 1
+            }
+        }
     }
     
     
@@ -71,12 +104,8 @@ class TutorialVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
-        
+        fadeInViews()
     }
-    
-    
-    
-    
     
     
 }
