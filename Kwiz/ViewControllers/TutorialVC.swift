@@ -25,7 +25,18 @@ class TutorialVC: UIViewController {
         return label
     }()
     
-    
+    lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: view.center.x - 200, y: 225, width: 400, height: 475)
+        label.text = "Hey there! This is an interactive quiz game designed to challenge you to think outside the box, so not every question should be taken literally! If the obvious approach doesn't work, try something completely outlandish! What can be interacted with isn't always straightforward, so try pinching, dragging, and messing with everything!"
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = label.font.withSize(30)
+        label.layer.borderWidth = 1
+        label.layer.cornerRadius = 20
+        label.alpha = 0
+        return label
+    }()
     
     
     
@@ -33,10 +44,10 @@ class TutorialVC: UIViewController {
     private func addSubviews() {
         view.backgroundColor = #colorLiteral(red: 0.4326986074, green: 0.5668497086, blue: 1, alpha: 1)
         view.addSubview(titleLabel)
-       
+        view.addSubview(descriptionLabel)
     }
     
-   
+    
     
     
     //MARK: - Lifecycle Methods
@@ -48,7 +59,7 @@ class TutorialVC: UIViewController {
     
     
     
-        
+    
     
 }
 
