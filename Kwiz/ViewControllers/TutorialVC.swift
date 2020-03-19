@@ -38,6 +38,22 @@ class TutorialVC: UIViewController {
         return label
     }()
     
+    lazy var startButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: view.center.x - 100, y: 750, width: 200, height: 75)
+        button.backgroundColor = .purple
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.setTitle("Let's go!", for: .normal)
+        button.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
+        button.alpha = 0
+        return button
+    }()
+    
+    
+    @objc func startButtonPressed() {
+        //segue to multiplechoiceVC
+    }
     
     
     //MARK: - Private Methods
@@ -45,6 +61,7 @@ class TutorialVC: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4326986074, green: 0.5668497086, blue: 1, alpha: 1)
         view.addSubview(titleLabel)
         view.addSubview(descriptionLabel)
+        view.addSubview(startButton)
     }
     
     
@@ -56,6 +73,7 @@ class TutorialVC: UIViewController {
         addSubviews()
         
     }
+    
     
     
     
