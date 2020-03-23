@@ -16,12 +16,14 @@ class MultipleChoiceVC: UIViewController {
     //MARK: - UI Objects
     lazy var questionTextField: UILabel = {
         let tf = UILabel()
-        tf.font = UIFont(name: "Verdana-Bold", size: 22)
-        tf.backgroundColor = #colorLiteral(red: 0.9682953954, green: 0.2332102954, blue: 0.00375417457, alpha: 1)
+        tf.font = UIFont(name: "AvenirNext-DemiBold", size: 30)
+        tf.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         tf.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         tf.textAlignment = .center
         tf.numberOfLines = 0
         tf.layer.cornerRadius = 10
+        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderWidth = 2
         tf.clipsToBounds = true
         tf.adjustsFontSizeToFitWidth = true
         return tf
@@ -30,9 +32,11 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceAButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.8897868991, green: 0.3494265079, blue: 0.2590676546, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 0
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -41,9 +45,11 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceBButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 1
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -52,9 +58,11 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceCButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 2
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -63,9 +71,11 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var answerChoiceDButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.07879226655, green: 0.173327148, blue: 0.501418829, alpha: 1)
         button.layer.cornerRadius = 20
-        button.titleLabel?.font = UIFont(name: "Verdana", size: 20)
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 25)
         button.tag = 3
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -75,23 +85,23 @@ class MultipleChoiceVC: UIViewController {
     
     lazy var skipButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.7546889782, green: 0.3102076054, blue: 0.9116453528, alpha: 1)
         button.setImage(UIImage(named: "forwardArrow"), for: .normal)
         return button
     }()
     
     lazy var backButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.7546889782, green: 0.3102076054, blue: 0.9116453528, alpha: 1)
         button.setImage(UIImage(named: "backArrow"), for: .normal)
-        button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
         return button
     }()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
     lazy var hintButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.9270957112, green: 0.3483060598, blue: 0.195644021, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.7546889782, green: 0.3102076054, blue: 0.9116453528, alpha: 1)
         button.setImage(UIImage(named: "hint"), for: .normal)
         return button
     }()
@@ -101,7 +111,7 @@ class MultipleChoiceVC: UIViewController {
         super.viewDidLoad()
         addViews()
         addConstraints()
-        view.backgroundColor = #colorLiteral(red: 0.3806488216, green: 0.5188760161, blue: 0.915720582, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.4326986074, green: 0.5668497086, blue: 1, alpha: 1)
         addTargetsToButtons()
         
 
@@ -117,18 +127,20 @@ class MultipleChoiceVC: UIViewController {
     }
     //MARK: - Methods
     private func checkIfNoMoreQuestionsThenRespond() {
-        if Game.shared.isQuestionsEmpty() {
-            navigationController?.pushViewController(ResultsVC(), animated: true)
-        } else {
-            Game.shared.getNewCurrentQuestion()
-            goToNextQuestion()
-        }
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        goToNextViewController(vc: vc)
+//        if Game.shared.isQuestionsEmpty() {
+//            navigationController?.pushViewController(ResultsVC(), animated: true)
+//        } else {
+//            Game.shared.getNewCurrentQuestion()
+//            goToNextQuestion(vc: ResultsVC())
+//        }
     }
-    private func goToNextQuestion() {
+    private func goToNextViewController(vc: UIViewController) {
         // 1. instatiate another VC
         // 2 . push
-        let newMC = MultipleChoiceVC()
-        navigationController?.pushViewController(newMC, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     private func updateGameCenter() {
         Game.shared.saveScore()
@@ -150,11 +162,11 @@ class MultipleChoiceVC: UIViewController {
     }
     
     private func addConstraints(){
+        setUpLivesStackView()
         setUpQuestionTF()
         setUpAnswersStackView()
         //setUpBackButton()
         //setUpSkipButton()
-        setUpLivesStackView()
         //setUpHintButton()
         
     }
@@ -162,30 +174,38 @@ class MultipleChoiceVC: UIViewController {
     private func setUpQuestionTF(){
         questionTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 65),
-            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -65),
-            questionTextField.heightAnchor.constraint(equalToConstant: 100),
-            questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+//            questionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+//            questionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            questionTextField.topAnchor.constraint(equalTo: heartStack.bottomAnchor, constant: 10),
+            questionTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            questionTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+            questionTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2)
             
-            questionTextField.bottomAnchor.constraint(equalTo: answerChoiceAButton.topAnchor, constant:
-                50),
+            //questionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+            
+            //questionTextField.bottomAnchor.constraint(equalTo: answerChoiceAButton.topAnchor, constant:
+               // 50),
+            
         ])
+        //view.frame.height / 2
         
     }
     
     private func setUpAnswersStackView(){
         let stackView = UIStackView(arrangedSubviews: [answerChoiceAButton, answerChoiceBButton, answerChoiceCButton, answerChoiceDButton])
         stackView.axis = .vertical
-        stackView.spacing = 50
+        stackView.spacing = 35
         stackView.distribution = .fillEqually
         self.view.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             stackView.leadingAnchor.constraint(equalTo: questionTextField.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: questionTextField.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 75)
+            stackView.topAnchor.constraint(equalTo: questionTextField.bottomAnchor, constant: 50),
+            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
         ])
     }
     
@@ -216,10 +236,10 @@ class MultipleChoiceVC: UIViewController {
         
         heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            heartStack.bottomAnchor.constraint(equalTo: questionTextField.topAnchor, constant: -30),
-            heartStack.heightAnchor.constraint(equalToConstant: 60),
-            heartStack.widthAnchor.constraint(equalToConstant: 150)
+            heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            heartStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
+            heartStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
 
         ])
         
@@ -255,12 +275,8 @@ class MultipleChoiceVC: UIViewController {
     @objc private func buttonPicked(sender: UIButton) {
         if Game.shared.answer(sender.tag) {
             answerResult(userResult: UserResult.correct, viewController: self)
-            
-           
-        
         } else {
             answerResult(userResult: UserResult.wrong, viewController: self)
-            
         }
     }
     

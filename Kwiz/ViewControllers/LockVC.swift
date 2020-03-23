@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import GameKit
 
 class LockVC: UIViewController {
-
+    
     //MARK: - Objects
     let loginLabel: UILabel = {
         let label = UILabel()
@@ -61,13 +62,15 @@ class LockVC: UIViewController {
     }()
     let handle: UIView = {
         let knob = UIView(frame: .zero)
-        knob.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        knob.backgroundColor = #colorLiteral(red: 0.4312569201, green: 0.3756824136, blue: 0.9097105861, alpha: 1)
         knob.layer.borderColor = UIColor.black.cgColor
         knob.layer.borderWidth = 10
         knob.layer.cornerRadius = 30
         return knob
     }()
-    let heartStack = HeartsStackView()
+    let heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
+    
+    var segueFuncAlreadyRan = false
     //MARK: Gestures
     let panGesture = UIPanGestureRecognizer()
     let usernameGesture = UITapGestureRecognizer()
@@ -181,25 +184,70 @@ class LockVC: UIViewController {
         print(point.x)
         guard point.y > 0, point.x > 0 else {
             if point.x <= 0 {
+                answerResult(userResult: .correct, viewController: self)
                 return
             }
             return
-            
         }
         
         let angle = point.x == 0 ? .pi/2 : atan(Double(point.y / point.x))
-        //print(touch)
-        //print(angle)
         handle.transform = CGAffineTransform(rotationAngle: CGFloat(angle))
     }
+    private func segue(funcAlreadyCalled: Bool) {
+        if !funcAlreadyCalled {
+            Game.shared.increaseScoreForSpecialQuestions()
+            Game.shared.switchAndGetNextTypeOfQuestion()
+            Game.shared.updatesGameCenter()
+            let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+            navigationController?.pushViewController(vc, animated: true)
+            segueFuncAlreadyRan = true
+        }
+    }
+    private func loseLivesInLockVC() {
+        Game.shared.reduceLives()
+        heartStack.loseLife(remaining: Game.shared.getLives())
+    }
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
+        
+        switch userResult {
+        case .correct:
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained \(Game.shared.getCurrentSpecialQuestion()?.points ?? 5) points!", preferredStyle: .alert)
+            viewController.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.segue(funcAlreadyCalled: self?.segueFuncAlreadyRan ?? false)})
+            }
+            /*
+             Game.shared.updatesGameCenter()
+             Game.shared.increaseScoreForSpecialQuestions()
+             Game.shared.updatesGameCenter()
+             Game.shared.switchAndGetNextTypeOfQuestion()
+             let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+             navigationController?.pushViewController(vc, animated: true)
+             segueFuncAlreadyRan = true
+             */
+            
+        case .wrong:
+            let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.loseLivesInLockVC()})
+            }
+            viewController.present(alert, animated: true)
+        }
+    }
+    
+    //MARK: - Objc Func
     @objc private func tappedUsernameBox() {
-        print("tapped username box")
+        answerResult(userResult: .wrong, viewController: self)
     }
     @objc private func tappedPasswordBox() {
-        print("tapped password box")
+        answerResult(userResult: .wrong, viewController: self)
     }
     @objc private func tappedSignIn() {
-        print("tapped sign in")
+        answerResult(userResult: .wrong, viewController: self)
     }
     
     //MARK: Gesture Functions
@@ -228,14 +276,39 @@ class LockVC: UIViewController {
     }
     
     
+    private func showAlert() {
+        
+        let alertVC = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        
+        switch GKLocalPlayer.local.isAuthenticated {
+        case true:
+            alertVC.title = "No internet connection detected."
+            alertVC.message = "Please log back in to continue your progress."
+        case false:
+            alertVC.title = "Login Required!"
+            alertVC.message = "Please login or sign up in order to continue your progress."
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alertVC, animated: true, completion: nil)
+    }
+        
+    }
+    
+  
+    
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         //view.backgroundColor = #colorLiteral(red: 0.8754208684, green: 0.3353283703, blue: 0.1785621047, alpha: 1)
-        view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.4312569201, green: 0.3756824136, blue: 0.9097105861, alpha: 1)
         setupConstraints()
         addGestures()
-
+       
+        showAlert()
+        
     }
-
+    
 }

@@ -12,6 +12,12 @@ enum LivesRemaining: Int {
     case three = 3
     case two = 2
     case one = 1
+    case none = 0
+}
+enum NextTypeOfQuestion {
+    case firstMC
+    case secondMC
+    case special
 }
 
 class Game {
@@ -21,6 +27,9 @@ class Game {
     private var user: User?
     private var questions: [Multiplechoice]
     private var currentQuestion: Multiplechoice?
+    private var specialQuestions: [SpecialQuestion]
+    private var currentSQ: SpecialQuestion?
+    private var nextType: NextTypeOfQuestion
     
     
     /// game requires user to exist, games always start with 3 lives and a score of 0
@@ -28,10 +37,13 @@ class Game {
     private init() {
         lives = LivesRemaining.three
         score = 0
-        questions = Game.getQuestions()
+        questions = Game.getQuestions().shuffled()
+        questions.forEach({ $0.shuffleAnswers() } )
+        specialQuestions = allSpecialQuestions.shuffled()
+        nextType = .firstMC
     }
     
-    //MARK: Questions
+    //MARK: - Questions
     /// internal game function to get questions
    static private func getQuestions() -> [Multiplechoice] {
         return [Multiplechoice(question: "What key can't open locks?", allAnswers: [Answer(text: "Donkeys", isCorrect: .correct)
@@ -60,7 +72,7 @@ class Game {
     ,Answer(text: "A love letter", isCorrect: .incorrect)
     ,Answer(text: "The letter Q", isCorrect: .incorrect)]
     , questionValue: 5),
-    Multiplechoice(question: "You're in a dark cave with only one match, a lump of coal, a stove, and a kerosene lamp. You have the option of lighting one. Which do you light first?", allAnswers: [Answer(text: "The match", isCorrect: .correct)
+    Multiplechoice(question: "You're in a dark cave with only one match, a lump of coal, a stove, and a kerosene lamp. Which do you light first?", allAnswers: [Answer(text: "The match", isCorrect: .correct)
     ,Answer(text: "The lump of coal", isCorrect: .incorrect)
     ,Answer(text: "The stove", isCorrect: .incorrect)
     ,Answer(text: "The kerosene lamp", isCorrect: .incorrect)]
@@ -74,11 +86,9 @@ class Game {
     
     func shuffle(){
         print("shuffle")
-        print("segue to multipleChoice VC")
-        
         questions.shuffle()
-        
         questions.forEach({ $0.shuffleAnswers() } )
+        specialQuestions = allSpecialQuestions.shuffled()
         //getNewCurrentQuestion()
     }
     func getNewCurrentQuestion() {
@@ -120,8 +130,66 @@ class Game {
         }
         return false
     }
+    func switchAndGetNextTypeOfQuestion() {
+        switch nextType {
+        case .firstMC:
+            getNewCurrentQuestion()
+            if let _ = currentQuestion {
+                nextType = .secondMC
+            } else {
+                getNewSpecialQuestion()
+                if let _ = currentSQ {
+                    nextType = .special
+                } else {
+                    quit()
+                }
+            }
+        case .secondMC:
+            getNewSpecialQuestion()
+            if let _ = currentSQ {
+                nextType = .special
+            } else {
+                getNewCurrentQuestion()
+                if let _ = currentQuestion {
+                    nextType = .firstMC
+                } else {
+                    quit()
+                }
+            }
+        case .special:
+            getNewCurrentQuestion()
+            if let _ = currentQuestion {
+                nextType = .firstMC
+            } else {
+                getNewSpecialQuestion()
+                if let _ = currentSQ {
+                    nextType = .special
+                } else {
+                    quit()
+                }
+            }
+        }
+    }
     
-    //MARK: User
+    //MARK: - Special Questions
+    func getNewSpecialQuestion() {
+        currentSQ = specialQuestions.popLast()
+    }
+    func getCurrentSpecialQuestion() -> SpecialQuestion? {
+        return currentSQ
+    }
+    func increaseScoreForSpecialQuestions() {
+        if let question = currentSQ {
+            score += question.points
+            user!.updateHighScore(newCurrentScore: score)
+            updatesGameCenter()
+        }
+    }
+    func getSpecialQHint() -> String {
+        return currentSQ?.hint ?? "Hint unavailable"
+    }
+    
+    //MARK: - User
     func setUser(user: User) {
         self.user = user
     }
@@ -132,13 +200,16 @@ class Game {
     func start() {
         print("start/restart")
         lives = .three
+        nextType = .firstMC
         score = 0
         questions = Game.getQuestions()
         user?.startGame()
         user?.play()
+        shuffle()
+        //switchAndGetNextTypeOfQuestion()
     }
     
-    //MARK: Game
+    //MARK: - Game
     func quit(){
         print("quit")
         print("back to main view controller")
@@ -167,6 +238,9 @@ class Game {
         case .two:
             lives = .one
         case .one:
+            lives = .none
+            quit()
+        case .none:
             quit()
         }
     }
@@ -179,20 +253,29 @@ class Game {
         if let question = currentQuestion {
             score += question.getPoints()
             user!.updateHighScore(newCurrentScore: score)
+            updatesGameCenter()
         }
+    }
+    func getNextType() -> NextTypeOfQuestion {
+        return nextType
     }
     
     /// global game score
     /// - Returns: users score(Int)
     func getCurrentScore()-> Int {
-        return user?.highestScore ?? 0
+        //return user?.highestScore ?? 0
+        return score
         //Show user score, current score
     }
     
-    //MARK: GameCenter
+    //MARK: - GameCenter
+    func updatesGameCenter() {
+        saveScore()
+        checkFinishAchievement()
+    }
     func checkFinishAchievement(){
-        let totalQValue = Game.getQuestions().count * 5
-        if(user!.highestScore >= totalQValue) {
+        let totalQValue = (Game.getQuestions().count * 5) + (allSpecialQuestions.count * 10)
+        if(score >= totalQValue) {
             let achieved = GKAchievement(identifier: "kwiz.achievement.finished", player: GKLocalPlayer.local)
             achieved.percentComplete = 100
             achieved.showsCompletionBanner = true

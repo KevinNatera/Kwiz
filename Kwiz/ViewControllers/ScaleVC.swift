@@ -19,23 +19,25 @@ class ScaleVC: UIViewController {
         let label = UILabel()
         label.text = "Balance the scale"
         label.textAlignment = .center
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
-        label.font = UIFont(name: "Times New Roman", size: 40)
+        label.font = UIFont(name: "AmericanTypewriter-CondensedBold", size: 45)
         return label
     }()
     var steel: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
-        image.backgroundColor = .gray
+        image.backgroundColor = #colorLiteral(red: 0.6950650215, green: 0.689879775, blue: 0.6986576915, alpha: 1)
         return image
     }()
     var feather: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 110, height: 110))
-        image.backgroundColor = #colorLiteral(red: 1, green: 0.8688890338, blue: 0.8717179298, alpha: 1)
+        image.backgroundColor = #colorLiteral(red: 0.8061974645, green: 0.9113429189, blue: 0.992636025, alpha: 1)
         return image
     }()
     var mysteryBox: UIImageView = {
         let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
-        image.backgroundColor = .brown
+        image.backgroundColor = #colorLiteral(red: 0.7217288613, green: 0.548459053, blue: 0.4073687196, alpha: 1)
         return image
     }()
     var inputBox: UIImageView = {
@@ -61,13 +63,13 @@ class ScaleVC: UIViewController {
         return button
     }()
     //MARK: back button maybe deleted
-    lazy var backButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 20, y: 52, width: 100, height: 50))
-        button.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
-        button.setImage(UIImage(named: "backArrow"), for: .normal)
-        button.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
-        return button
-    }()
+//    lazy var backButton: UIButton = {
+//        let button = UIButton(frame: CGRect(x: 20, y: 52, width: 100, height: 50))
+//        button.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
+//        button.setImage(UIImage(named: "backArrow"), for: .normal)
+//        button.addTarget(self, action: #selector(segueToViewController), for: .touchUpInside)
+//        return button
+//    }()
     var heartStack = HeartsStackView(livesRemaining: Game.shared.getLives())
     
     //MARK: - Properties
@@ -75,16 +77,8 @@ class ScaleVC: UIViewController {
     var featherPanGesture = UIPanGestureRecognizer()
     
     var steelCenter = CGPoint()
-    var featherCenter = CGPoint() {
-        didSet {
-            if inputBox.frame.contains(featherCenter) {
-                feather.center = inputBox.center
-                rotate(view: feather)
-                loselife()
-                reset.isHidden = false
-            }
-        }
-    }
+    var featherCenter = CGPoint()
+
     var steelOriginalCenter = CGPoint()
     var featherOriginalCenter = CGPoint()
     var game = Game.shared
@@ -102,9 +96,9 @@ class ScaleVC: UIViewController {
         constrainFeather()
         constrainReset()
         setUpLivesStackView()
-        setupLabelsInBoxes(text: "?", superview: mysteryBox, color: .white)
+        setupLabelsInBoxes(text: "?", superview: mysteryBox, color: .black)
         setupLabelsInBoxes(text: "Feathers", superview: feather, color: .black)
-        setupLabelsInBoxes(text: "Steel", superview: steel, color: .white)
+        setupLabelsInBoxes(text: "Steel", superview: steel, color: .black)
         
         makeTriangle()
         
@@ -127,6 +121,8 @@ class ScaleVC: UIViewController {
         promptLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             promptLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 90),
+            promptLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            promptLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             promptLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
     }
     private func constrainSteel() {
@@ -192,9 +188,6 @@ class ScaleVC: UIViewController {
             answer.heightAnchor.constraint(equalToConstant: answer.frame.height)])
     }
     private func setUpLivesStackView(){
-
-//        game.reduceLives()
-//        heartStack = HeartsStackView(livesRemaining: game.getLives())
         view.addSubview(heartStack)
         heartStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -235,10 +228,10 @@ class ScaleVC: UIViewController {
     private func setupLabelsInBoxes(text: String, superview: UIView, color: UIColor) {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         label.text = text
-        label.font = UIFont(name: "System", size: 20)
+        label.font = UIFont(name: "AmericanTypewriter-Condensed", size: 20)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = .white
+        label.textColor = .black
         superview.addSubview(label)
         
         
@@ -286,23 +279,40 @@ class ScaleVC: UIViewController {
         heartStack.loseLife(remaining: game.getLives())
     }
     private func pickedCorrectAnswer() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let lock = LockVC()
-            lock.modalPresentationStyle = .fullScreen
-            self.present(lock, animated: true, completion: nil)
-        }
-        
+            segueToViewController()
     }
     
+    private func answerResult(userResult:UserResult, viewController: UIViewController){
+        
+        switch userResult {
+        case .correct:
+            let alert = UIAlertController(title: "Correct!", message: "Congratulations! You gained \(Game.shared.getCurrentSpecialQuestion()?.points ?? 5) points!", preferredStyle: .alert)
+            viewController.present(alert, animated: true)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.pickedCorrectAnswer()})
+            }
+            
+            
+        case .wrong:
+            let alert = UIAlertController(title: "Wrong", message: "Try again!", preferredStyle: .alert)
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                alert.dismiss(animated: true, completion: { [weak self] in
+                    self?.loselife()})
+            }
+            viewController.present(alert, animated: true)
+        }
+    }
     
-    //MARK: Objc Func
+    //MARK: - Objc Func
     @objc private func draggedSteel(_ sender: UIPanGestureRecognizer) {
         
         switch sender.state {
         case .ended:
-            print("ended")
+            SoundManager.shared.playOnce(sound: "steel")
             if inputBox.frame.contains(steelCenter) {
-                
                 steel.transform = CGAffineTransform.identity
                 feather.transform = CGAffineTransform.identity
                 view.bringSubviewToFront(steel)
@@ -313,12 +323,13 @@ class ScaleVC: UIViewController {
                 
                 steel.center = inputBox.center
                 rotate(view: steel)
-                loselife()
+                
+                answerResult(userResult: .wrong, viewController: self)
                 reset.isHidden = false
             } else if answer.frame.contains(steelCenter) {
                 steel.center = answer.center
                 showSolution()
-                //pickedCorrectAnswer()
+                answerResult(userResult: .correct, viewController: self)
             }
         default:
             print("something")
@@ -334,13 +345,35 @@ class ScaleVC: UIViewController {
        
     }
     @objc private func draggedFeather(_ sender: UIPanGestureRecognizer) {
-        steel.transform = CGAffineTransform.identity
-        feather.transform = CGAffineTransform.identity
-        view.bringSubviewToFront(feather)
-        let translation = sender.translation(in: view)
-        feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
-        sender.setTranslation(CGPoint.zero, in: view)
-        featherCenter = feather.center
+        switch sender.state {
+        case .ended:
+            SoundManager.shared.playOnce(sound: "feather")
+            if inputBox.frame.contains(featherCenter) {
+                
+                steel.transform = CGAffineTransform.identity
+                feather.transform = CGAffineTransform.identity
+                view.bringSubviewToFront(feather)
+                let translation = sender.translation(in: view)
+                feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
+                sender.setTranslation(CGPoint.zero, in: view)
+                featherCenter = feather.center
+                
+                feather.center = inputBox.center
+                rotate(view: feather)
+                answerResult(userResult: .wrong, viewController: self)
+                reset.isHidden = false
+            }
+        default:
+            steel.transform = CGAffineTransform.identity
+            feather.transform = CGAffineTransform.identity
+            view.bringSubviewToFront(feather)
+            let translation = sender.translation(in: view)
+            feather.center = CGPoint(x: feather.center.x + translation.x, y: feather.center.y + translation.y)
+            sender.setTranslation(CGPoint.zero, in: view)
+            featherCenter = feather.center
+        }
+        
+        
     }
     @objc private func resetPressed() {
         steel.center = steelOriginalCenter
@@ -353,20 +386,22 @@ class ScaleVC: UIViewController {
     }
     
     //this function so we can go back momentarily
-    @objc private func segueToQuestion() {
-        let vc = MainVC()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+    private func segueToViewController() {
+        Game.shared.increaseScoreForSpecialQuestions()
+        Game.shared.switchAndGetNextTypeOfQuestion()
+        Game.shared.updatesGameCenter()
+        let vc = useNextTypeToCallVC(nextType: Game.shared.getNextType())
+        navigationController?.pushViewController(vc, animated: true)
         
     }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.7800616622, green: 0.932757318, blue: 0.9999788404, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 1, green: 0.7897956371, blue: 0.3367378712, alpha: 1)
         setConstraints()
         addGestures()
-        view.addSubview(backButton) //adding back button here momentarily
+        //view.addSubview(backButton) //adding back button here momentarily
     }
     
 
