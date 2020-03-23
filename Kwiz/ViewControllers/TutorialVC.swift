@@ -70,11 +70,7 @@ class TutorialVC: UIViewController {
         label.layer.cornerRadius = 20
         label.alpha = 0
         return label
-        
     }()
-    
-    
-    
     
     lazy var whiteScreen: UIView = {
         let view = UIView()
@@ -126,6 +122,12 @@ class TutorialVC: UIViewController {
         view.addSubview(showButton)
         view.addSubview(showText)
         view.addSubview(whiteScreen)
+        
+        if let showTutorial = UserDefaults.standard.value(forKey: "showTutorial") as? Bool {
+            if !showTutorial {
+                showButton.setBackgroundImage(UIImage(systemName: "checkmark.square"), for: .normal)
+            }
+        }
     }
     
     private func fadeInViews() {
@@ -146,7 +148,7 @@ class TutorialVC: UIViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            UIView.animate(withDuration: 4) {
+            UIView.animate(withDuration: 3) {
                 self.startButton.alpha = 1
                 self.showButton.alpha = 1
                 self.showText.alpha = 1
