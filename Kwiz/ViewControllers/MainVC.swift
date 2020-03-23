@@ -27,11 +27,17 @@ class MainVC: UIViewController {
         return view
     }()
     
+    lazy var howToPlayButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(segueToTutorial), for: .touchUpInside)
+        return button
+    }()
+    
     
     
     //MARK: - Setup
     private func setupStackViewWithButtons() {
-        let stackView = UIStackView(arrangedSubviews: [startButton,rankingButton])
+        let stackView = UIStackView(arrangedSubviews: [startButton,howToPlayButton,rankingButton])
         stackView.axis = .vertical
         stackView.spacing = 40
         stackView.distribution = .fillEqually
@@ -45,17 +51,18 @@ class MainVC: UIViewController {
     private func setupButtons() {
         updateTitleOnButton(button: startButton, title: "START")
         updateTitleOnButton(button: rankingButton, title: "RANKING")
+        updateTitleOnButton(button: howToPlayButton, title: "HOW TO PLAY")
         //updateTitleOnButton(button: settingButton, title: "SETTINGS")
         
-        startButton.addTarget(self, action: #selector(segueToQuestion), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(checkUserDeaults), for: .touchUpInside)
     }
     private func setupImageConstraints() {
         view.addSubview(kwizImage)
         kwizImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             kwizImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-//            kwizImage.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant:  -80),
-//            kwizImage.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: 80),
+            //            kwizImage.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant:  -80),
+            //            kwizImage.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: 80),
             kwizImage.widthAnchor.constraint(equalToConstant: 425),
             kwizImage.heightAnchor.constraint(equalToConstant: 300)])
         
@@ -80,13 +87,22 @@ class MainVC: UIViewController {
     }
     
     
+    @objc func segueToTutorial() {
+        let tutorialVC = TutorialVC()
+        let navigationController = UINavigationController(rootViewController: tutorialVC)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.isHidden = true
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
         
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {return}
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromTop, animations: {
+            window.rootViewController = navigationController
+        }, completion: nil)
+    }
     
-    
-    
-    
-    //MARK: Objc Function
-    @objc func segueToQuestion() {
+    private func segueToQuestion() {
         
         // 1. Instantiate navigation controller
         // 2. Instantiate firstVC
@@ -107,11 +123,28 @@ class MainVC: UIViewController {
             let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
             else {return}
         UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
-                window.rootViewController = navigationController
+            window.rootViewController = navigationController
         }, completion: nil)
         
         
     }
+    
+    
+    //MARK: Objc Function
+    @objc func checkUserDeaults() {
+        if let showTutorial = UserDefaults.standard.value(forKey: "showTutorial") as? Bool {
+            if showTutorial {
+                segueToTutorial()
+            } else {
+                segueToQuestion()
+            }
+        } else {
+            segueToTutorial()
+        }
+    }
+    
+    
+    
     
     @objc func leaderboard() {
         let vc = GKGameCenterViewController()
@@ -135,7 +168,7 @@ class MainVC: UIViewController {
 }
 
 extension MainVC: GKGameCenterControllerDelegate {
-  func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-    gameCenterViewController.dismiss(animated: true, completion: nil)
-  }
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
 }
