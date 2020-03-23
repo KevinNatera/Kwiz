@@ -27,11 +27,17 @@ class MainVC: UIViewController {
         return view
     }()
     
+    lazy var howToPlayButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(segueToTutorial), for: .touchUpInside)
+        return button
+    }()
+    
     
     
     //MARK: - Setup
     private func setupStackViewWithButtons() {
-        let stackView = UIStackView(arrangedSubviews: [startButton,rankingButton])
+        let stackView = UIStackView(arrangedSubviews: [startButton,howToPlayButton,rankingButton])
         stackView.axis = .vertical
         stackView.spacing = 40
         stackView.distribution = .fillEqually
@@ -45,6 +51,7 @@ class MainVC: UIViewController {
     private func setupButtons() {
         updateTitleOnButton(button: startButton, title: "START")
         updateTitleOnButton(button: rankingButton, title: "RANKING")
+        updateTitleOnButton(button: howToPlayButton, title: "HOW TO PLAY")
         //updateTitleOnButton(button: settingButton, title: "SETTINGS")
         
         startButton.addTarget(self, action: #selector(checkUserDeaults), for: .touchUpInside)
@@ -80,7 +87,7 @@ class MainVC: UIViewController {
     }
     
     
-    private func segueToTutorial() {
+    @objc func segueToTutorial() {
         let tutorialVC = TutorialVC()
         let navigationController = UINavigationController(rootViewController: tutorialVC)
         navigationController.navigationBar.isTranslucent = false
