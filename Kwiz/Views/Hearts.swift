@@ -84,15 +84,15 @@ class HeartsStackView: UIStackView {
         case .three:
             makeLivesVisible()
         case .two:
-            UIView.animate(withDuration: 1) { [weak self] in
+            UIView.animate(withDuration: 0.7) { [weak self] in
                 self?.userLivesImageOne.alpha = 0
             }
         case .one:
-            UIView.animate(withDuration: 1) { [weak self] in
+            UIView.animate(withDuration: 0.7) { [weak self] in
                 self?.userLivesImageTwo.alpha = 0
             }
         case .none:
-            UIView.animate(withDuration: 1) { [weak self] in
+            UIView.animate(withDuration: 0.7) { [weak self] in
                 self?.userLivesImageThree.alpha = 0
             }
         }
