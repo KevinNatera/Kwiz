@@ -46,16 +46,45 @@ class SoundManager{
         }
     }
     
-    func pause(){
+    //Mark: use deinit{NotificationCenter.default.removeObserver(self)} to clean out old observers (Clear/clean)
+    //MARK: Example
+    // SoundManager.shared.audioPlayerObserver() this goes into viewdidLoad to create observer
+    //MARK: Using soundmanager in seperate function
+    // can be objc function if you want it to be used for a button or a normal function if you want to call it somewhere else 
+    // @objc func secondaryPause(){
+//        SoundManager.shared.postAudioplayer()
+//    }
+    
+    
+    /// This function makes an observer that constantly checks for a didupdateaudioplayer post and when it does see it pause function runs
+    func audioPlayerPuaseObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(pause), name: .didPauseAudioPlayer, object: nil)
+    }
+    
+    /// This function makes an observer that constantly checks for a didupdateaudioplayer post and when it does see it stops the music/song
+    func audioPlayerStopObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(stopPlaying), name: .didStopAudioPlayer, object: nil)
+    }
+    
+    
+    /// This function makes a post letting notification know so it will run the observer you made in vc
+    @objc func postAudioplayer(){
+        let name = Notification.Name("didPauseAudioPlayer")
+        NotificationCenter.default.post(name: name, object: nil)
+    }
+    
+    @objc func pause(){
         if audioPlayer!.isPlaying{
             audioPlayer?.pause()
         }
         else {
+            audioPlayer?.prepareToPlay()
             audioPlayer?.play()
         }
     }
+
     
-    func stopPlaying(){
+    @objc func stopPlaying(){
         if audioPlayer!.isPlaying{
             audioPlayer?.stop()
         }
@@ -63,7 +92,10 @@ class SoundManager{
         }
     }
     
-    func playInAllVC(){
-        
-    }
+}
+
+//Making unique ID/name
+extension Notification.Name {
+    static let didPauseAudioPlayer = Notification.Name("didPauseAudioPlayer")
+    static let didStopAudioPlayer = Notification.Name("didStopAudioPlayer")
 }
