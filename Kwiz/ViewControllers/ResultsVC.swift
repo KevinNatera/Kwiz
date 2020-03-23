@@ -93,7 +93,9 @@ class ResultsVC: UIViewController {
     }()
     var resultImage: UIImageView = {
         let image = UIImageView()
-        image.backgroundColor = .green
+        image.backgroundColor = .clear
+        image.contentMode = .scaleAspectFill
+        image.image = UIImage(named: "trophy")
         return image
     }()
     
@@ -173,6 +175,7 @@ class ResultsVC: UIViewController {
     private func startAnimation(){
         switch Game.shared.getLives() {
         case .none:
+            resultImage.image = UIImage(named: "brokenTrophy")
             loseAnimation.alpha = 1
             loseAnimation.play()
         default:
