@@ -22,7 +22,7 @@ class MovingImageVC: UIViewController {
     //MARK: Lazy vars
     lazy var instructions: UILabel = {
         let text = UILabel()
-        text.text = "Tilt and Find Exit!"
+        text.text = "Tilt and Find the Correct Door to Exit!"
         text.numberOfLines = 3
         text.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         text.alpha = 0
@@ -128,7 +128,7 @@ class MovingImageVC: UIViewController {
         NSLayoutConstraint.activate([
             heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             heartStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            heartStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25),
+            heartStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
             heartStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
         ])
     }
@@ -196,7 +196,7 @@ class MovingImageVC: UIViewController {
     
     /// Starts Animation for showing question/Instructions
     private func startingAnimation(){
-        UIView.animateKeyframes(withDuration: 2, delay: 0, options: [.calculationModePaced], animations: {
+        UIView.animateKeyframes(withDuration: 3, delay: 0, options: [.calculationModePaced], animations: {
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1, animations: {
                 self.instructions.alpha = 1
                 self.instructions.transform = CGAffineTransform(scaleX: 2, y: 2)
