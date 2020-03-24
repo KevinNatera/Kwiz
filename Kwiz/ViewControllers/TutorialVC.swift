@@ -160,6 +160,7 @@ class TutorialVC: UIViewController {
     func addAllConstraints() {
         addTitleLabelConstraints()
         addDescriptionLabelConstraints()
+        addStartButtonConstraints()
     }
     func addTitleLabelConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -175,7 +176,15 @@ class TutorialVC: UIViewController {
             descriptionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
             descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             descriptionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 8)])
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: view.frame.height * 0.02)])
+    }
+    func addStartButtonConstraints() {
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        startButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor,constant: view.frame.height * 0.05),
+        startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        startButton.widthAnchor.constraint(equalTo: descriptionLabel.widthAnchor, multiplier: 0.5),
+        startButton.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 0.9)])
     }
     
     
