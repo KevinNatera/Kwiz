@@ -156,13 +156,34 @@ class TutorialVC: UIViewController {
         }
     }
     
-    
+    //MARK: - Constraints
+    func addAllConstraints() {
+        addTitleLabelConstraints()
+        addDescriptionLabelConstraints()
+    }
+    func addTitleLabelConstraints() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.10),
+        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 8)])
+    }
+    func addDescriptionLabelConstraints() {
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            descriptionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            descriptionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: 8)])
+    }
     
     
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
+        addAllConstraints()
         fadeInViews()
     }
     
