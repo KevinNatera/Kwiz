@@ -1,16 +1,16 @@
 # Kwiz
 
 ## Building / Getting Started
--Require ios phone to play
--XCode is prefered to run code
--First you need to Clone this Repo
--open Kwiz.xcworkspace with xcode
--connect your phone
--download it onto your phone with xcode
--lastly enjoy, Thank You
+-Require ios phone to play  
+-XCode is prefered to run code  
+-First you need to Clone this Repo  
+-open Kwiz.xcworkspace with xcode  
+-connect your phone  
+-download it onto your phone with xcode  
+-lastly enjoy, Thank You  
 
 # !Warning
-Please know that there might be bugs and if you catch any you can e-mail them too
+Please know that there might be bugs and if you catch any you can e-mail them too  
 ericmei@pursuit.org
 
 ## User Stories
