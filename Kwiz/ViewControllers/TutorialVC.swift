@@ -156,13 +156,61 @@ class TutorialVC: UIViewController {
         }
     }
     
-    
+    //MARK: - Constraints
+    func addAllConstraints() {
+        addTitleLabelConstraints()
+        addDescriptionLabelConstraints()
+        addStartButtonConstraints()
+        addShowTextConstraints()
+        addShowButtonConstraints()
+    }
+    func addTitleLabelConstraints() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        titleLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.10),
+        titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 8)])
+    }
+    func addDescriptionLabelConstraints() {
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            descriptionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.95),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            descriptionLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: view.frame.height * 0.02)])
+    }
+    func addStartButtonConstraints() {
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        startButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor,constant: view.frame.height * 0.05),
+        startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        startButton.widthAnchor.constraint(equalTo: descriptionLabel.widthAnchor, multiplier: 0.5),
+        startButton.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 0.9)])
+    }
+    func addShowTextConstraints() {
+        showText.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            showText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            showText.widthAnchor.constraint(equalTo: startButton.widthAnchor),
+            showText.heightAnchor.constraint(equalTo: startButton.heightAnchor, multiplier: 0.8),
+            showText.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: view.frame.height * 0.02)])
+    }
+    func addShowButtonConstraints() {
+        showButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            showButton.heightAnchor.constraint(equalTo: showText.heightAnchor, multiplier: 0.8),
+            showButton.widthAnchor.constraint(equalTo: showText.heightAnchor, multiplier: 0.8),
+            showButton.centerYAnchor.constraint(equalTo: showText.centerYAnchor),
+            showButton.trailingAnchor.constraint(equalTo: showText.trailingAnchor, constant: showText.frame.height * -0.02)])
+    }
     
     
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
+        addAllConstraints()
         fadeInViews()
     }
     
