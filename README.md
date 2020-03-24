@@ -1,5 +1,19 @@
 # Kwiz
 
+## Building ##
+## Getting Started
+Require ios phone to play
+XCode is prefered to run code
+First you need to Clone this Repo
+open Kwiz.xcworkspace with xcode
+connect your phone
+download it onto your phone with xcode
+lastly enjoy, Thank You
+
+# !Warning
+Please know that there might be bugs and if you catch any you can e-mail them too
+ericmei@pursuit.org
+
 ## User Stories
 
 After missing my train by quite literally one second, I was devastated to see that the next one arrives in 10 MTA minutes. That’s like half an hour in real life! So to pass the time, I decided to play the first silly app I ran into in the app store, which just so happened to be Kwiz. The aesthetically pleasing interface captured my interest immediately, and I was surprised to find myself unable to blow through the challenges without much thought. I was very engaged by the fact that my initial thought was never the correct approach; I always had to reassess the way I was thinking and really get my gears turning before I could figure out the right way to overcome a challenge. If it wasn't for the 15 minute wait to recover your lives once you've failed the Kwiz, I would've been so consumed by getting through this stupid game that I would've missed the train again!
@@ -27,5 +41,6 @@ After the completion of every game, the user is given a score (calculated from h
 
 ## New technologies
 * GameKit/ GameCenter
+* Air BnB Lottie Animations
 * UIReferenceLibraryViewController
 * Unique implementation of different UIGestures
