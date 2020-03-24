@@ -50,7 +50,7 @@ class SoundManager{
     //MARK: Example
     // SoundManager.shared.audioPlayerObserver() this goes into viewdidLoad to create observer
     //MARK: Using soundmanager in seperate function
-    // can be objc function if you want it to be used for a button or a normal function if you want to call it somewhere else 
+    // can be objc function if you want it to be used for a button or a normal function if you want to call it somewhere else
     // @objc func secondaryPause(){
 //        SoundManager.shared.postAudioplayer()
 //    }
