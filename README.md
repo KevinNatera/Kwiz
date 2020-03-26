@@ -43,3 +43,5 @@ After the completion of every game, the user is given a score (calculated from h
 * Air BnB Lottie Animations
 * UIReferenceLibraryViewController
 * Unique implementation of different UIGestures
+
+![](Kwizy.gif)
