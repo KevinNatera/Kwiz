@@ -75,6 +75,7 @@ class ResultsVC: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.white.cgColor
+        button.layer.zPosition = 10
         button.addTarget(self, action: #selector(retryButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -165,10 +166,10 @@ class ResultsVC: UIViewController {
     private func addSubViews() {
         view.addSubview(titleLabel)
         view.addSubview(scoreLabel)
-        view.addSubview(retryButton)
         view.addSubview(homeButton)
         view.addSubview(winAnimation)
         view.addSubview(loseAnimation)
+        view.addSubview(retryButton)
         
     }
     
