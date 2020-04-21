@@ -66,15 +66,15 @@ class GameScene: SKScene {
     /// Changes hidden button status to false
     /// - Parameter rect: takes a CGRect to examine
     func foundWhichButton(rect: CGRect){
-        if rect.contains(CGPoint(x: 100, y: 750)) {
+        if rect.contains(CGPoint(x: UIScreen.main.bounds.width / 4, y: UIScreen.main.bounds.height / 1.1)) {
             gundam.physicsBody?.affectedByGravity = false
             gundam.isHidden = true
             onOrOff = false
         }
-        else if rect.contains(CGPoint(x: 225, y: 100)) {
+        else if rect.contains(CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.width / 5)) {
             onOrOff1 = false
         }
-        else if rect.contains(CGPoint(x: 400, y: 500)) {
+        else if rect.contains(CGPoint(x: UIScreen.main.bounds.width, y: UIScreen.main.bounds.height / 1.75)) {
             onOrOff2 = false
         }
     }
