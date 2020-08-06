@@ -126,9 +126,9 @@ class MovingImageVC: UIViewController {
         heartStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(heartStack)
         NSLayoutConstraint.activate([
-            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            heartStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            heartStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
+            heartStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            heartStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            heartStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.45),
             heartStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
         ])
     }
