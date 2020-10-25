@@ -1,4 +1,5 @@
 # Kwiz
+Visit our website [here](https://kwizgameapp.wixsite.com/home)
 
 ## Building / Getting Started
 -Require ios phone to play  
