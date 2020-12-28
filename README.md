@@ -47,4 +47,4 @@ After the completion of every game, the user is given a score (calculated from h
 * UIReferenceLibraryViewController
 * Unique implementation of different UIGestures
 
-![](https://github.com/KevinNatera/Kwiz/blob/TestBranch/Gif/Kwiz.gif)
+![](https://github.com/KevinNatera/Kwiz/blob/TestBranch/Gif/Kwiz1.gif)
