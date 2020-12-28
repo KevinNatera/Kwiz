@@ -1,6 +1,8 @@
 # Kwiz
 Visit our website [here](https://kwizgameapp.wixsite.com/home)
 
+Now available on the [Apple App Store](https://apps.apple.com/us/app/kwiz-games-challenge/id1536447940)! Give it a try!
+
 ## Building / Getting Started
 -Require ios phone to play  
 -XCode is prefered to run code  
